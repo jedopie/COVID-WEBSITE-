@@ -2,11 +2,40 @@
 Base styles
 ------------------------*/
 
+* {
+	box-sizing: border-box;
+}
+/* Navigation */
+   .topnav {
+	overflow: hidden;
+	background-color: #222;
+	text-align: center;
+	
+	}
+
+	.topnav a {
+	float: left;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+	}
+
+	.topnav a:hover {
+	background-color:#222;
+	color: #4CAF50;
+	}
+
+	.topnav a.active {
+	background-color: rgb(14, 93, 14);
+	color: white;
+	}
+
 body
 {
 	margin: 0;
 	padding: 0;
 	color: #000000;
-	background-color: #a7a7ce;
 	font: 1em/1.2 "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
 }

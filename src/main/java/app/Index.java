@@ -17,7 +17,7 @@ import io.javalin.http.Handler;
 public class Index implements Handler {
 
     // URL of this page relative to http://localhost:7000/
-    public static final String URL = "/";
+    public static final String URL = "/index.html";
 
     @Override
     public void handle(Context context) throws Exception {
@@ -28,30 +28,23 @@ public class Index implements Handler {
         html = html + "<head>" + 
                "<title>Homepage</title>";
 
+
+        // Link for each page
+        html = html + "<div class='topnav'";
+        html = html + "<a class='active' href='index.html'>Home</a>";
+        html = html + "<a href='page1.html'>Page 1</a>";
+        html = html + "<a href='page2.html'>Page 2</a>";
+        html = html + "<a href='page3.html'>Page 3</a>";
+        html = html + "<a href='page4.html'>Page 4</a>";
+        html = html + "<a href='page5.html'>Page 5</a>";
+        html = html + "<a href='page6.html'>Page 6</a>";
+        html = html + "</div>";
+
         // Add some CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
 
         // Add the body
         html = html + "<body>";
-
-        // Add HTML for the logo.png image
-        html = html + "<img src='logo.png' height='200px'/>";
-
-        // Add HTML for the list of pages
-        html = html + "<h1>Homepage</h1>" +
-               "<p>Links to sub-pages</p>" +
-               "<ul>";
-
-        // Link for each page
-        html = html + "<li> <a href='page1.html'>Page 1</a> </li>";
-        html = html + "<li> <a href='page2.html'>Page 2</a> </li>";
-        html = html + "<li> <a href='page3.html'>Page 3</a> </li>";
-        html = html + "<li> <a href='page4.html'>Page 4</a> </li>";
-        html = html + "<li> <a href='page5.html'>Page 5</a> </li>";
-        html = html + "<li> <a href='page6.html'>Page 6</a> </li>";
-
-        // Finish the List HTML
-        html = html + "</ul>";
 
         // Finish the HTML webpage
         html = html + "</body>" + "</html>";
