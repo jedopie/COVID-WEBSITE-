@@ -53,6 +53,11 @@ public class Page1 implements Handler {
         html = html + "<a href='index.html'>Link to Homepage</a>";
         html = html + "</p>";
 
+        // divs for layout
+        html = html + "<div>";
+        html = html + "<div>";
+
+
         // Look up some information from JDBC
         // First we need to use your JDBCConnection class
         JDBCConnection jdbc = new JDBCConnection();
