@@ -54,8 +54,19 @@ public class Page1 implements Handler {
         html = html + "</p>";
 
         // divs for layout
-        html = html + "<div>";
-        html = html + "<div>";
+        html = html + "<div class='container1'>";
+        html = html + "<img class='floatleft1' src='images/worldmap.png'></img>";
+        html = html + "<div class='floatright1'></div>";
+        html = html + "</div>";
+
+
+        html = html + "<div class='container1'>";
+        html = html + "<div class='floatleft2'></div>";
+        html = html + "<a href='help.java' class='link1'></a>";
+        html = html + "<div class='floatcentre1'></div>";
+        html = html + "<div class='floatright2'></div>";
+        html = html + "</div>";
+     
 
 
         // Look up some information from JDBC

@@ -33,7 +33,7 @@ public class Page6 implements Handler {
         // Add some CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
 
-        html = html + "<div class='topnav'";
+         html = html + "<div class='topnav'";
          html = html + "<a href='index.html'>Home</a>";
          html = html + "<a href='page1.html'>Page 1</a>";
          html = html + "<a href='page2.html'>Page 2</a>";

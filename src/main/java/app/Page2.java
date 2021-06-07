@@ -52,6 +52,14 @@ public class Page2 implements Handler {
         html = html + "<a href='index.html'>Link to Homepage</a>";
         html = html + "</p>";
 
+
+
+        html = html + "<div class='container2'>";
+            
+        html = html + "</div>";
+
+        html = html + "<img class='bigimg'></img>";
+
         // Look up some information from JDBC
         // First we need to use your JDBCConnection class
         JDBCConnection jdbc = new JDBCConnection();
