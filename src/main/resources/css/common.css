@@ -34,43 +34,121 @@ Base styles
 
 body
 {
-	margin: 0;
-	padding: 0;
+	padding: 0px;
+	margin: 0px;
 	color: #000000;
 	font: 1em/1.2 "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
 }
 
 /* Page 1 */
 .container1 {
-	margin: 15px, 15px, 15px, 15px;
+	margin: 15px;
+	padding: 15px;
+
 }
 
 .floatleft1 {
 	float:left;
 	width: 70%;
-	height: auto;
+	height: 350px;
+	border-color: black;
+	border-style: solid;
+	border-radius: 15px 0px 0px 15px;
 }
 
 .floatright1 {
 	float: right;
 	width: 30%;
-	height: auto;
+	height: 350px;
+	background-color:lightgrey;
+	border-radius: 0px 15px 15px 0px;
+	
 }
 
-.floatleft2 {
+.left {
 	float: left;
 	width: 30%;
-	height: 100px;
-}
+	background-color: lightgrey;
+	margin: 30px 0px 30px 30px;
+	height: 200px;
+	border-radius: 15px;
+  }
 
-.floatright2 {
-	float: right;
+  .middle {
+	float: left;
 	width: 30%;
-	height: 100px;
-}
+	background-color: lightgrey;
+	margin: 30px 30px 30px 30px;
+	height: 200px;
+	border-radius: 15px;
+  }
 
-.floatcentre1 {
+  .right {
+	float: left;
 	width: 30%;
-	height: 100px;
+	background-color:lightgrey;
+	margin: 30px 30px 30px 0px;
+	height: 200px;
+	border-radius: 15px;
+  }
+
+  /* page 2 */
+  .container2 {
+	margin: 30px;
+	padding: 15px;
+	background-color: lightgrey;
+	height: 300px;
+	border-radius: 15px;
+  }
+
+  .bigimg{
+	  margin: 0px auto 30px auto;
+	  height: auto;
+	  display: block;
+	  width: 50%;
+	  border-radius: 15px;
+  }
+
+  .centered_text {
 	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: rgb(75, 206, 249);
+	padding: 10px;
+	border-radius: 15px;
+  }
+
+  .container3 {
+	position: relative;
+  	text-align: center;
+  	color: white;
+  }
+
+  .container3 a {
+	position: relative;
+  	text-align: center;
+  	color: white;
+	text-decoration: none;
+  }
+
+  /* page 3 */
+.search {
+	
 }
+
+input[type=text], select {
+	width: 40%;
+	padding: 12px 20px;
+	margin: auto;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 15px;
+	box-sizing: border-box;
+	position: absolute;
+	background-color: rgb(243, 242, 242);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, 0%);
+  }
+

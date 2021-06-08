@@ -1,7 +1,5 @@
 package app;
 
-import java.util.ArrayList;
-
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 
@@ -17,7 +15,7 @@ import io.javalin.http.Handler;
 public class Index implements Handler {
 
     // URL of this page relative to http://localhost:7000/
-    public static final String URL = "/index.html";
+    public static final String URL = "/";
 
     @Override
     public void handle(Context context) throws Exception {
@@ -27,11 +25,13 @@ public class Index implements Handler {
         // Add some Header information
         html = html + "<head>" + 
                "<title>Homepage</title>";
+               // Add some CSS (external file)
+        html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
 
 
         // Link for each page
-        html = html + "<div class='topnav'";
-        html = html + "<a class='active' href='index.html'>Home</a>";
+        html = html + "<div class='topnav'>";
+        html = html + "<a class='active' href='/'>Home</a>";
         html = html + "<a href='page1.html'>Page 1</a>";
         html = html + "<a href='page2.html'>Page 2</a>";
         html = html + "<a href='page3.html'>Page 3</a>";
@@ -40,11 +40,13 @@ public class Index implements Handler {
         html = html + "<a href='page6.html'>Page 6</a>";
         html = html + "</div>";
 
-        // Add some CSS (external file)
-        html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
-
         // Add the body
         html = html + "<body>";
+
+        html = html + "<h1>Home</h1>";
+        html = html + "<p>Return to Homepage: ";
+        html = html + "<a href='/'>Link to Homepage</a>";
+        html = html + "</p>";
 
         // Finish the HTML webpage
         html = html + "</body>" + "</html>";

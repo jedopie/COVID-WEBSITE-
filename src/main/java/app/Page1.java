@@ -34,8 +34,8 @@ public class Page1 implements Handler {
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
 
          // Link for each page
-         html = html + "<div class='topnav'";
-         html = html + "<a href='index.html'>Home</a>";
+         html = html + "<div class='topnav'>";
+         html = html + "<a href='/'>Home</a>";
          html = html + "<a class='active' href='page1.html'>Page 1</a>";
          html = html + "<a href='page2.html'>Page 2</a>";
          html = html + "<a href='page3.html'>Page 3</a>";
@@ -44,27 +44,24 @@ public class Page1 implements Handler {
          html = html + "<a href='page6.html'>Page 6</a>";
          html = html + "</div>";
 
+         html = html + "</head>";
+
         // Add the body
         html = html + "<body>";
 
-        // Add HTML for link back to the homepage
-        html = html + "<h1>Page 1</h1>";
-        html = html + "<p>Return to Homepage: ";
-        html = html + "<a href='index.html'>Link to Homepage</a>";
-        html = html + "</p>";
 
         // divs for layout
         html = html + "<div class='container1'>";
-        html = html + "<img class='floatleft1' src='images/worldmap.png'></img>";
+        html = html + "<img class='floatleft1' src='worldmap.png'></img>";
         html = html + "<div class='floatright1'></div>";
         html = html + "</div>";
 
 
-        html = html + "<div class='container1'>";
-        html = html + "<div class='floatleft2'></div>";
-        html = html + "<a href='help.java' class='link1'></a>";
-        html = html + "<div class='floatcentre1'></div>";
-        html = html + "<div class='floatright2'></div>";
+        html = html + "<div class='container2'>";
+        html = html + "<div class='left'></div>";
+        // html = html + "<a href='page1.html' class='link1'>Need Help?</a>";
+        html = html + "<div class='middle'></div>";
+        html = html + "<div class='right'></div>";
         html = html + "</div>";
      
 
@@ -73,19 +70,6 @@ public class Page1 implements Handler {
         // First we need to use your JDBCConnection class
         JDBCConnection jdbc = new JDBCConnection();
 
-        // Next we will ask this *class* for the movies
-        ArrayList<String> movies = jdbc.getMovies();
-
-        // Add HTML for the movies list
-        html = html + "<h1>Movies</h1>" + "<ul>";
-
-        // Finally we can print out all of the movies
-        for (String movie : movies) {
-            html = html + "<li>" + movie + "</li>";
-        }
-
-        // Finish the List HTML
-        html = html + "</ul>";
 
         // Finish the HTML webpage
         html = html + "</body>" + "</html>";

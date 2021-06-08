@@ -33,8 +33,8 @@ public class Page5 implements Handler {
         // Add some CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
 
-        html = html + "<div class='topnav'";
-         html = html + "<a href='index.html'>Home</a>";
+        html = html + "<div class='topnav'>";
+         html = html + "<a href='/'>Home</a>";
          html = html + "<a href='page1.html'>Page 1</a>";
          html = html + "<a href='page2.html'>Page 2</a>";
          html = html + "<a href='page3.html'>Page 3</a>";
@@ -48,7 +48,7 @@ public class Page5 implements Handler {
         // Add HTML for link back to the homepage
         html = html + "<h1>Page 5</h1>";
         html = html + "<p>Return to Homepage: ";
-        html = html + "<a href='index.html'>Link to Homepage</a>";
+        html = html + "<a href='/'>Link to Homepage</a>";
         html = html + "</p>";
 
         // Look up some information from JDBC
