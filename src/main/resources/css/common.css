@@ -134,21 +134,44 @@ body
 
   /* page 3 */
 .search {
-	
+	height: 40px;
 }
 
 input[type=text], select {
 	width: 40%;
 	padding: 12px 20px;
-	margin: auto;
+	margin: 15px 30px 30px 30px;
 	display: inline-block;
 	border: 1px solid #ccc;
 	border-radius: 15px;
 	box-sizing: border-box;
 	position: absolute;
 	background-color: rgb(243, 242, 242);
-	top: 50%;
-	left: 50%;
+	left: 45%;
 	transform: translate(-50%, 0%);
   }
+
+  input.submit1 {
+	width: 8%;
+	cursor: pointer;
+	padding: 12px 20px;
+	margin: 15px 30px 30px 30px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 15px;
+	box-sizing: border-box;
+	position: absolute;
+	background-color: rgb(243, 242, 242);
+	left: 70%;
+	transform: translate(-50%, 0%);
+  }
+
+  .country_title {
+		width: 80%;
+		background-color: rgb(68, 67, 67);
+		text-align: center; 
+		color: white;
+		margin-top: 30px;
+  }
+  
 

@@ -49,8 +49,15 @@ public class Page3 implements Handler {
         html = html + "<div class='search'>";
           html = html + "<form>";
             html = html + "<input type='text' id='search' name='search' placeholder='Search for a Country...'>";
+            html = html + "<input type='submit' value='Submit' class='submit1'>";
           html = html + "</form";
         html = html + "</div>";
+
+
+        html = html + "<div class='country_title'>the searched country goes here</div>";
+
+
+
 
         
 
