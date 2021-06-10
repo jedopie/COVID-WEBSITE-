@@ -31,6 +31,7 @@ public class Index implements Handler {
 
         // Link for each page
         html = html + "<div class='topnav'>";
+        html = html + "<a href = \"/\"><img src=\"GLOBE Logo.png\" style = \"width: 5vh;\"></a>";
         html = html + "<a class='active' href='/'>Home</a>";
         html = html + "<a href='page1.html'>Page 1</a>";
         html = html + "<a href='page2.html'>Page 2</a>";
@@ -42,8 +43,25 @@ public class Index implements Handler {
 
         // Add the body
         html = html + "<body>";
+        html = html + "<div class='covidbanner'>";
+        html = html + "<img class='covidbannerpic' src='covid banner.jpeg' style = 'width:100%'></img>";
+        html = html + "<div class='covid19head'>COVID-19</div>";
+        html = html + "</div>";
+        
+        html = html + "<div class='infobanner1'>";
+        html = html + "<img class = 'banner1pic' src='Vaccine Background.jpeg'></img";
+        html = html + "</div>";
+
+        html = html + "<div class='infobanner2'>";
+        html = html + "<img class = 'banner2pic' src='dark banner.jpeg'></img";
+        html = html + "</div>";
+
+        html = html + "<div class = 'infobanner3'>";
+        html = html + "<img class = 'banner3pic' src='lightbluebanner.jpeg'></img";
+        html = html + "</div>";
 
         html = html + "<h1>Home</h1>";
+
         html = html + "<p>Return to Homepage: ";
         html = html + "<a href='/'>Link to Homepage</a>";
         html = html + "</p>";

@@ -5,6 +5,7 @@ Base styles
 * {
 	box-sizing: border-box;
 }
+
 /* Navigation */
    .topnav {
 	overflow: hidden;
@@ -19,18 +20,72 @@ Base styles
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
-	font-size: 17px;
+	font-size: 20px;
 	}
 
 	.topnav a:hover {
 	background-color:#222;
-	color: #4CAF50;
+	color: #019fbb;
 	}
 
 	.topnav a.active {
-	background-color: rgb(14, 93, 14);
+	background-color: #019fbb;
 	color: white;
 	}
+
+/* Web Banner */
+.covidbanner{
+	position: relative;
+	text-align : centre;
+	padding: 15px 15px 5px 15px;
+	height : 250px;
+	width : 1440px;
+}
+.covidbannerpic {
+	max-width: 100%;
+	max-height: 100%;
+}
+/* COVID19 Heading */
+.covid19head {
+	position : absolute;
+	color : white;
+	font-size : 80px;
+	top:40%;
+	left : 580;
+
+
+}
+.infobanner1 {
+	float : left;
+	padding: 5px 5px 15px 15px;
+	height : 100px;
+	width:480px;
+
+}
+.banner1pic {
+	width: 100%;
+	max-height: 100%;
+}
+
+.infobanner2 {
+	padding : 2px 2px 15px 5px;
+	height : 90px;
+	width : 480px;
+}
+.banner2pic {
+	width: 100%;
+	max-height: 100%;
+}
+
+.infobanner3 {
+	padding : 2px 15px 15px 5px;
+	height :90px;
+	width : 480px;
+}
+.banner3pic {
+	width: 100%;
+	max-height: 100%;
+}
 
 body
 {
