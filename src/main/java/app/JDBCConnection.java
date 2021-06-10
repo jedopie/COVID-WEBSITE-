@@ -21,7 +21,7 @@ import java.sql.Statement;
 public class JDBCConnection {
 
     // Name of database file (contained in database folder)
-    private static final String DATABASE = "jdbc:sqlite:database/Movies.db";
+    private static final String DATABASE = "jdbc:sqlite:database/COVID FINAL DATABASE.db";
 
     public JDBCConnection() {
         System.out.println("Created JDBC Connection Object");
@@ -30,8 +30,9 @@ public class JDBCConnection {
     /**
      * Get all of the Movies in the database
      */
-    public ArrayList<String> getMovies() {
-        ArrayList<String> movies = new ArrayList<String>();
+    // GLOBAL DEATH TALLY
+    public int caseCount() {
+        int cases = 0;
 
         // Setup the variable for the JDBC connection
         Connection connection = null;
@@ -45,26 +46,15 @@ public class JDBCConnection {
             statement.setQueryTimeout(30);
 
             // The Query
-            String query = "SELECT * FROM movie";
+            String query = "SELECT sum(cases) FROM casesdeaths";
             
             // Get Result
             ResultSet results = statement.executeQuery(query);
-
-            // Process all of the results
-            // The "results" variable is similar to an array
-            // We can iterate through all of the database query results
-            while (results.next()) {
-                // We can lookup a column of the a single record in the
-                // result using the column name
-                // BUT, we must be careful of the column type!
-                int id              = results.getInt("mvnumb");
-                String movieName     = results.getString("mvtitle");
-                int year            = results.getInt("yrmde");
-                String type         = results.getString("mvtype");
-
-                // For now we will just store the movieName and ignore the id
-                movies.add(movieName);
-            }
+            results.next();
+            String sum = results.getString(1);
+            System.out.println(cases);
+            cases = (int) Double.parseDouble(sum);
+            
 
             // Close the statement because we are done with it
             statement.close();
@@ -84,6 +74,142 @@ public class JDBCConnection {
         }
 
         // Finally we return all of the movies
-        return movies;
+        return cases;
     }
+// GLOBAL DEATH TALLY
+    public int deathCount() {
+        int deaths = 0;
+
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(DATABASE);
+
+            // Prepare a new SQL Query & Set a timeout
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+
+            // The Query
+            String query = "SELECT sum(deaths) FROM casesdeaths";
+            
+            // Get Result
+            ResultSet results = statement.executeQuery(query);
+            results.next();
+            String sum = results.getString(1);
+            System.out.println(deaths);
+            deaths = (int) Double.parseDouble(sum);
+            
+
+            // Close the statement because we are done with it
+            statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+        return deaths;
+    }
+    //MOST AFFECTED COUNTRIES BY CASES - ORDERED WORST - LEAST AFFECTED
+    public ArrayList<String> getMostCases() {
+    ArrayList<String> countries = new ArrayList<String>();
+    ArrayList<int[]> countrycase = new ArrayList<int[]>(); 
+
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT country_region, SUM(cases) FROM casesdeaths JOIN locations ON locations.id = casesdeaths.location_id GROUP BY country_region ORDER BY sum(cases) DESC LIMIT 5";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+            String country     = results.getString("Country_Region");
+            
+
+            countries.add(country);
+        }
+
+        statement.close();
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    return countries;
+}
+// GIVES TOTAL CASES BY GIVEN COUNTRY
+public int getTotalCasesByCountry(String country) {
+    int sum = 0;
+
+    // Setup the variable for the JDBC connection
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT country_region, sum(cases) FROM casesdeaths JOIN Locations ON locations.ID = casesdeaths.Location_id WHERE country_region = '" + country + "'" ;
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+             sum              = results.getInt("sum(cases)");
+
+            // For now we will just store the movieName and ignore the id
+            
+        }
+
+        // Close the statement because we are done with it
+        statement.close();
+    } catch (SQLException e) {
+        // If there is an error, lets just pring the error
+        System.err.println(e.getMessage());
+    } finally {
+        // Safety code to cleanup
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            // connection close failed.
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Finally we return all of the movies
+    return sum;
+}
+
 }
