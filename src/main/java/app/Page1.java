@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import java.text.NumberFormat;
+import java.text.DecimalFormat;
 
 /**
  * Temporary HTML as an example page.
@@ -23,6 +25,12 @@ public class Page1 implements Handler {
 
     @Override
     public void handle(Context context) throws Exception {
+        JDBCConnection jdbc = new JDBCConnection();
+        int sumCases = jdbc.caseCount();
+        int sumDeaths = jdbc.deathCount();
+        ArrayList<String> countries = jdbc.getMostCases();
+        NumberFormat myFormat = NumberFormat.getInstance();
+
         // Create a simple HTML webpage in a String
         String html = "<html>";
 
@@ -59,16 +67,24 @@ public class Page1 implements Handler {
 
         html = html + "<div class='container2'>";
         html = html + "<div class='left'></div>";
+        // TOTAL CASES WORLDWIDE
+        html = html + "<p>" + myFormat.format(sumCases) + " Cases</p>";
         // html = html + "<a href='page1.html' class='link1'>Need Help?</a>";
         html = html + "<div class='middle'></div>";
+        //WORST AFFECTED COUNTRIES BY CASES
+        for (String country : countries) {
+            html = html + "<ol>" + country + " - " + myFormat.format(jdbc.getTotalCasesByCountry(country)) + " Cases</ol>";
+        }
         html = html + "<div class='right'></div>";
+        // TOTAL DEATHS WORLDWIDE
+        html = html + "<p>" + myFormat.format(sumDeaths) + " Deaths</p>";
         html = html + "</div>";
      
 
 
         // Look up some information from JDBC
         // First we need to use your JDBCConnection class
-        JDBCConnection jdbc = new JDBCConnection();
+
 
 
         // Finish the HTML webpage
