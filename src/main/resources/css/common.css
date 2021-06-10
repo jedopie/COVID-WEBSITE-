@@ -10,8 +10,7 @@ Base styles
    .topnav {
 	overflow: hidden;
 	background-color: #222;
-	text-align: center;
-	
+	text-align: center;	
 	}
 
 	.topnav a {
@@ -33,7 +32,7 @@ Base styles
 	color: white;
 	}
 
-/* Web Banner */
+/* Web Banner  - HOME PAGE */
 .covidbanner{
 	position: relative;
 	text-align : centre;
@@ -58,7 +57,13 @@ Base styles
 	padding: 2px 5px 15px 15px;
 	height : 90px;
 	width:480px;
+	text-align:center;
 
+}
+.simplehead {
+	position : absolute;
+	color : white;
+	font-size : 40px;
 }
 .banner1pic {
 	width: 100%;
@@ -70,6 +75,13 @@ Base styles
 	padding : 2px 15px 15px 2px;
 	height : 90px;
 	width : 480px;
+	text-align : center;
+}
+.maphead {
+	position : absolute;
+	color : white;
+	font-size : 30px;
+	
 }
 .banner2pic {
 	width: 100%;
@@ -81,10 +93,44 @@ Base styles
 	padding : 2px 5px 15px 2px;
 	height :90px;
 	width : 480px;
+	text-align: center;
 }
 .banner3pic {
 	width: 100%;
 	max-height: 100%;
+}
+.detailstats {
+	position : absolute;
+	color : white;
+	font-size : 30px;
+}
+.textboxleft {
+	float: left;
+    background-color: #02579a;
+    position: relative;
+    width: 460px;
+    height: 800px;
+    margin: 15px;
+    border-radius: 20px;
+}
+.textboxmiddle {
+    float: left;
+    background-color: #02579a;
+    position: relative;
+    width: 460px;
+    height: 800px;
+    margin: 15px 0px 15px 0px;
+    border-radius: 20px;
+}
+.textboxright {
+    float: right;
+    background-color: #02579a;
+    position: relative;
+    width: 460px;
+    height: 800px;
+    margin: 15px 15px 15px 0px;
+    border-radius: 20px;
+
 }
 
 body
