@@ -64,34 +64,47 @@ public class Page1 implements Handler {
         // Add the body
         html = html + "<body>";
 
+        html = html + "<div class='clear'></div>";
 
         // divs for layout
         html = html + "<div class='container1'>";
             html = html + "<img class='floatleft1' src='90.jpeg'>";
-            html = html + "<div class='floatright1'></div>";
+
+            html = html + "<div class='floatright1'>";
+            html = html + "<ul>";
+            html = html + "<li><a class='active' href='page1.html'>Home </a></li>";
+            html = html + "<li><a href='page2.html'>COVID-19: Whats happening around the world?</a></li>";
+            html = html + "<li><a href='page3.html'>Want to see more about Covid-19 infections?</a></li>";
+            html = html + "<li><a href='page4.html'>Want to see more about Covid-19 Deaths?</a></li>";
+            html = html + "<li><a href='page5.html'>See Cumulative Covid data from similar countries</a></li>";
+            html = html + "<li><a href='page6.html'>Explore our data set with advanced search tools</a></li>";
+            html = html + "</ul>";
+            html = html + "</div>";
+
         html = html + "</div>";
 
+        html = html + "<div class='clear'></div>";
 
-        html = html + "<div class='container2'>";
-        html = html + "<div class='left'></div>";
+        html = html + "<div class='wrapper'>";
+            html = html + "<div class='left'></div>";
 
-        // // TOTAL CASES WORLDWIDE
-        // html = html + "<p>" + myFormat.format(sumCases) + " Cases</p>";
+            // // TOTAL CASES WORLDWIDE
+            // html = html + "<p>" + myFormat.format(sumCases) + " Cases</p>";
 
-        // html = html + "<a href='page1.html' class='link1'>Need Help?</a>";
-        html = html + "<div class='middle'></div>";
+            // html = html + "<a href='page1.html' class='link1'>Need Help?</a>";
+            html = html + "<div class='middle'><a>Need more Help?</a></div>";
 
-        // //WORST AFFECTED COUNTRIES BY CASES
-        // for (String country : countries) {
-        //     html = html + "<ol>" + country + " - " + myFormat.format(jdbc.getTotalCasesByCountry(country)) + " Cases</ol>";
-        // }
+            // //WORST AFFECTED COUNTRIES BY CASES
+            // for (String country : countries) {
+            //     html = html + "<ol>" + country + " - " + myFormat.format(jdbc.getTotalCasesByCountry(country)) + " Cases</ol>";
+            // }
 
-        html = html + "<div class='right'></div>";
+            html = html + "<div class='right'></div>";
+        html = html + "</div>";
 
         // // TOTAL DEATHS WORLDWIDE
         // html = html + "<p>" + myFormat.format(sumDeaths) + " Deaths</p>";
 
-        html = html + "</div>";
      
 
 

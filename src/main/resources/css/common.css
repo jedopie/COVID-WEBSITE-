@@ -46,6 +46,40 @@ Base styles
 	color: white;
 	}
 
+
+	/* side nav on page 1  */
+	.floatright1 ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		background-color: #f1f1f1;
+	  }
+	
+	  
+	  .floatright1 li a {
+		display: block;
+		color: #000;
+		padding: 26.1px;
+		text-decoration: none;
+		border-bottom: solid 0.1px rgb(164, 164, 164);
+	  }
+
+	  .floatright1 li:last-child { 
+		border-bottom: none;
+	  }
+	  
+	  /* Change the link color on hover */
+	  .floatright1 li a:hover {
+		background-color: #222;
+		color: white;
+	  }
+
+	  .floatright1 a.active {
+		background-color: #019fbb;
+		color: white;
+		}
+
 /* Web Banner */
 .covidbanner{
 	position: relative;
@@ -116,10 +150,43 @@ body
 
 }
 
+
+/* .middletext {
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	text-align: center;
+  }
+  
+  .container1:hover .floatleft1 {
+	opacity: 0.3;
+  }
+  
+  .container1:hover .middletext {
+	opacity: 1;
+  }
+  
+  .text {
+	background-color: #04AA6D;
+	color: white;
+	font-size: 16px;
+	padding: 16px 32px;
+  } */
+
+  .container1:hover .floatleft1 {
+	opacity: 0.3;
+  }
+
 .floatleft1 {
 	float:left;
 	width: 70%;
 	height: 430px;
+	transition: .5s ease;
+    backface-visibility: hidden;
 	/* border-radius: 15px 0px 0px 15px; */
 }
 
@@ -130,6 +197,14 @@ body
 	background-color:lightgrey;
 	border-radius: 0px 15px 15px 0px;
 	
+}
+
+.clear{
+	clear:both;
+  }
+
+.wrapper {
+	text-align:center;
 }
 
 .left {
@@ -144,10 +219,18 @@ body
   .middle {
 	float: left;
 	width: 30%;
-	background-color: lightgrey;
+	background: linear-gradient(to bottom, #019fbb 25%, Lightgrey 25%, lightgrey 80%);
 	margin: 30px 40px 30px 40px;
 	height: 200px;
 	border-radius: 15px;
+  }
+
+  .wrapper a {
+	position: static;
+	top: 5%;
+	left: 50%;
+	color: white;
+	font-weight: bold;
   }
 
   .right {
@@ -174,18 +257,21 @@ body
 	font-weight: bold;
   }
 
-  .facts {
+  .container2 h2 {
 	bottom: 50%;
 	left: 50%;
 	position: static;
+	font-size: 40px;
 
   }
 
-  .container2 ol {
+  .container2 h4 {
 	margin: 0;
 	position: static;
+	font-size: 30px;
 	bottom: 70%;
 	left: 50%;
+	text-transform: uppercase;
   }
 
   .sumcases {
@@ -194,7 +280,7 @@ body
 	margin: 30px 0px 30px 30px;
 	height: 200px;
 	/* border-radius: 15px; */
-	background: linear-gradient(to bottom, #019fbb 20%, Lightgrey 20%, lightgrey 80%);
+	background: linear-gradient(to bottom, #019fbb 25%, Lightgrey 25%, lightgrey 80%);
   }
 
   .sumdeaths {
@@ -202,7 +288,7 @@ body
 	width: 30%;
 	margin: 30px 40px 30px 40px;
 	height: 200px;
-	background: linear-gradient(to bottom, #019fbb 20%, Lightgrey 20%, lightgrey 80%);
+	background: linear-gradient(to bottom, #019fbb 25%, Lightgrey 25%, lightgrey 80%);
 	/* border-radius: 15px; */
   }
 
@@ -211,7 +297,7 @@ body
 	width: 30%;
 	margin: 30px 30px 30px 0px;
 	height: 647;
-	background: linear-gradient(to bottom, #019fbb 40px, Lightgrey 40px, lightgrey 100%);
+	background: linear-gradient(to bottom, #019fbb 50px, Lightgrey 50px, lightgrey 100%);
 	
 	/* border-radius: 15px; */
   }
@@ -223,8 +309,13 @@ body
 	  height: auto;
 	  display: block;
 	  width: 62.7%;
+	  transition: .5s ease;
+      backface-visibility: hidden;
 	  /* border-radius: 15px; */
-	  
+  }
+
+  .container3:hover .bigimg {
+	opacity: 0.3;
   }
 
   .container3 {
@@ -250,8 +341,10 @@ body
   }
 
   /* page 3 */
-.search {
+.search_container {
 	height: 40px;
+	display: block;
+	clear:both;
 }
 
 input[type=text], select {
@@ -273,7 +366,7 @@ input[type=text], select {
 	cursor: pointer;
 	padding: 12px 20px;
 	margin: 15px 30px 30px 30px;
-	display: inline-block;
+	display: block;
 	border: 1px solid #ccc;
 	border-radius: 15px;
 	box-sizing: border-box;
@@ -290,5 +383,10 @@ input[type=text], select {
 		color: white;
 		margin-top: 30px;
   }
+
+  	.container4 {
+		  margin: 0 auto;
+		  position: relative;
+	  }
   
 
