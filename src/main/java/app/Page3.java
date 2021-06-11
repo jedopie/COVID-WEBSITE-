@@ -33,6 +33,11 @@ public class Page3 implements Handler {
         // Add some CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
 
+        // top banner
+        html = html + "<div class='top'>";
+        html = html + "<div class='covid'>COVID-19</div>";
+        html = html + "</div>";
+
          html = html + "<div class='topnav'>";
          html = html + "<a href='/'>Home</a>";
          html = html + "<a href='page1.html'>Page 1</a>";

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import java.text.NumberFormat;
+import java.text.DecimalFormat;
 
 /**
  * Temporary HTML as an example page.
@@ -23,6 +25,12 @@ public class Page2 implements Handler {
 
     @Override
     public void handle(Context context) throws Exception {
+        JDBCConnection jdbc = new JDBCConnection();
+        int sumCases = jdbc.caseCount();
+        int sumDeaths = jdbc.deathCount();
+        ArrayList<String> countries = jdbc.getMostCases();
+        NumberFormat myFormat = NumberFormat.getInstance();
+
         // Create a simple HTML webpage in a String
         String html = "<html>";
 
@@ -32,6 +40,11 @@ public class Page2 implements Handler {
 
         // Add some CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
+
+        // top banner
+        html = html + "<div class='top'>";
+        html = html + "<div class='covid'>COVID-19</div>";
+        html = html + "</div>";
 
          html = html + "<div class='topnav'>";
          html = html + "<a href='/'>Home</a>";
@@ -49,18 +62,35 @@ public class Page2 implements Handler {
         // Add the body
         html = html + "<body>";
 
-        html = html + "<div class='container2'>";
-            
+
+        html = html + "<div class=container2>";
+            // TOTAL CASES WORLDWIDE
+            html = html + "<div class='sumcases'>";
+                html = html + "<p>TOTAL GLOBAL CASES</p>";
+                html = html + "<h4 class='bottom80'>" + myFormat.format(sumCases) + " <br>Cases</h4>";
+            html = html + "</div>";
+
+            // TOTAL DEATHS WORLDWIDE
+            html = html + "<div class='sumdeaths'>";
+                html = html + "<p>TOTAL GLOBAL DEATHS</p>";
+                html = html + "<h4 class='facts'>" + myFormat.format(sumDeaths) + " <br>Deaths</h4>";
+                html = html + "</div>";
+
+             //WORST AFFECTED COUNTRIES BY CASES
+             html = html + "<div class='covid_country'>";
+                html = html + "<p>TOP 5 COUNTRIES</p>";
+                for (String country : countries) {
+                    html = html + "<ol>" + country + " - " + myFormat.format(jdbc.getTotalCasesByCountry(country)) + " <br>Cases</ol>";
+                }
+            html = html + "</div>";
+
         html = html + "</div>";
 
+        // find out more image
         html = html + "<div class='container3'>";
             html = html + "<img class='bigimg' src='covid.jpeg'></img>";
             html = html + "<div class=centered_text><a href=page1.html>Want to find out <br> more about covid-19?</a></div>";
         html = html + "</div>";
-
-        // Look up some information from JDBC
-        // First we need to use your JDBCConnection class
-        JDBCConnection jdbc = new JDBCConnection();
 
 
         // Finish the HTML webpage
