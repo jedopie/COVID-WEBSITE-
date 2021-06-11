@@ -41,6 +41,12 @@ public class Page1 implements Handler {
         // Add some CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
 
+        // top banner
+        html = html + "<div class='top'>";
+        html = html + "<div class='covid'>COVID-19</div>";
+        html = html + "</div>";
+
+
          // Link for each page
          html = html + "<div class='topnav'>";
          html = html + "<a href='/'>Home</a>";
@@ -51,6 +57,7 @@ public class Page1 implements Handler {
          html = html + "<a href='page5.html'>Page 5</a>";
          html = html + "<a href='page6.html'>Page 6</a>";
          html = html + "</div>";
+         
 
          html = html + "</head>";
 
@@ -60,24 +67,30 @@ public class Page1 implements Handler {
 
         // divs for layout
         html = html + "<div class='container1'>";
-        html = html + "<img class='floatleft1' src='worldmap.png'></img>";
-        html = html + "<div class='floatright1'></div>";
+            html = html + "<img class='floatleft1' src='90.jpeg'>";
+            html = html + "<div class='floatright1'></div>";
         html = html + "</div>";
 
 
         html = html + "<div class='container2'>";
         html = html + "<div class='left'></div>";
-        // TOTAL CASES WORLDWIDE
-        html = html + "<p>" + myFormat.format(sumCases) + " Cases</p>";
+
+        // // TOTAL CASES WORLDWIDE
+        // html = html + "<p>" + myFormat.format(sumCases) + " Cases</p>";
+
         // html = html + "<a href='page1.html' class='link1'>Need Help?</a>";
         html = html + "<div class='middle'></div>";
-        //WORST AFFECTED COUNTRIES BY CASES
-        for (String country : countries) {
-            html = html + "<ol>" + country + " - " + myFormat.format(jdbc.getTotalCasesByCountry(country)) + " Cases</ol>";
-        }
+
+        // //WORST AFFECTED COUNTRIES BY CASES
+        // for (String country : countries) {
+        //     html = html + "<ol>" + country + " - " + myFormat.format(jdbc.getTotalCasesByCountry(country)) + " Cases</ol>";
+        // }
+
         html = html + "<div class='right'></div>";
-        // TOTAL DEATHS WORLDWIDE
-        html = html + "<p>" + myFormat.format(sumDeaths) + " Deaths</p>";
+
+        // // TOTAL DEATHS WORLDWIDE
+        // html = html + "<p>" + myFormat.format(sumDeaths) + " Deaths</p>";
+
         html = html + "</div>";
      
 
