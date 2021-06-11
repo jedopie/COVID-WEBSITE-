@@ -50,7 +50,7 @@ Base styles
 .covidbanner{
 	position: relative;
 	text-align : centre;
-	padding: 15px 15px 5px 15px;
+	padding: 15px 15px 2px 15px;
 	height : 250px;
 	width : 1440px;
 }
@@ -64,14 +64,12 @@ Base styles
 	color : white;
 	font-size : 80px;
 	top:40%;
-	left : 580;
-
-
+	left : 560;
 }
 .infobanner1 {
 	float : left;
-	padding: 5px 5px 15px 15px;
-	height : 100px;
+	padding: 2px 5px 15px 15px;
+	height : 90px;
 	width:480px;
 
 }
@@ -81,7 +79,8 @@ Base styles
 }
 
 .infobanner2 {
-	padding : 2px 2px 15px 5px;
+	float : right;
+	padding : 2px 15px 15px 2px;
 	height : 90px;
 	width : 480px;
 }
@@ -91,7 +90,8 @@ Base styles
 }
 
 .infobanner3 {
-	padding : 2px 15px 15px 5px;
+	float : right;
+	padding : 2px 5px 15px 2px;
 	height :90px;
 	width : 480px;
 }

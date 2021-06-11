@@ -55,13 +55,15 @@ public class Index implements Handler {
         html = html + "<div class='infobanner1'>";
         html = html + "<img class = 'banner1pic' src='Vaccine Background.jpeg'></img";
         html = html + "</div>";
+        html = html + "</div>";
 
         html = html + "<div class='infobanner2'>";
-        html = html + "<img class = 'banner2pic' src='dark banner.jpeg'></img";
+        html = html + "<img class = 'banner2pic' src='Vaccine Background.jpeg'></img";
+        html = html + "</div>";
         html = html + "</div>";
 
         html = html + "<div class = 'infobanner3'>";
-        html = html + "<img class = 'banner3pic' src='lightbluebanner.jpeg'></img";
+        html = html + "<img class = 'banner3pic' src='Vaccine Background.jpeg'></img";
         html = html + "</div>";
 
         html = html + "<h1>Home</h1>";
