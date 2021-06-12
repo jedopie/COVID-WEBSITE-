@@ -67,29 +67,32 @@ public class Page2 implements Handler {
             // TOTAL CASES WORLDWIDE
             html = html + "<div class='sumcases'>";
                 html = html + "<p>TOTAL GLOBAL CASES</p>";
-                html = html + "<h4 class='bottom80'>" + myFormat.format(sumCases) + " <br>Cases</h4>";
+                html = html + "<h2>" + myFormat.format(sumCases) + " <br>Cases</h2>";
             html = html + "</div>";
 
             // TOTAL DEATHS WORLDWIDE
             html = html + "<div class='sumdeaths'>";
                 html = html + "<p>TOTAL GLOBAL DEATHS</p>";
-                html = html + "<h4 class='facts'>" + myFormat.format(sumDeaths) + " <br>Deaths</h4>";
-                html = html + "</div>";
+                html = html + "<h2>" + myFormat.format(sumDeaths) + " <br>Deaths</h2>";
+             html = html + "</div>";
 
              //WORST AFFECTED COUNTRIES BY CASES
              html = html + "<div class='covid_country'>";
                 html = html + "<p>TOP 5 COUNTRIES</p>";
                 for (String country : countries) {
-                    html = html + "<ol>" + country + " - " + myFormat.format(jdbc.getTotalCasesByCountry(country)) + " <br>Cases</ol>";
+                    html = html + "<br>";
+                    html = html + "<h4>" + country + " - " + myFormat.format(jdbc.getTotalCasesByCountry(country)) + " <br>Cases</h4>";
+                    html = html + "<br>";
                 }
             html = html + "</div>";
 
         html = html + "</div>";
 
+        
         // find out more image
         html = html + "<div class='container3'>";
             html = html + "<img class='bigimg' src='covid.jpeg'></img>";
-            html = html + "<div class=centered_text><a href=page1.html>Want to find out <br> more about covid-19?</a></div>";
+            html = html + "<div class=centered_text><a href=page3.html>Want to find out <br> more about covid-19?</a></div>";
         html = html + "</div>";
 
 
