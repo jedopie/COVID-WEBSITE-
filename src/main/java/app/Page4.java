@@ -51,11 +51,77 @@ public class Page4 implements Handler {
         // Add the body
         html = html + "<body>";
 
-        // Add HTML for link back to the homepage
-        html = html + "<h1>Page 4</h1>";
-        html = html + "<p>Return to Homepage: ";
-        html = html + "<a href='/'>Link to Homepage</a>";
-        html = html + "</p>";
+        html = html + "<div class='search_container'>";
+        html = html + "<form>";
+          html = html + "<div class='centered_div'>";
+          html = html + "<input type='text' id='search' name='search' placeholder='Search for a Country...'>";
+          html = html + "<input type='submit' value='Search' class='submit1'>";
+          html = html + "</div>";
+        html = html + "</form>";
+      html = html + "</div>";
+
+      html = html + "<div class='clear'></div>";
+
+      html = html + "<div class='container4'>";
+       html = html + "<div class='country_title'>the searched country goes here</div>";
+      html = html + "</div>";
+
+      html = html + "<div class='container5'>";
+
+       html = html + "<div class='Tot_infection'>";
+       html = html + "<p>Total Deaths</p>";
+
+       html = html + "</div>";
+
+       html = html + "<div class='infection_date'>";
+       html = html + "<form>";
+        html = html + "<p>Total Deaths<br><p>";
+        html = html + "<label for='date1'> from </label>";
+        html = html + "<input type='date' id='date1' name='date1' data-date-inline-picker='true'>";
+        html = html + "<label for='date2'>to </label>";
+        html = html + "<input type='date' id='date2' name='date2' data-date-inline-picker='true'>";
+       html = html + "</form>";
+       html = html + "</div>";
+
+       html = html + "<div class='max_infection'>";
+       html = html + "<p>Highest Deaths in 1 day</p>";
+       
+       html = html + "</div>";
+
+       html = html + "<br class='clear' />";
+
+      html = html + "</div>";
+
+
+      html = html + "<div class='container6'>";
+        html = html + "<table class='tbl'>";
+        html = html + "<tr>";
+          html = html + "<th>State</th>";
+          html = html + "<th>Total Deaths/Total infections Ratio</th>";
+          // date selector tbl header
+            html = html + "<th>";
+            html = html + "<form>";
+            html = html + "<label for='date3'>Total Deaths/Total infections Ratio</label>";
+            html = html + "<input type='date' id='date3' name='date3' data-date-inline-picker='true'>";
+            html = html + "<label for='date4'> to </label>";
+            html = html + "<input type='date' id='date4' name='date4' data-date-inline-picker='true'>";
+            html = html + "</form>";
+            html = html + "</th>";
+
+          html = html + "<th>Highest Deaths/Highest infections in 1 Day Ratio</th>";
+        html = html + "</tr>";
+        html = html + "<tr>";
+          html = html + "<td>java forloop display for all countries</td>";
+          html = html + "<td></td>";
+          html = html + "<td></td>";
+          html = html + "<td></td>";
+        html = html + "</tr>";
+      html = html + "</table>";
+
+      html = html + "<br class='clear' />";
+    html = html + "</div>";
+
+
 
         // Look up some information from JDBC
         // First we need to use your JDBCConnection class

@@ -244,7 +244,7 @@ body
 	float: right;
 	width: 30%;
 	height: 430px;
-	background-color:lightgrey;
+	background-color:l#f1f1f1;
 	border-radius: 0px 15px 15px 0px;
 	
 }
@@ -260,7 +260,7 @@ body
 .left {
 	float: left;
 	width: 30%;
-	background-color: lightgrey;
+	background-color: #f1f1f1;
 	margin: 30px 0px 30px 30px;
 	height: 200px;
 	border-radius: 15px;
@@ -269,7 +269,7 @@ body
   .middle {
 	float: left;
 	width: 30%;
-	background: linear-gradient(to bottom, #019fbb 25%, Lightgrey 25%, lightgrey 80%);
+	background: linear-gradient(to bottom, #019fbb 25%, #f1f1f1 25%, #f1f1f1 80%);
 	margin: 30px 40px 30px 40px;
 	height: 200px;
 	border-radius: 15px;
@@ -281,12 +281,13 @@ body
 	left: 50%;
 	color: white;
 	font-weight: bold;
+	cursor: pointer;
   }
 
   .right {
 	float: left;
 	width: 30%;
-	background-color:lightgrey;
+	background-color:#f1f1f1;
 	margin: 30px 30px 30px 0px;
 	height: 200px;
 	border-radius: 15px;
@@ -331,7 +332,7 @@ body
 	margin: 30px 0px 30px 30px;
 	height: 200px;
 	/* border-radius: 15px; */
-	background: linear-gradient(to bottom, #019fbb 25%, Lightgrey 25%, lightgrey 80%);
+	background: linear-gradient(to bottom, #019fbb 25%, #f1f1f1 25%, #f1f1f1 80%);
   }
 
   .sumdeaths {
@@ -340,7 +341,7 @@ body
 	width: 30%;
 	margin: 30px 40px 30px 40px;
 	height: 200px;
-	background: linear-gradient(to bottom, #019fbb 25%, Lightgrey 25%, lightgrey 80%);
+	background: linear-gradient(to bottom, #019fbb 25%, #f1f1f1 25%, #f1f1f1 80%);
 	/* border-radius: 15px; */
   }
 
@@ -349,7 +350,7 @@ body
 	width: 30%;
 	margin: 30px 30px 30px 0px;
 	height: 647;
-	background: linear-gradient(to bottom, #019fbb 50px, Lightgrey 50px, lightgrey 100%);
+	background: linear-gradient(to bottom, #019fbb 50px, #f1f1f1 50px, #f1f1f1 100%);
 	
 	/* border-radius: 15px; */
   }
@@ -394,51 +395,199 @@ body
 
   /* page 3 */
 .search_container {
-	height: 40px;
-	display: block;
-	clear:both;
+		margin: 30px 30px 10px 30px;
+        background-color: white;
+		text-align: center;
 }
 
-input[type=text], select {
-	width: 40%;
-	padding: 12px 20px;
-	margin: 15px 30px 30px 30px;
+.centered_div{
 	display: inline-block;
+	margin: 0 auto;
+	width: 100%;
+}
+
+input[type=text] {
 	border: 1px solid #ccc;
 	border-radius: 15px;
 	box-sizing: border-box;
-	position: absolute;
-	background-color: rgb(243, 242, 242);
-	left: 45%;
-	transform: translate(-50%, 0%);
+	width: 40%;
+	padding: 15px;
+	display: inline-block;
+	background: #f1f1f1;
+	margin-right: 15px;
+	text-align: center;
   }
 
-  input.submit1 {
+  input[type=submit] {
 	width: 8%;
+	padding: 15px;
 	cursor: pointer;
-	padding: 12px 20px;
-	margin: 15px 30px 30px 30px;
-	display: block;
 	border: 1px solid #ccc;
 	border-radius: 15px;
 	box-sizing: border-box;
-	position: absolute;
-	background-color: rgb(243, 242, 242);
-	left: 70%;
-	transform: translate(-50%, 0%);
-  }
-
-  .country_title {
-		width: 80%;
-		background-color: rgb(68, 67, 67);
-		text-align: center; 
-		color: white;
-		margin-top: 30px;
+	display: inline-block;
+	background: #f1f1f1;
   }
 
   	.container4 {
-		  margin: 0 auto;
-		  position: relative;
+		margin: 0px 30px 0px 30px;
+        background-color: white;
+		text-align: center;
+	}
+
+	.country_title {
+		width: 80%;
+		background-color: #222;
+		text-align: center; 
+		color: white;
+		display: inline-block;
+		margin: 0 auto;
+		padding: 15px;
+		border-radius: 15px;
+	    box-sizing: border-box;
+  }
+  
+  /* 3 boxes  */
+  .container5 {
+	margin: 0px 30px 0px 30px;
+	background-color: white;
+	padding: 0px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+  .container5 p {
+	position: static;
+	top: 5%;
+	left: 50%;
+	color: white;
+	font-weight: bold;
+  }
+
+  .container5 h2 {
+	bottom: 50%;
+	left: 50%;
+	position: static;
+	font-size: 40px;
+
+  }
+
+  .Tot_infection {
+	float: left;
+	width: 30%;
+	margin: 30px 0px 30px 30px;
+	height: 200px;
+	/* border-radius: 15px; */
+	background: linear-gradient(to bottom, #019fbb 25%, #f1f1f1 25%, #f1f1f1 80%);
+  }
+
+  .infection_date {
+	float: left;
+	width: 30%;
+	margin: 30px;
+	height: 200px;
+	background: linear-gradient(to bottom, #019fbb 25%, #838383 25%, #838383 50%,#f1f1f1 50%, #f1f1f1 80%);
+	/* border-radius: 15px; */
+  }
+
+  .max_infection {
+	float: left;
+	width: 30%;
+	margin: 30px 30px 30px 0px;
+	height: 200px;
+	background: linear-gradient(to bottom, #019fbb 50px, #f1f1f1 50px, #f1f1f1 100%);
+  }
+
+  .container5 input[type=date] {
+	width: 140px;
+	border: 1px solid #ccc;
+	border-radius: 15px;
+	box-sizing: border-box;
+	background: white;
+	top: 5%;
+	left: 50%;
+	height: 40px;
+	margin: 4px 0px 4px 4px;
+  }
+
+  .container5 label {
+	  color: white;
+	  margin-left: 10px;
+	  font-weight: bold;
+  }
+
+  /* aus button for states drop down */
+  .button_cont {
+	margin: 0px 15px 0px 0px;
+	background-color: white;
+	padding: 30px 30px 0px 30px;
+	text-transform: uppercase;
+	position: relative;
+	}
+
+	.btn_block {
+		width: 300px;
+		cursor: pointer;
+		background: #222;
+		color:white;
+		text-decoration: none;
+		padding: 10px;
+		border-radius: 15px;
+		font-size: large;
+		
+	}
+
+	.center_button {
+		margin: 0;
+		padding: 20px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
 	  }
   
+
+
+  .container6 {
+	margin: 30px 30px 0px 30px;
+	background-color: white;
+	padding: 0px 30px 0px 30px;
+	text-transform: uppercase;
+	}
+
+	.tbl {
+		border-collapse: collapse;
+		width: 100%;
+	}
+	
+	.tbl td, .tbl th {
+	border: 1px solid #ddd;
+	padding: 8px;
+	}
+	
+	.tbl tr:nth-child(even){background-color: #f2f2f2;}
+	
+	.tbl tr:hover {background-color: #ddd;}
+	
+	.tbl th {
+		padding-top: 12px;
+		padding-bottom: 10px;
+		text-align: left;
+		background-color: #019fbb ;
+		color: white;
+	}
+
+	.container6 input[type=date] {
+		width: 140px;
+		border: 1px solid #ccc;
+		border-radius: 15px;
+		box-sizing: border-box;
+		background: white;
+		height: 30px;
+		margin: 4px 0px -40px 4px;
+	  }
+
+
+
 
