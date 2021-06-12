@@ -53,16 +53,120 @@ public class Page3 implements Handler {
 
         html = html + "<div class='search_container'>";
           html = html + "<form>";
+            html = html + "<div class='centered_div'>";
             html = html + "<input type='text' id='search' name='search' placeholder='Search for a Country...'>";
-            html = html + "<input type='submit' value='Submit' class='submit1'>";
-          html = html + "</form";
+            html = html + "<input type='submit' value='Search' class='submit1'>";
+            html = html + "</div>";
+          html = html + "</form>";
         html = html + "</div>";
 
         html = html + "<div class='clear'></div>";
 
         html = html + "<div class='container4'>";
-        html = html + "<div class='country_title'>the searched country goes here</div>";
+         html = html + "<div class='country_title'>the searched country goes here</div>";
         html = html + "</div>";
+
+        html = html + "<div class='container5'>";
+
+         html = html + "<div class='Tot_infection'>";
+         html = html + "<p>Total Infections</p>";
+
+         html = html + "</div>";
+
+         html = html + "<div class='infection_date'>";
+         html = html + "<form>";
+          html = html + "<p>Total Infections<br><p>";
+          html = html + "<label for='date1'> from </label>";
+          html = html + "<input type='date' id='date1' name='date1' data-date-inline-picker='true'>";
+          html = html + "<label for='date2'>to </label>";
+          html = html + "<input type='date' id='date2' name='date2' data-date-inline-picker='true'>";
+         html = html + "</form>";
+         html = html + "</div>";
+
+         html = html + "<div class='max_infection'>";
+         html = html + "<p>Highest Infections in 1 Day</p>";
+         
+         html = html + "</div>";
+
+         html = html + "<br class='clear' />";
+
+        html = html + "</div>";
+
+        html = html + "<div class='button_cont'>";
+        html = html + "<form>";
+        html = html + "<div class='center_button'>";
+          html = html + "<button class='btn_block' name='aus' type='submit'>Australian States</button>";
+          html = html + "</div>";
+        html = html + "</form>";
+        html = html + "<br class='clear' />";
+        html = html + "</div>";
+
+
+        html = html + "<div class='container6'>";
+          html = html + "<table class='tbl'>";
+          html = html + "<tr>";
+            html = html + "<th>State</th>";
+            html = html + "<th>Total Infections</th>";
+            // date selector tbl header
+              html = html + "<th>";
+              html = html + "<form>";
+              html = html + "<label for='date3'>Total Infections from </label>";
+              html = html + "<input type='date' id='date3' name='date3' data-date-inline-picker='true'>";
+              html = html + "<label for='date4'> to </label>";
+              html = html + "<input type='date' id='date4' name='date4' data-date-inline-picker='true'>";
+              html = html + "</form>";
+              html = html + "</th>";
+
+            html = html + "<th>Highest Infections in 1 day</th>";
+          html = html + "</tr>";
+          html = html + "<tr>";
+            html = html + "<td>VIC</td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+          html = html + "</tr>";
+          html = html + "<tr>";
+            html = html + "<td>SA</td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+          html = html + "</tr>";
+          html = html + "<tr>";
+            html = html + "<td>WA</td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+          html = html + "</tr>";
+          html = html + "<tr>";
+            html = html + "<td>QLD</td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+          html = html + "</tr>";
+          html = html + "<tr>";
+            html = html + "<td>NSW</td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+          html = html + "</tr>";
+          html = html + "<tr>";
+            html = html + "<td>TAS</td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+          html = html + "</tr>";
+          html = html + "<tr>";
+            html = html + "<td>NT</td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+          html = html + "</tr>";
+        html = html + "</table>";
+
+        html = html + "<br class='clear' />";
+      html = html + "</div>";
+
+
 
 
 
