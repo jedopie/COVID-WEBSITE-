@@ -7,6 +7,8 @@ import io.javalin.http.Handler;
 import java.text.NumberFormat;
 import java.text.DecimalFormat;
 import java.util.Scanner;
+import java.util.Date;
+
 /**
  * Temporary HTML as an example page.
  * 
@@ -26,8 +28,11 @@ public class Page3 implements Handler {
 
     @Override
     public void handle(Context context) throws Exception {
-      Scanner scanner = new Scanner(System.in);
+      JDBCConnection jdbc = new JDBCConnection();
+      NumberFormat myFormat = NumberFormat.getInstance();
         final String country = context.queryParam("search");
+        final String date1 = context.queryParam("date1");
+        final String date2 = context.queryParam("date2");
 
         System.out.println(country);
 
@@ -72,15 +77,30 @@ public class Page3 implements Handler {
         
         html = html + "<div class='clear'></div>";
 
-       
+       if (country == null) {
         html = html + "<div class='container4'>";
-         html = html + "<div class='country_title' id='countryID'>the searched country goes here</div>";
+        html = html + "<div class='country_title' id='countryID'>Please Enter a Country</div>";
+       html = html + "</div>";
+       }
+       else {
+        html = html + "<div class='container4'>";
+         html = html + "<div class='country_title' id='countryID'>" + country + "</div>";
         html = html + "</div>";
+       }
 
         html = html + "<div class='container5'>";
 
+        if (jdbc.getTotalCasesByCountry(country) < 1) {
+          html = html + "<div class='Tot_infection'>";
+          html = html + "<p>Total Infections</p>";
+          html = html + "<h2>COUNTRY COULD NOT BE FOUND</h2>";
+        }
+        else {
+
          html = html + "<div class='Tot_infection'>";
          html = html + "<p>Total Infections</p>";
+         html = html + "<h2>" + myFormat.format(jdbc.getTotalCasesByCountry(country)) + " Cases</h2>";
+        }
 
          html = html + "</div>";
 
@@ -91,11 +111,28 @@ public class Page3 implements Handler {
           html = html + "<input type='date' id='date1' name='date1' data-date-inline-picker='true'>";
           html = html + "<label for='date2'>to </label>";
           html = html + "<input type='date' id='date2' name='date2' data-date-inline-picker='true'>";
+          html = html + "<input type='submit' value='Search' class='submit2'>";
          html = html + "</form>";
          html = html + "</div>";
 
+         if  (jdbc.getHighestCaseTallyByDay(country) <1) {
+          html = html + "<div class='max_infection'>";
+          html = html + "<p>Highest Infections in 1 Day</p>";
+          html = html + "<h2>COUNTRY COULD NOT BE FOUND</h2>";
+
+         }
+         else if (jdbc.getHighestCaseTallyByDay(country) <2){
+          html = html + "<div class='max_infection'>";
+          html = html + "<p>Highest Infections in 1 Day</p>";
+          html = html + "<h2>" + myFormat.format(jdbc.getHighestCaseTallyByDay(country)) + " Case</h2>";
+          html = html + "<h2>" + jdbc.getHighestCaseDay(country) + "</h2>";
+          }
+         else {
          html = html + "<div class='max_infection'>";
          html = html + "<p>Highest Infections in 1 Day</p>";
+         html = html + "<h2>" + myFormat.format(jdbc.getHighestCaseTallyByDay(country)) + " Cases</h2>";
+         html = html + "<h2>" + jdbc.getHighestCaseDay(country) + "</h2>";
+         }
          
          html = html + "</div>";
 
@@ -132,6 +169,7 @@ public class Page3 implements Handler {
               html = html + "<input type='date' id='date3' name='date3' data-date-inline-picker='true'>";
               html = html + "<label for='date4'> to </label>";
               html = html + "<input type='date' id='date4' name='date4' data-date-inline-picker='true'>";
+              html = html + "<input type='submit' value='Search' class='submit2'>";
               html = html + "</form>";
               html = html + "</th>";
 
@@ -193,7 +231,6 @@ public class Page3 implements Handler {
 
         // Look up some information from JDBC
         // First we need to use your JDBCConnection class
-        JDBCConnection jdbc = new JDBCConnection();
       
 
         // Finish the HTML webpage
