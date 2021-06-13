@@ -418,8 +418,8 @@ input[type=text] {
   }
 
   input[type=submit] {
-	width: 8%;
-	padding: 15px;
+	width: 15%;
+	padding: 10px;
 	cursor: pointer;
 	border: 1px solid #ccc;
 	border-radius: 15px;
@@ -498,7 +498,7 @@ input[type=text] {
   }
 
   .container5 input[type=date] {
-	width: 140px;
+	width: 120px;
 	border: 1px solid #ccc;
 	border-radius: 15px;
 	box-sizing: border-box;
@@ -506,7 +506,7 @@ input[type=text] {
 	top: 5%;
 	left: 50%;
 	height: 40px;
-	margin: 4px 0px 4px 4px;
+	margin: 2px 0px 2px 2px;
   }
 
   .container5 label {
