@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
-
+import java.text.NumberFormat;
+import java.text.DecimalFormat;
+import java.util.Scanner;
 /**
  * Temporary HTML as an example page.
  * 
@@ -18,11 +20,19 @@ import io.javalin.http.Handler;
  */
 public class Page3 implements Handler {
 
+
     // URL of this page relative to http://localhost:7000/
     public static final String URL = "/page3.html";
 
     @Override
     public void handle(Context context) throws Exception {
+      Scanner scanner = new Scanner(System.in);
+        final String country = context.queryParam("search");
+
+        System.out.println(country);
+
+        System.out.println(context.queryParamMap());
+
         // Create a simple HTML webpage in a String
         String html = "<html>";
 
@@ -59,11 +69,12 @@ public class Page3 implements Handler {
             html = html + "</div>";
           html = html + "</form>";
         html = html + "</div>";
-
+        
         html = html + "<div class='clear'></div>";
 
+       
         html = html + "<div class='container4'>";
-         html = html + "<div class='country_title'>the searched country goes here</div>";
+         html = html + "<div class='country_title' id='countryID'>the searched country goes here</div>";
         html = html + "</div>";
 
         html = html + "<div class='container5'>";

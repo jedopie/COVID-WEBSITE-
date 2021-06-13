@@ -40,6 +40,7 @@ public class Page2 implements Handler {
 
         // Add some CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
+        html = html + "<script src='javascript.js'></script>";
 
         // top banner
         html = html + "<div class='top'>";
