@@ -67,27 +67,34 @@ public class Page6 implements Handler {
       html = html + "<div class='container7'>";
         html = html + "<div class='sim_climate'>";
             html = html + "<div class='grey'>";
-            html = html + "<h4>See Covid data from countries in similar climates</h4>";
+            html = html + "<h4>See Covid-19 data from countries facing similar impacts</h4>";
             html = html + "</div>";
 
             html = html + "<div class='filters'>";
-                 html = html + "<p>Climate: load value</p>";
-                 html = html + "<form>";
-                    
-                html = html + "</form>";
-            html = html + "</div>";
+            html = html + "<form class='worst'>";
+            html = html + "<label for='sort_similar'>See Similar Countries based on </label>";
+            html = html + "<select name='sort_similar' id='sort_similar'>";
+            html = html + "<option value='per_mil'>Total infections/1 million people</option>";
+            html = html + "<option value='death_inf_ratio'>Deaths to infections Ratio</option>";
+            html = html + "<option value='max_deaths'>Maximum daily deaths</option>";
+            html = html + "<option value='max_infection'>Maximum daily infections</option>";
+            html = html + "</select>";
+        html = html + "</form>";
+    html = html + "</div>"; 
 
             html = html + "<table class='tbl'>";
             html = html + "<tr>";
-            html = html + "<th>Country</th>";
-            html = html + "<th>Transmission Rate</th>";
-            html = html + "<th>Death Rate</th>";
+                html = html + "<th>Country</th>";
+                html = html + "<th>Total Infections</th>";
+                html = html + "<th>Infections/1 million people</th>";
             html = html + "</tr>";
-            html = html + "<tr>";
-            html = html + "<td>java forloop display for all countries</td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-            html = html + "</tr>";
+            for(int i = 0; i <= 6; i++){
+                html = html + "<tr>";
+                html = html + "<td>COUNTRY</td>";
+                html = html + "<td>0</td>";
+                html = html + "<td>0</td>";
+                html = html + "</tr>";
+                }
         html = html + "</table>";
 
       html = html + "<br class='clear' />";
@@ -95,26 +102,42 @@ public class Page6 implements Handler {
 
         html = html + "<div class='sim_distance'>";  
             html = html + "<div class='grey'>";
-                html = html + "<h4>See Covid data from countries in similar climates</h4>";
+                html = html + "<h4>See Covid data from American States facing similar impacts</h4>";
+                html = html + "</div>";
+ 
+                html = html + "<div class='US_SEARCH'>";
+                    html = html + "<form>";
+                    html = html + "<div class='centered_div'>";
+                    html = html + "<input type='text' id='search_US' name='search_US' placeholder='Search for a US State...'>";
+                    html = html + "<input type='submit' value='Search' class='submit1'>";
+                    html = html + "</div>";
+                    html = html + "</form>";
                 html = html + "</div>";
 
                 html = html + "<div class='filters'>";
-                    html = html + "<form>";
-                        html = html + "<label for='distance_km'>See Covid-19 data from countries facing similar impacts</label>";
-                        html = html + "<input type='number' id='distance_km' name='distance_km'><span style='margin-left:10px;'>km</span>";
+                        html = html + "<form class='worst'>";
+                        html = html + "<label for='sort_similar'>See Similar US States based on </label>";
+                        html = html + "<select name='sort_similar2' id='sort_similar2'>";
+                        html = html + "<option value='per_mil2'>Total infections/1 million people</option>";
+                        html = html + "<option value='death_inf_ratio2'>Deaths to infections Ratio</option>";
+                        html = html + "<option value='max_deaths2'>Maximum daily deaths</option>";
+                        html = html + "<option value='max_infection2'>Maximum daily infections</option>";
+                        html = html + "</select>";
                     html = html + "</form>";
                 html = html + "</div>"; 
         html = html + "<table class='tbl'>";
         html = html + "<tr>";
           html = html + "<th>Country</th>";
-           html = html + "<th>Transmission Rate</th>";
-           html = html + "<th>Death Rate</th>";
+           html = html + "<th>Total Infections</th>";
+           html = html + "<th>Infections/1 million people</th>";
         html = html + "</tr>";
-        html = html + "<tr>";
-          html = html + "<td>java forloop display for all countries</td>";
-          html = html + "<td></td>";
-          html = html + "<td></td>";
-        html = html + "</tr>";
+        for(int i = 0; i <= 5; i++){
+            html = html + "<tr>";
+            html = html + "<td>COUNTRY</td>";
+            html = html + "<td>0</td>";
+            html = html + "<td>0</td>";
+            html = html + "</tr>";
+            }
       html = html + "</table>";
 
       html = html + "<br class='clear' />";
@@ -125,25 +148,32 @@ public class Page6 implements Handler {
 
       html = html + "<div class='container8'>";
         html = html + "<div class='grey'>";
-        html = html + "<h4>See Deaths, Infections and Population Ratios for Covid-19</h4>";
+        html = html + "<h4>See Covid data from countries facing similar impacts to your US State</h4>";
         html = html + "</div>";
+        html = html + "<div class='filters'>";
+        html = html + "<form class='worst'>";
+        html = html + "<label for='sort_similar'>See Similar Countries to your US State based on </label>";
+        html = html + "<select name='sort_similar2' id='sort_similar2'>";
+        html = html + "<option value='per_mil2'>Total infections/1 million people</option>";
+        html = html + "<option value='death_inf_ratio2'>Deaths to infections Ratio</option>";
+        html = html + "<option value='max_deaths2'>Maximum daily deaths</option>";
+        html = html + "<option value='max_infection2'>Maximum daily infections</option>";
+        html = html + "</select>";
+    html = html + "</form>";
+html = html + "</div>"; 
         html = html + "<table class='tbl'>";
         html = html + "<tr>";
             html = html + "<th>Country</th>";
-            html = html + "<th>Infections</th>";
-            html = html + "<th>Deaths</th>";
-            html = html + "<th>Population</th>";
-            html = html + "<th>Infection to Death Ratio</th>";
-            html = html + "<th>Infections and Death to population Ratio</th>";
+           html = html + "<th>Total Infections</th>";
+           html = html + "<th>Infections/1 million people</th>";
         html = html + "</tr>";
-        html = html + "<tr>";
-            html = html + "<td>java forloop display for all countries</td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-        html = html + "</tr>";
+        for(int i = 0; i <= 6; i++){
+            html = html + "<tr>";
+            html = html + "<td>COUNTRY</td>";
+            html = html + "<td>0</td>";
+            html = html + "<td>0</td>";
+            html = html + "</tr>";
+            }
         html = html + "</table>";
 
         html = html + "<br class='clear' />";

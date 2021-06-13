@@ -86,32 +86,27 @@ public class Page1 implements Handler {
         html = html + "<div class='clear'></div>";
 
         html = html + "<div class='wrapper'>";
-            html = html + "<div class='left'></div>";
+            html = html + "<div class='left'>";
+                html = html + "<h2>How do I use this<br>website?</h2>";
+                html = html + "<p>Using the navigation above, find the page in which youd like to explore and press on it.";
+                html = html + "After being redirected read all headings to find out what each statistic represents. Explore even further into our data by manipulating it using our tools provided on each page. </p>";
+                
+            html = html + "</div>";
 
-            // // TOTAL CASES WORLDWIDE
-            // html = html + "<p>" + myFormat.format(sumCases) + " Cases</p>";
+            html = html + "<div class='middle'>";
+            html = html + "<h2><a class='titlehelp' href='page1.html'>Need more<br>Help?</a></h2>";
+            html = html + "<p>Need more Help? Well click <a class='help'href='page1.html'>'Help'</a> here and we'll take you through a short video on how to explore the website to get the most out of it. Listen to the intsrcutions carefully to ensure we can further your education regarding Covid-19</p>";
+            html = html + "</div>";
 
-            // html = html + "<a href='page1.html' class='link1'>Need Help?</a>";
-            html = html + "<div class='middle'><a>Need more Help?</a></div>";
 
-            // //WORST AFFECTED COUNTRIES BY CASES
-            // for (String country : countries) {
-            //     html = html + "<ol>" + country + " - " + myFormat.format(jdbc.getTotalCasesByCountry(country)) + " Cases</ol>";
-            // }
 
-            html = html + "<div class='right'></div>";
+            html = html + "<div class='right'>";
+            html = html + "<h2>What can I explore about <br>Covid-19?</h2>";
+            html = html + "<p>There is much to explore using our wide range of data. explore the impacts of Covid-19 using our tools such as set the time periods of the data, .";
+            html = html + "see similar countries based on your preferred data, multiple ratios and more. For users wanting an overview, explore the first 4 pages in the menu's, however to dive deeper, explore the last 2 pages in the menu's</p>";
+
+            html = html + "</div>";
         html = html + "</div>";
-
-        // // TOTAL DEATHS WORLDWIDE
-        // html = html + "<p>" + myFormat.format(sumDeaths) + " Deaths</p>";
-
-     
-
-
-        // Look up some information from JDBC
-        // First we need to use your JDBCConnection class
-
-
 
         // Finish the HTML webpage
         html = html + "</body>" + "</html>";

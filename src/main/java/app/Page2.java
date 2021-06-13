@@ -87,14 +87,18 @@ public class Page2 implements Handler {
                 }
             html = html + "</div>";
 
+        html = html + "<div class='container3'>";
+            html = html + "<img class='bigimg' src='covid.jpeg'></img>";
+                 html = html + "<br class='clear' />";
+            html = html + "<div class=centered_text>";
+            html = html + "<a href='page3.html'>Want to find out<br>more about Covid-19?</a>";
+            html = html + "</div>";
         html = html + "</div>";
+
+    html = html + "</div>";
 
         
         // find out more image
-        html = html + "<div class='container3'>";
-            html = html + "<img class='bigimg' src='covid.jpeg'></img>";
-            html = html + "<div class=centered_text><a href=page3.html>Want to find out <br> more about covid-19?</a></div>";
-        html = html + "</div>";
 
 
         // Finish the HTML webpage

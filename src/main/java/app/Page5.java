@@ -84,11 +84,13 @@ public class Page5 implements Handler {
             html = html + "<th>Transmission Rate</th>";
             html = html + "<th>Death Rate</th>";
             html = html + "</tr>";
+            for(int i = 0; i <= 6; i++){
             html = html + "<tr>";
-            html = html + "<td>java forloop display for all countries</td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
+            html = html + "<td>COUNTRY</td>";
+            html = html + "<td>0</td>";
+            html = html + "<td>0</td>";
             html = html + "</tr>";
+            }
         html = html + "</table>";
 
       html = html + "<br class='clear' />";
@@ -96,7 +98,7 @@ public class Page5 implements Handler {
 
         html = html + "<div class='sim_distance'>";  
             html = html + "<div class='grey'>";
-                html = html + "<h4>See Covid data from countries in similar climates</h4>";
+                html = html + "<h4>See Covid data from surrounding countries</h4>";
                 html = html + "</div>";
 
                 html = html + "<div class='filters'>";
@@ -111,11 +113,13 @@ public class Page5 implements Handler {
            html = html + "<th>Transmission Rate</th>";
            html = html + "<th>Death Rate</th>";
         html = html + "</tr>";
-        html = html + "<tr>";
-          html = html + "<td>java forloop display for all countries</td>";
-          html = html + "<td></td>";
-          html = html + "<td></td>";
-        html = html + "</tr>";
+        for(int i = 0; i <= 6; i++){
+            html = html + "<tr>";
+            html = html + "<td>COUNTRY</td>";
+            html = html + "<td>0</td>";
+            html = html + "<td>0</td>";
+            html = html + "</tr>";
+            }
       html = html + "</table>";
 
       html = html + "<br class='clear' />";
@@ -137,14 +141,16 @@ public class Page5 implements Handler {
             html = html + "<th>Infection to Death Ratio</th>";
             html = html + "<th>Infections and Death to population Ratio</th>";
         html = html + "</tr>";
-        html = html + "<tr>";
-            html = html + "<td>java forloop display for all countries</td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-        html = html + "</tr>";
+        for(int i = 0; i <= 6; i++){
+            html = html + "<tr>";
+            html = html + "<td>COUNTRY</td>";
+            html = html + "<td>0</td>";
+            html = html + "<td>0</td>";
+            html = html + "<td>0</td>";
+            html = html + "<td>0</td>";
+            html = html + "<td>0</td>";
+            html = html + "</tr>";
+            }
         html = html + "</table>";
 
         html = html + "<br class='clear' />";
