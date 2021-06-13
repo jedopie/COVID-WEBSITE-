@@ -179,7 +179,7 @@ public int getTotalCasesByCountry(String country) {
         statement.setQueryTimeout(30);
 
         // The Query
-        String query = "SELECT country_region, sum(cases) FROM casesdeaths JOIN Locations ON locations.ID = casesdeaths.Location_id WHERE country_region LIKE '%" + country + "%'" ;
+        String query = "SELECT country_region, sum(cases) FROM casesdeaths JOIN Locations ON locations.ID = casesdeaths.Location_id WHERE country_region = '" + country + "' COLLATE NOCASE GROUP BY country_region" ;
         
         // Get Result
         ResultSet results = statement.executeQuery(query);
@@ -227,7 +227,7 @@ public int getTotalDeathsByCountry(String country) {
         statement.setQueryTimeout(30);
 
         // The Query
-        String query = "SELECT country_region, sum(deaths) FROM casesdeaths JOIN Locations ON locations.ID = casesdeaths.Location_id WHERE country_region LIKE '%" + country + "%'" ;
+        String query = "SELECT country_region, sum(deaths) FROM casesdeaths JOIN Locations ON locations.ID = casesdeaths.Location_id WHERE country_region = '" + country + "' COLLATE NOCASE GROUP BY country_region" ;
         
         // Get Result
         ResultSet results = statement.executeQuery(query);
