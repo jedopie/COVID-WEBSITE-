@@ -51,26 +51,39 @@ public class Index implements Handler {
         html = html + "<img class='covidbannerpic' src='covid banner.jpeg' style = 'width:100%'></img>";
         html = html + "<div class='covid19head'>COVID-19</div>";
         html = html + "</div>";
+        html = html + "</div>";
         
         html = html + "<div class='infobanner1'>";
         html = html + "<img class = 'banner1pic' src='Vaccine Background.jpeg'></img";
+        html = html + "<div class='simplehead'>Broad Statistics</div>";
         html = html + "</div>";
         html = html + "</div>";
 
         html = html + "<div class='infobanner2'>";
         html = html + "<img class = 'banner2pic' src='Vaccine Background.jpeg'></img";
+        html = html + "<div class = 'detailstats'>Detailed Statistics</div>";
         html = html + "</div>";
         html = html + "</div>";
 
         html = html + "<div class = 'infobanner3'>";
         html = html + "<img class = 'banner3pic' src='Vaccine Background.jpeg'></img";
+        html = html + "<div class='maphead'>Interactive Map</div>";
         html = html + "</div>";
 
-        html = html + "<h1>Home</h1>";
+        html = html + "<div class = 'textboxleft'>";
+        html = html + "<p> covid is scary </p>";
+        html = html + "</div>";
 
-        html = html + "<p>Return to Homepage: ";
-        html = html + "<a href='/'>Link to Homepage</a>";
-        html = html + "</p>";
+        html = html + "<div class = 'textboxmiddle'>";
+        html = html + "<p> covid is scary </p>";
+        html = html + "</div>";
+
+        html = html + "<div class = 'textboxright'>";
+        html = html + "<p> covid is scary </p>";
+        html = html + "</div>";
+
+
+
 
         // Finish the HTML webpage
         html = html + "</body>" + "</html>";

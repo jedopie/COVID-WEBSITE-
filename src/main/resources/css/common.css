@@ -23,8 +23,7 @@ Base styles
    .topnav {
 	overflow: hidden;
 	background-color: #222;
-	text-align: center;
-	
+	text-align: center;	
 	}
 
 	.topnav a {
@@ -46,6 +45,9 @@ Base styles
 	color: white;
 	}
 
+<<<<<<< HEAD
+/* Web Banner  - HOME PAGE */
+=======
 
 	/* side nav on page 1  */
 	.floatright1 ul {
@@ -81,16 +83,16 @@ Base styles
 		}
 
 /* Web Banner */
+>>>>>>> 5f9d634a18929714cbd4722ef764e9f9834a9ff9
 .covidbanner{
 	position: relative;
-	text-align : centre;
+	text-align : center;
 	padding: 15px 15px 2px 15px;
 	height : 250px;
 	width : 1440px;
 }
 .covidbannerpic {
-	max-width: 100%;
-	max-height: 100%;
+	width:100%;
 }
 /* COVID19 Heading */
 .covid19head {
@@ -105,7 +107,13 @@ Base styles
 	padding: 2px 5px 15px 15px;
 	height : 90px;
 	width:480px;
+	text-align:center;
 
+}
+.simplehead {
+	position : absolute;
+	color : white;
+	font-size : 40px;
 }
 .banner1pic {
 	width: 100%;
@@ -117,6 +125,13 @@ Base styles
 	padding : 2px 15px 15px 2px;
 	height : 90px;
 	width : 480px;
+	text-align : center;
+}
+.maphead {
+	position : absolute;
+	color : white;
+	font-size : 30px;
+	
 }
 .banner2pic {
 	width: 100%;
@@ -128,10 +143,44 @@ Base styles
 	padding : 2px 5px 15px 2px;
 	height :90px;
 	width : 480px;
+	text-align: center;
 }
 .banner3pic {
 	width: 100%;
 	max-height: 100%;
+}
+.detailstats {
+	position : absolute;
+	color : white;
+	font-size : 30px;
+}
+.textboxleft {
+	float: left;
+    background-color: #019fbb;
+    position: relative;
+    width: 460px;
+    height: 800px;
+    margin: 15px;
+    border-radius: 20px;
+}
+.textboxmiddle {
+    float: left;
+    background-color: #019fbb;
+    position: relative;
+    width: 460px;
+    height: 800px;
+    margin: 15px 0px 15px 0px;
+    border-radius: 20px;
+}
+.textboxright {
+    float: right;
+    background-color: #019fbb;
+    position: relative;
+    width: 460px;
+    height: 800px;
+    margin: 15px 15px 15px 0px;
+    border-radius: 20px;
+
 }
 
 body
@@ -276,6 +325,7 @@ body
   }
 
   .sumcases {
+	  color: green;
 	float: left;
 	width: 30%;
 	margin: 30px 0px 30px 30px;
@@ -285,6 +335,7 @@ body
   }
 
   .sumdeaths {
+	  color : red;
 	float: left;
 	width: 30%;
 	margin: 30px 40px 30px 40px;

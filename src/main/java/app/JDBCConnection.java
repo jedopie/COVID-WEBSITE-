@@ -179,7 +179,7 @@ public int getTotalCasesByCountry(String country) {
         statement.setQueryTimeout(30);
 
         // The Query
-        String query = "SELECT country_region, sum(cases) FROM casesdeaths JOIN Locations ON locations.ID = casesdeaths.Location_id WHERE country_region = '" + country + "'" ;
+        String query = "SELECT country_region, sum(cases) FROM casesdeaths JOIN Locations ON locations.ID = casesdeaths.Location_id WHERE country_region LIKE '%" + country + "%'" ;
         
         // Get Result
         ResultSet results = statement.executeQuery(query);
@@ -211,5 +211,52 @@ public int getTotalCasesByCountry(String country) {
     // Finally we return all of the movies
     return sum;
 }
+//Total Deaths by Country
+public int getTotalDeathsByCountry(String country) {
+    int sum = 0;
 
+    // Setup the variable for the JDBC connection
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT country_region, sum(deaths) FROM casesdeaths JOIN Locations ON locations.ID = casesdeaths.Location_id WHERE country_region LIKE '%" + country + "%'" ;
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+             sum              = results.getInt("sum(deaths)");
+
+            // For now we will just store the movieName and ignore the id
+            
+        }
+
+        // Close the statement because we are done with it
+        statement.close();
+    } catch (SQLException e) {
+        // If there is an error, lets just pring the error
+        System.err.println(e.getMessage());
+    } finally {
+        // Safety code to cleanup
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            // connection close failed.
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Finally we return all of the movies
+    return sum;
+}
 }
