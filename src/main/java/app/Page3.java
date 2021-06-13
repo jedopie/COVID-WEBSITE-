@@ -157,7 +157,7 @@ public class Page3 implements Handler {
 
         html = html + "<div class='container6'>";
             html = html + "<form class='worst'>";
-            html = html + "<label for='cars'>Sort Data  </label>";
+            html = html + "<label for='sort_aus'>Sort Data  </label>";
             html = html + "<select name='sort_aus' id='sort_aus'>";
             html = html + "<option value='worst'>Worst Affected</option>";
             html = html + "<option value='leats'>Least Affected</option>";

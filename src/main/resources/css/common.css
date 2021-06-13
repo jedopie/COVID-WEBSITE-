@@ -45,9 +45,8 @@ Base styles
 	color: white;
 	}
 
-<<<<<<< HEAD
+
 /* Web Banner  - HOME PAGE */
-=======
 
 	/* side nav on page 1  */
 	.floatright1 ul {
@@ -83,7 +82,6 @@ Base styles
 		}
 
 /* Web Banner */
->>>>>>> 5f9d634a18929714cbd4722ef764e9f9834a9ff9
 .covidbanner{
 	position: relative;
 	text-align : center;
@@ -253,7 +251,11 @@ body
   }
 
 .wrapper {
-	text-align:center;
+	padding :10px;
+}
+
+.left p, .left h2, .middle p, .middle h2, .right p, .right h2 {
+	margin: 20px;
 }
 
 .left {
@@ -261,35 +263,34 @@ body
 	width: 30%;
 	background-color: #f1f1f1;
 	margin: 30px 0px 30px 30px;
-	height: 200px;
-	border-radius: 15px;
+	height: 250px;
   }
 
   .middle {
 	float: left;
 	width: 30%;
-	background: linear-gradient(to bottom, #019fbb 25%, #f1f1f1 25%, #f1f1f1 80%);
+	background: #f1f1f1;
 	margin: 30px 40px 30px 40px;
-	height: 200px;
-	border-radius: 15px;
+	height: 250px;
   }
 
-  .wrapper a {
-	position: static;
-	top: 5%;
-	left: 50%;
-	color: white;
-	font-weight: bold;
-	cursor: pointer;
+  .titlehelp {
+	text-decoration: none;
+	color: black;
   }
+
+  .help {
+	  color: #019fbb;
+	  text-decoration: none;
+  }
+
 
   .right {
 	float: left;
 	width: 30%;
 	background-color:#f1f1f1;
 	margin: 30px 30px 30px 0px;
-	height: 200px;
-	border-radius: 15px;
+	height: 250px;
   }
 
   /* page 2 */
@@ -360,7 +361,7 @@ body
 	  margin: 0px 0px 30px 30px;
 	  height: auto;
 	  display: block;
-	  width: 62.7%;
+	  width: 100%;
 	  transition: .5s ease;
       backface-visibility: hidden;
 	  /* border-radius: 15px; */
@@ -374,15 +375,16 @@ body
 	position: relative;
   	text-align: center;
   	color: white;
+	  width: 62.7%;
   }
 
   .centered_text {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: rgb(75, 206, 249);
-	padding: 10px;
+	transform: translate(-30%, 110%);
+	background-color:#222;
+	padding: 20px;
 	border-radius: 15px;
   }
 
@@ -596,14 +598,12 @@ input[type=text] {
 /* page 5 */
 
 	  .container7{
-		  border: 1px solid green;
 		  margin: 30px;
 	  }
 
 	  .sim_climate{
 		  float:left;
 		  width: 50%;
-		  border: 1px solid green;
 		  height:400px;
 		  padding-right: 30px;
 	  }
@@ -624,7 +624,7 @@ input[type=text] {
 	  }
 
 	  .filters {
-		margin: 0px 0px 15px 0px;
+		margin: 0px 0px 20px 0px;
 	  }
 
 	  .filters[type=date] {
@@ -643,15 +643,49 @@ input[type=text] {
 		float: right;
 		overflow: hidden;
 		width: 50%;
-		border: 1px solid green;
 		height:400px;
 		padding-left: 30px;
 	  } 
 
 	  .container8 {
 		  margin: 0px 30px 30px 30px;
-		  border: 1px solid green;
+		 
 		  height: 300px;
+	  }
+
+	  .US_SEARCH input[type=text] {
+		border: 1px solid #ccc;
+		border-radius: 15px;
+		box-sizing: border-box;
+		width: 85%;
+		padding: 10px;
+		color: white;
+		display: inline-block;
+		background: #019fbb;
+		margin-right: 15px;
+		text-align: center;
+	  }
+	
+	  .US_SEARCH input[type=submit] {
+		width: 12%;
+		padding: 10px;
+		cursor: pointer;
+		border: 1px solid #ccc;
+		border-radius: 15px;
+		box-sizing: border-box;
+		display: inline-block;
+		background: #019fbb;
+		color:white;
+	  }
+
+	  .US_SEARCH ::placeholder {
+		color: white;
+		opacity: 1; /* Firefox */
+	  }
+
+	  .search_container ::placeholder{
+		color: black;
+		opacity: 1; /* Firefox */
 	  }
 
 

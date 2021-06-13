@@ -95,7 +95,7 @@ public class Page4 implements Handler {
 
       html = html + "<div class='container6'>";
         html = html + "<form class='worst'>";
-        html = html + "<label for='cars'>Sort Data  </label>";
+        html = html + "<label for='sort_ratio'>Sort Data  </label>";
         html = html + "<select name='sort_ratio' id='sort_ratio'>";
         html = html + "<option value='worst'>Worst Affected</option>";
         html = html + "<option value='least'>Least Affected</option>";
