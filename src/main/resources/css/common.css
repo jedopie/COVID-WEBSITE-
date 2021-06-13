@@ -498,10 +498,16 @@ input[type=text] {
 
 
   .container6 {
-	margin: 30px 30px 0px 30px;
+	margin: 15px 30px 0px 30px;
 	background-color: white;
 	padding: 0px 30px 0px 30px;
 	text-transform: uppercase;
+	}
+
+	.worst  {
+		float:left;
+		margin: 0px 0px 5px 0px;
+
 	}
 
 	.tbl {
@@ -536,6 +542,66 @@ input[type=text] {
 		margin: 4px 0px -40px 4px;
 	  }
 
+/* page 5 */
+
+	  .container7{
+		  border: 1px solid green;
+		  margin: 30px;
+	  }
+
+	  .sim_climate{
+		  float:left;
+		  width: 50%;
+		  border: 1px solid green;
+		  height:400px;
+		  padding-right: 30px;
+	  }
+
+	  .grey {
+		width: 100%;
+		background-color: #222;
+		text-align: center; 
+		color: white;
+		display: inline-block;
+		margin: 0px 0px 15px 0px;
+		border-radius: 5px;
+	    box-sizing: border-box;
+	  }
+
+	  .grey h4 {
+		  margin: 10px;
+	  }
+
+	  .filters {
+		margin: 0px 0px 15px 0px;
+	  }
+
+	  .filters[type=date] {
+		  float: right;
+	  }
+
+	  .filters p {
+		  float: left;
+		  margin: 0px 65px 0px 0px;
+		  font-size: larger;
+		  background: #019fbb;
+		  color: white;
+	  }
+
+	  .sim_distance{
+		float: right;
+		overflow: hidden;
+		width: 50%;
+		border: 1px solid green;
+		height:400px;
+		padding-left: 30px;
+	  } 
+
+	  .container8 {
+		  margin: 0px 30px 30px 30px;
+		  border: 1px solid green;
+		  height: 300px;
+	  }
 
 
 

@@ -50,11 +50,107 @@ public class Page5 implements Handler {
         // Add the body
         html = html + "<body>";
 
-        // Add HTML for link back to the homepage
-        html = html + "<h1>Page 5</h1>";
-        html = html + "<p>Return to Homepage: ";
-        html = html + "<a href='/'>Link to Homepage</a>";
-        html = html + "</p>";
+        html = html + "<div class='search_container'>";
+        html = html + "<form>";
+          html = html + "<div class='centered_div'>";
+          html = html + "<input type='text' id='search' name='search' placeholder='Search for a Country...'>";
+          html = html + "<input type='submit' value='Search' class='submit1'>";
+          html = html + "</div>";
+        html = html + "</form>";
+        html = html + "<div class='clear'></div>";
+      html = html + "</div>";
+
+
+
+      html = html + "<div class='container7'>";
+        html = html + "<div class='sim_climate'>";
+            html = html + "<div class='grey'>";
+            html = html + "<h4>See Covid data from countries in similar climates</h4>";
+            html = html + "</div>";
+
+            html = html + "<div class='filters'>";
+                 html = html + "<p>Climate: load value</p>";
+                 html = html + "<form>";
+                    html = html + "<label for='date5'>Time Period: </label>";
+                    html = html + "<input type='date' id='date5' name='date6' data-date-inline-picker='true'>";
+                    html = html + "<label for='date6'>  to  </label>";
+                    html = html + "<input type='date' id='date6' name='date6' data-date-inline-picker='true'>";
+                html = html + "</form>";
+            html = html + "</div>";
+
+            html = html + "<table class='tbl'>";
+            html = html + "<tr>";
+            html = html + "<th>Country</th>";
+            html = html + "<th>Transmission Rate</th>";
+            html = html + "<th>Death Rate</th>";
+            html = html + "</tr>";
+            html = html + "<tr>";
+            html = html + "<td>java forloop display for all countries</td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+            html = html + "</tr>";
+        html = html + "</table>";
+
+      html = html + "<br class='clear' />";
+        html = html + "</div>";
+
+        html = html + "<div class='sim_distance'>";  
+            html = html + "<div class='grey'>";
+                html = html + "<h4>See Covid data from countries in similar climates</h4>";
+                html = html + "</div>";
+
+                html = html + "<div class='filters'>";
+                    html = html + "<form>";
+                        html = html + "<label for='distance_km'>See Surrounding Countries of distance  </label>";
+                        html = html + "<input type='number' id='distance_km' name='distance_km'><span style='margin-left:10px;'>km</span>";
+                    html = html + "</form>";
+                html = html + "</div>"; 
+        html = html + "<table class='tbl'>";
+        html = html + "<tr>";
+          html = html + "<th>Country</th>";
+           html = html + "<th>Transmission Rate</th>";
+           html = html + "<th>Death Rate</th>";
+        html = html + "</tr>";
+        html = html + "<tr>";
+          html = html + "<td>java forloop display for all countries</td>";
+          html = html + "<td></td>";
+          html = html + "<td></td>";
+        html = html + "</tr>";
+      html = html + "</table>";
+
+      html = html + "<br class='clear' />";
+        html = html + "</div>";   
+
+        html = html + "<div class='clear'></div>";
+      html = html + "</div>";     
+
+      html = html + "<div class='container8'>";
+        html = html + "<div class='grey'>";
+        html = html + "<h4>See Deaths, Infections and Population Ratios for Covid-19</h4>";
+        html = html + "</div>";
+        html = html + "<table class='tbl'>";
+        html = html + "<tr>";
+            html = html + "<th>Country</th>";
+            html = html + "<th>Infections</th>";
+            html = html + "<th>Deaths</th>";
+            html = html + "<th>Population</th>";
+            html = html + "<th>Infection to Death Ratio</th>";
+            html = html + "<th>Infections and Death to population Ratio</th>";
+        html = html + "</tr>";
+        html = html + "<tr>";
+            html = html + "<td>java forloop display for all countries</td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+            html = html + "<td></td>";
+        html = html + "</tr>";
+        html = html + "</table>";
+
+        html = html + "<br class='clear' />";
+
+      html = html + "</div>";
+
 
         // Look up some information from JDBC
         // First we need to use your JDBCConnection class
