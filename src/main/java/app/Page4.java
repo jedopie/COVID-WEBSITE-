@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import java.text.NumberFormat;
+
 
 /**
  * Temporary HTML as an example page.
@@ -23,6 +25,14 @@ public class Page4 implements Handler {
 
     @Override
     public void handle(Context context) throws Exception {
+      JDBCConnection jdbc = new JDBCConnection();
+      NumberFormat myFormat = NumberFormat.getInstance();
+      final String country = context.queryParam("search");
+        final String date1 = context.queryParam("date1");
+        final String date2 = context.queryParam("date2");
+        final String sort = context.queryParam("sort_aus");
+        final String date3 = context.queryParam("date3");
+        final String date4 = context.queryParam("date4");
         // Create a simple HTML webpage in a String
         String html = "<html>";
 
@@ -57,7 +67,6 @@ public class Page4 implements Handler {
           html = html + "<input type='text' id='search' name='search' placeholder='Search for a Country...'>";
           html = html + "<input type='submit' value='Search' class='submit1'>";
           html = html + "</div>";
-        html = html + "</form>";
       html = html + "</div>";
 
       html = html + "<div class='clear'></div>";
@@ -70,21 +79,26 @@ public class Page4 implements Handler {
 
        html = html + "<div class='Tot_infection'>";
        html = html + "<p>Total Deaths</p>";
+       html = html + "<h2>" + myFormat.format(jdbc.getTotalDeathsByCountry(country)) + " Deaths</h2>";
 
        html = html + "</div>";
 
        html = html + "<div class='infection_date'>";
-       html = html + "<form>";
         html = html + "<p>Total Deaths<br><p>";
         html = html + "<label for='date1'> from </label>";
-        html = html + "<input type='date' id='date1' name='date1' data-date-inline-picker='true'>";
+        html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date1' name='date1' data-date-inline-picker='true'>";
         html = html + "<label for='date2'>to </label>";
-        html = html + "<input type='date' id='date2' name='date2' data-date-inline-picker='true'>";
+        html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date2' name='date2' data-date-inline-picker='true'>";
+        html = html + "<input type='submit' value='Search' class='submit1'>";
+
+        html = html + "<h2>" + myFormat.format(jdbc.getSumDeathsTimePeriod(country, date1, date2)) + " Deaths</h2>";
        html = html + "</form>";
        html = html + "</div>";
 
        html = html + "<div class='max_infection'>";
        html = html + "<p>Highest Deaths in 1 day</p>";
+       html = html + "<h2>" + myFormat.format(jdbc.getHighestDeathTallyByDayState(country)) + " Deaths </h2>";
+       html = html + "<h2>" + jdbc.getHighestDeathDay(country) + "</h2";
        
        html = html + "</div>";
 
@@ -132,7 +146,6 @@ public class Page4 implements Handler {
 
         // Look up some information from JDBC
         // First we need to use your JDBCConnection class
-        JDBCConnection jdbc = new JDBCConnection();
 
 
         // Finish the HTML webpage
