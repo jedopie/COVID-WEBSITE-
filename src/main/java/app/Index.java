@@ -81,7 +81,10 @@ public class Index implements Handler {
         html = html + "<div class = 'textboxright'>";
         html = html + "<p> covid is scary </p>";
         html = html + "</div>";
-
+        html += "<form action='/shopping-cart' method='post'>";
+		html += "<input name='secret' type='hidden' value='my hidden value'></input>";
+		html += "<input name='product-id' type='hidden' value='1'></input>";
+		html += "<input type='submit' value='Add this product to your cart'></input> </form>";
 
 
 

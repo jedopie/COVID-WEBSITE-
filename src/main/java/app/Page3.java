@@ -33,6 +33,11 @@ public class Page3 implements Handler {
         final String country = context.queryParam("search");
         final String date1 = context.queryParam("date1");
         final String date2 = context.queryParam("date2");
+        final String sort = context.queryParam("sort_aus");
+        final String date3 = context.queryParam("date3");
+        final String date4 = context.queryParam("date4");
+
+
 
         System.out.println(country);
 
@@ -70,9 +75,8 @@ public class Page3 implements Handler {
           html = html + "<form>";
             html = html + "<div class='centered_div'>";
             html = html + "<input type='text' id='search' name='search' placeholder='Search for a Country...'>";
-            html = html + "<input type='submit' value='Search' class='submit1'>";
+            html = html + "<input type='submit' id='submit1' value='Search' class='submit1'>";
             html = html + "</div>";
-          html = html + "</form>";
         html = html + "</div>";
         
         html = html + "<div class='clear'></div>";
@@ -105,14 +109,14 @@ public class Page3 implements Handler {
          html = html + "</div>";
 
          html = html + "<div class='infection_date'>";
-         html = html + "<form>";
           html = html + "<p>Total Infections<br><p>";
           html = html + "<label for='date1'> from </label>";
-          html = html + "<input type='date' id='date1' name='date1' data-date-inline-picker='true'>";
+          html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date1' name='date1' data-date-inline-picker='true'>";
           html = html + "<label for='date2'>to </label>";
-          html = html + "<input type='date' id='date2' name='date2' data-date-inline-picker='true'>";
-          html = html + "<input type='submit' value='Search' class='submit2'>";
+          html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date2' name='date2' data-date-inline-picker='true'>";
+          html = html + "<input type='submit' id='submit2' value='Search' class='submit2'>";
          html = html + "</form>";
+         html = html + "<h2>" + myFormat.format(jdbc.getSumCasesTimePeriod(country, date1, date2)) + " Cases</h2>";
          html = html + "</div>";
 
          if  (jdbc.getHighestCaseTallyByDay(country) <1) {
@@ -143,11 +147,12 @@ public class Page3 implements Handler {
         html = html + "<div class='button_cont'>";
         html = html + "<form>";
         html = html + "<div class='center_button'>";
-          html = html + "<button class='btn_block' name='aus' type='submit'>Australian States</button>";
+          html = html + "<button class='btn_block' name='Australia' type='submit'>Australian States</button>";
           html = html + "</div>";
         html = html + "</form>";
         html = html + "<br class='clear' />";
         html = html + "</div>";
+
 
 
         html = html + "<div class='container6'>";
@@ -157,6 +162,7 @@ public class Page3 implements Handler {
             html = html + "<option value='worst'>Worst Affected</option>";
             html = html + "<option value='leats'>Least Affected</option>";
             html = html + "</select>";
+            html = html + "<input type='submit' value='Search' class='submit2'>";
             html = html + "</form>";
           html = html + "<table class='tbl'>";
           html = html + "<tr>";
@@ -166,61 +172,75 @@ public class Page3 implements Handler {
               html = html + "<th>";
               html = html + "<form>";
               html = html + "<label for='date3'>Total Infections from </label>";
-              html = html + "<input type='date' id='date3' name='date3' data-date-inline-picker='true'>";
+              html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date3' name='date3' data-date-inline-picker='true'>";
               html = html + "<label for='date4'> to </label>";
-              html = html + "<input type='date' id='date4' name='date4' data-date-inline-picker='true'>";
-              html = html + "<input type='submit' value='Search' class='submit2'>";
+              html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date4' name='date4' data-date-inline-picker='true'>";
+              html = html + "<input type='submit' value='Search' class='submit3'>";
               html = html + "</form>";
               html = html + "</th>";
 
-            html = html + "<th>Highest Infections in 1 day</th>";
+          html = html + "<th>Highest Infections in 1 day</th>";
           html = html + "</tr>";
           html = html + "<tr>";
             html = html + "<td>VIC</td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-          html = html + "</tr>";
-          html = html + "<tr>";
-            html = html + "<td>SA</td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-          html = html + "</tr>";
-          html = html + "<tr>";
-            html = html + "<td>WA</td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-          html = html + "</tr>";
-          html = html + "<tr>";
-            html = html + "<td>QLD</td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
+            html = html + "<td>" + myFormat.format(jdbc.getTotalCasesByState("Victoria")) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getSumCasesTimePeriodByState("Victoria", date3, date4)) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getHighestCaseTallyByDayState("Victoria")) + " Cases ON " + jdbc.getHighestCaseDayByState("Australian Capital Territory") + "</td>";
           html = html + "</tr>";
           html = html + "<tr>";
             html = html + "<td>NSW</td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
+            html = html + "<td>" + myFormat.format(jdbc.getTotalCasesByState("New South Wales")) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getSumCasesTimePeriodByState("New South Wales", date3, date4)) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getHighestCaseTallyByDayState("New South Wales")) + " Cases ON " + jdbc.getHighestCaseDayByState("Australian Capital Territory") + "</td>";
+          html = html + "</tr>";
+          html = html + "<tr>";
+            html = html + "<td>QLD</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getTotalCasesByState("Queensland")) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getSumCasesTimePeriodByState("Queensland", date3, date4)) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getHighestCaseTallyByDayState("Queensland")) + " Cases ON " + jdbc.getHighestCaseDayByState("Australian Capital Territory") + "</td>";
+          html = html + "</tr>";
+          html = html + "<tr>";
+            html = html + "<td>WA</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getTotalCasesByState("Western Australia")) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getSumCasesTimePeriodByState("Western Australia", date3, date4)) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getHighestCaseTallyByDayState("Western Australia")) + " Cases ON " + jdbc.getHighestCaseDayByState("Australian Capital Territory") + "</td>";
+          html = html + "</tr>";
+          html = html + "<tr>";
+            html = html + "<td>SA</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getTotalCasesByState("South Australia")) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getSumCasesTimePeriodByState("South Australia", date3, date4)) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getHighestCaseTallyByDayState("South Australia")) + " Cases ON " + jdbc.getHighestCaseDayByState("Australian Capital Territory") + "</td>";
           html = html + "</tr>";
           html = html + "<tr>";
             html = html + "<td>TAS</td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
+            html = html + "<td>" + myFormat.format(jdbc.getTotalCasesByState("Tasmania")) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getSumCasesTimePeriodByState("Tasmania", date3, date4)) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getHighestCaseTallyByDayState("Tasmania")) + " Cases ON " + jdbc.getHighestCaseDayByState("Australian Capital Territory") + "</td>";
           html = html + "</tr>";
           html = html + "<tr>";
             html = html + "<td>NT</td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
-            html = html + "<td></td>";
+            html = html + "<td>" + myFormat.format(jdbc.getTotalCasesByState("Northern Territory")) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getSumCasesTimePeriodByState("Northern Territory", date3, date4)) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getHighestCaseTallyByDayState("Northern Territory")) + " Cases ON " + jdbc.getHighestCaseDayByState("Australian Capital Territory") + "</td>";
+            html = html + "<tr>";
+            html = html + "<td>ACT</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getTotalCasesByState("Australian Capital Territory")) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getSumCasesTimePeriodByState("Australian Capital Territory", date3, date4)) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getHighestCaseTallyByDayState("Australian Capital Territory")) + " Cases ON " + jdbc.getHighestCaseDayByState("Australian Capital Territory") + "</td>";
           html = html + "</tr>";
         html = html + "</table>";
 
         html = html + "<br class='clear' />";
       html = html + "</div>";
+         
+    
+              
+
+        html = html + "<br class='clear' />";
+      html = html + "</div>";
+              
+        
+            
 
 
 

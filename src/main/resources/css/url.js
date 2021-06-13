@@ -8,3 +8,5 @@ const name = params.get("date2");
 console.log(search); 
 console.log(date1);
 console.log(date2);
+
+URL.resolve
