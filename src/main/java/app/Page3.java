@@ -90,9 +90,17 @@ public class Page3 implements Handler {
 
         html = html + "<div class='container5'>";
 
+        if (jdbc.getTotalCasesByCountry(country) < 1) {
+          html = html + "<div class='Tot_infection'>";
+          html = html + "<p>Total Infections</p>";
+          html = html + "<h2>COUNTRY COULD NOT BE FOUND</h2>";
+        }
+        else {
+
          html = html + "<div class='Tot_infection'>";
          html = html + "<p>Total Infections</p>";
          html = html + "<h2>" + myFormat.format(jdbc.getTotalCasesByCountry(country)) + " Cases</h2>";
+        }
 
          html = html + "</div>";
 
@@ -107,8 +115,24 @@ public class Page3 implements Handler {
          html = html + "</form>";
          html = html + "</div>";
 
+         if  (jdbc.getHighestCaseTallyByDay(country) <1) {
+          html = html + "<div class='max_infection'>";
+          html = html + "<p>Highest Infections in 1 Day</p>";
+          html = html + "<h2>COUNTRY COULD NOT BE FOUND</h2>";
+
+         }
+         else if (jdbc.getHighestCaseTallyByDay(country) <2){
+          html = html + "<div class='max_infection'>";
+          html = html + "<p>Highest Infections in 1 Day</p>";
+          html = html + "<h2>" + myFormat.format(jdbc.getHighestCaseTallyByDay(country)) + " Case</h2>";
+          html = html + "<h2>" + jdbc.getHighestCaseDay(country) + "</h2>";
+          }
+         else {
          html = html + "<div class='max_infection'>";
          html = html + "<p>Highest Infections in 1 Day</p>";
+         html = html + "<h2>" + myFormat.format(jdbc.getHighestCaseTallyByDay(country)) + " Cases</h2>";
+         html = html + "<h2>" + jdbc.getHighestCaseDay(country) + "</h2>";
+         }
          
          html = html + "</div>";
 
@@ -145,6 +169,7 @@ public class Page3 implements Handler {
               html = html + "<input type='date' id='date3' name='date3' data-date-inline-picker='true'>";
               html = html + "<label for='date4'> to </label>";
               html = html + "<input type='date' id='date4' name='date4' data-date-inline-picker='true'>";
+              html = html + "<input type='submit' value='Search' class='submit2'>";
               html = html + "</form>";
               html = html + "</th>";
 
