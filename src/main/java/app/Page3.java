@@ -74,7 +74,7 @@ public class Page3 implements Handler {
         html = html + "<div class='search_container'>";
           html = html + "<form>";
             html = html + "<div class='centered_div'>";
-            html = html + "<input type='text' id='search' name='search' placeholder='Search for a Country...'>";
+            html = html + "<input type='text' id='search' name='search' value='"+country+"' placeholder='Search for a Country...'>";
             html = html + "<input type='submit' id='submit1' value='Search' class='submit1'>";
             html = html + "</div>";
         html = html + "</div>";
@@ -88,7 +88,7 @@ public class Page3 implements Handler {
        }
        else {
         html = html + "<div class='container4'>";
-         html = html + "<div class='country_title' id='countryID'>" + country + "</div>";
+         html = html + "<div class='country_title' id='countryID'>" + country.toUpperCase() + "</div>";
         html = html + "</div>";
        }
 
@@ -111,7 +111,7 @@ public class Page3 implements Handler {
          html = html + "<div class='infection_date'>";
           html = html + "<p>Total Infections<br><p>";
           html = html + "<label for='date1'> from </label>";
-          html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date1' name='date1' data-date-inline-picker='true'>";
+          html = html + "<input type='date' min='2020-01-01' max='2021-04-30' value='2020-01-01' id='date1' name='date1' data-date-inline-picker='true'>";
           html = html + "<label for='date2'>to </label>";
           html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date2' name='date2' data-date-inline-picker='true'>";
           html = html + "<input type='submit' id='submit2' value='Search' class='submit2'>";
@@ -147,12 +147,11 @@ public class Page3 implements Handler {
         html = html + "<div class='button_cont'>";
         html = html + "<form>";
         html = html + "<div class='center_button'>";
-          html = html + "<button class='btn_block' name='Australia' type='submit'>Australian States</button>";
+          html = html + "<button class='btn_block' name='search' value='australia' type='submit'>Australian States</button>";
           html = html + "</div>";
         html = html + "</form>";
         html = html + "<br class='clear' />";
         html = html + "</div>";
-
 
 
         html = html + "<div class='container6'>";
@@ -160,10 +159,11 @@ public class Page3 implements Handler {
             html = html + "<label for='sort_aus'>Sort Data  </label>";
             html = html + "<select name='sort_aus' id='sort_aus'>";
             html = html + "<option value='worst'>Worst Affected</option>";
-            html = html + "<option value='leats'>Least Affected</option>";
+            html = html + "<option value='least'>Least Affected</option>";
             html = html + "</select>";
             html = html + "<input type='submit' value='Search' class='submit2'>";
             html = html + "</form>";
+
           html = html + "<table class='tbl'>";
           html = html + "<tr>";
             html = html + "<th>State</th>";
@@ -232,6 +232,9 @@ public class Page3 implements Handler {
 
         html = html + "<br class='clear' />";
       html = html + "</div>";
+          
+            
+         
          
     
               

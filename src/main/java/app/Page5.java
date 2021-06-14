@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import java.text.NumberFormat;
+import java.text.DecimalFormat;
+
 
 /**
  * Temporary HTML as an example page.
@@ -23,6 +26,15 @@ public class Page5 implements Handler {
 
     @Override
     public void handle(Context context) throws Exception {
+      JDBCConnection jdbc = new JDBCConnection();
+      NumberFormat myFormat = NumberFormat.getInstance();
+      final String country = context.queryParam("search");
+      final String date1 = context.queryParam("date5");
+      final String date2 = context.queryParam("date6");
+      ArrayList<String> countries = jdbc.getCountriesByClimate(jdbc.getClimateOfCountry(country));
+      DecimalFormat df = new DecimalFormat("#.#####");
+
+
         // Create a simple HTML webpage in a String
         String html = "<html>";
 
@@ -69,32 +81,33 @@ public class Page5 implements Handler {
             html = html + "</div>";
 
             html = html + "<div class='filters'>";
-                 html = html + "<p>Climate: load value</p>";
+                 html = html + "<p>" + jdbc.getClimateOfCountry(country) + "</p>";
                  html = html + "<form>";
                     html = html + "<label for='date5'>Time Period: </label>";
-                    html = html + "<input type='date' id='date5' name='date6' data-date-inline-picker='true'>";
+                    html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date5' name='date5' data-date-inline-picker='true'>";
                     html = html + "<label for='date6'>  to  </label>";
-                    html = html + "<input type='date' id='date6' name='date6' data-date-inline-picker='true'>";
+                    html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date6' name='date6' data-date-inline-picker='true'>";
+                    html = html + "<input type='submit' value='Search' class='submit1'>";
                 html = html + "</form>";
-            html = html + "</div>";
-
+                  html = html + "</div>";
             html = html + "<table class='tbl'>";
             html = html + "<tr>";
-            html = html + "<th>Country</th>";
-            html = html + "<th>Transmission Rate</th>";
-            html = html + "<th>Death Rate</th>";
+              html = html + "<th>Country</th>";
+               html = html + "<th>Transmission Rate</th>";
+               html = html + "<th>Death Rate</th>";
             html = html + "</tr>";
-            for(int i = 0; i <= 6; i++){
-            html = html + "<tr>";
-            html = html + "<td>COUNTRY</td>";
-            html = html + "<td>0</td>";
-            html = html + "<td>0</td>";
-            html = html + "</tr>";
-            }
+            for(String climate : countries){
+              html = html + "<tr>";
+              html = html + "<td>" + climate + "</td>";
+              html = html + "<td>" + myFormat.format(jdbc.getInfectionRateCertainTime(climate, date1, date2)) + " Per Day</td>";
+              html = html + "<td>" + myFormat.format(jdbc.getDeathRateCertainTime(climate, date1, date2)) + " Per Day</td>";
+              html = html + "</tr>";
+              }
         html = html + "</table>";
 
       html = html + "<br class='clear' />";
         html = html + "</div>";
+            
 
         html = html + "<div class='sim_distance'>";  
             html = html + "<div class='grey'>";
@@ -105,21 +118,24 @@ public class Page5 implements Handler {
                     html = html + "<form>";
                         html = html + "<label for='distance_km'>See Surrounding Countries of distance  </label>";
                         html = html + "<input type='number' id='distance_km' name='distance_km'><span style='margin-left:10px;'>km</span>";
+                        html = html + "<input type='submit' value='Search' class='submit1'>";
                     html = html + "</form>";
                 html = html + "</div>"; 
+                html = html + "<div class='tbl'>";
         html = html + "<table class='tbl'>";
         html = html + "<tr>";
           html = html + "<th>Country</th>";
            html = html + "<th>Transmission Rate</th>";
            html = html + "<th>Death Rate</th>";
         html = html + "</tr>";
-        for(int i = 0; i <= 6; i++){
-            html = html + "<tr>";
-            html = html + "<td>COUNTRY</td>";
-            html = html + "<td>0</td>";
-            html = html + "<td>0</td>";
-            html = html + "</tr>";
-            }
+        for(String climate : countries){
+          html = html + "<tr>";
+          html = html + "<td>" + climate + "</td>";
+          html = html + "<td>0</td>";
+          html = html + "<td>0</td>";
+          html = html + "</tr>";
+          html = html + "</div>";
+          }
       html = html + "</table>";
 
       html = html + "<br class='clear' />";
@@ -141,14 +157,14 @@ public class Page5 implements Handler {
             html = html + "<th>Infection to Death Ratio</th>";
             html = html + "<th>Infections and Death to population Ratio</th>";
         html = html + "</tr>";
-        for(int i = 0; i <= 6; i++){
+        for(String climate : countries){
             html = html + "<tr>";
-            html = html + "<td>COUNTRY</td>";
-            html = html + "<td>0</td>";
-            html = html + "<td>0</td>";
-            html = html + "<td>0</td>";
-            html = html + "<td>0</td>";
-            html = html + "<td>0</td>";
+            html = html + "<td>" + climate + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getTotalCasesByCountry(climate)) +"</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getTotalDeathsByCountry(climate)) + "</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getCountryPopulation(climate)) + "</td>";
+            html = html + "<td>" + df.format((double)(jdbc.getTotalDeathsByCountry(climate)) / jdbc.getTotalCasesByCountry(climate)) + " Deaths per Infection</td>";
+            html = html + "<td>" +  "</td>";
             html = html + "</tr>";
             }
         html = html + "</table>";
@@ -156,11 +172,6 @@ public class Page5 implements Handler {
         html = html + "<br class='clear' />";
 
       html = html + "</div>";
-
-
-        // Look up some information from JDBC
-        // First we need to use your JDBCConnection class
-        JDBCConnection jdbc = new JDBCConnection();
 
 
         // Finish the HTML webpage

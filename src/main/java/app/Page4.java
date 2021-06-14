@@ -33,6 +33,7 @@ public class Page4 implements Handler {
         final String sort = context.queryParam("sort_aus");
         final String date3 = context.queryParam("date3");
         final String date4 = context.queryParam("date4");
+
         // Create a simple HTML webpage in a String
         String html = "<html>";
 
