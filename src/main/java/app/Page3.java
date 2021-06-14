@@ -99,6 +99,11 @@ public class Page3 implements Handler {
           html = html + "<p>Total Infections</p>";
           html = html + "<h2>COUNTRY COULD NOT BE FOUND</h2>";
         }
+        else if (country == null) {
+          html = html + "<div class='Tot_infection'>";
+          html = html + "<p>Total Infections</p>";
+          html = html + "<h2></h2>";
+        }
         else {
 
          html = html + "<div class='Tot_infection'>";

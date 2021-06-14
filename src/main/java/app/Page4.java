@@ -65,16 +65,23 @@ public class Page4 implements Handler {
         html = html + "<div class='search_container'>";
         html = html + "<form>";
           html = html + "<div class='centered_div'>";
-          html = html + "<input type='text' id='search' name='search' placeholder='Search for a Country...'>";
+          html = html + "<input type='text' id='search' name='search' value='" + country + "'placeholder='Search for a Country...'>";
           html = html + "<input type='submit' value='Search' class='submit1'>";
           html = html + "</div>";
       html = html + "</div>";
 
       html = html + "<div class='clear'></div>";
 
-      html = html + "<div class='container4'>";
-       html = html + "<div class='country_title'>the searched country goes here</div>";
-      html = html + "</div>";
+      if (country == null) {
+        html = html + "<div class='container4'>";
+        html = html + "<div class='country_title' id='countryID'>Please Enter a Country</div>";
+       html = html + "</div>";
+       }
+       else {
+        html = html + "<div class='container4'>";
+         html = html + "<div class='country_title' id='countryID'>" + country.toUpperCase() + "</div>";
+        html = html + "</div>";
+       }
 
       html = html + "<div class='container5'>";
 
@@ -87,7 +94,7 @@ public class Page4 implements Handler {
        html = html + "<div class='infection_date'>";
         html = html + "<p>Total Deaths<br><p>";
         html = html + "<label for='date1'> from </label>";
-        html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date1' name='date1' data-date-inline-picker='true'>";
+        html = html + "<input type='date' min='2020-01-01' max='2021-04-30' value='2020-01-01'id='date1' name='date1' data-date-inline-picker='true'>";
         html = html + "<label for='date2'>to </label>";
         html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date2' name='date2' data-date-inline-picker='true'>";
         html = html + "<input type='submit' value='Search' class='submit1'>";
