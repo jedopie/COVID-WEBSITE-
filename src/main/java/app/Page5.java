@@ -51,7 +51,6 @@ public class Page5 implements Handler {
         html = html + "</div>";
 
         html = html + "<div class='topnav'>";
-         html = html + "<a href='/'>Home</a>";
          html = html + "<a href='page1.html'>Page 1</a>";
          html = html + "<a href='page2.html'>Page 2</a>";
          html = html + "<a href='page3.html'>Page 3</a>";
@@ -90,6 +89,7 @@ public class Page5 implements Handler {
                     html = html + "<input type='submit' value='Search' class='submit1'>";
                 html = html + "</form>";
                   html = html + "</div>";
+                  html = html + "<div class='tbl'>";
             html = html + "<table class='tbl'>";
             html = html + "<tr>";
               html = html + "<th>Country</th>";
@@ -104,6 +104,7 @@ public class Page5 implements Handler {
               html = html + "</tr>";
               }
         html = html + "</table>";
+        html = html + "</div>";
 
       html = html + "<br class='clear' />";
         html = html + "</div>";

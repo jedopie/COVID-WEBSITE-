@@ -48,8 +48,7 @@ public class Page2 implements Handler {
         html = html + "</div>";
 
          html = html + "<div class='topnav'>";
-         html = html + "<a href='/'>Home</a>";
-         html = html + "<a href='page1.html'>Page 1</a>";
+         html = html + "<a href='page1.html'>Home</a>";
          html = html + "<a class='active' href='page2.html'>Page 2</a>";
          html = html + "<a href='page3.html'>Page 3</a>";
          html = html + "<a href='page4.html'>Page 4</a>";
