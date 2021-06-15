@@ -62,14 +62,25 @@ public class Page4 implements Handler {
         // Add the body
         html = html + "<body>";
 
-        html = html + "<div class='search_container'>";
-        html = html + "<form>";
-          html = html + "<div class='centered_div'>";
-          html = html + "<input type='text' id='search' name='search' value='" + country + "'placeholder='Search for a Country...'>";
-          html = html + "<input type='submit' value='Search' class='submit1'>";
+        if (country == null) {
+          html = html + "<div class='search_container'>";
+          html = html + "<form>";
+            html = html + "<div class='centered_div'>";
+            html = html + "<input type='text' id='search' name='search' placeholder='Search for a Country...'>";
+            html = html + "<input type='submit' id='submit1' value='Search' class='submit1'>";
+            html = html + "</div>";
+        html = html + "</div>";
+        }
+        else{
+  
+          html = html + "<div class='search_container'>";
+            html = html + "<form>";
+              html = html + "<div class='centered_div'>";
+              html = html + "<input type='text' id='search' name='search' value='"+country+"' placeholder='Search for a Country...'>";
+              html = html + "<input type='submit' id='submit1' value='Search' class='submit1'>";
+              html = html + "</div>";
           html = html + "</div>";
-      html = html + "</div>";
-
+        }
       html = html + "<div class='clear'></div>";
 
       if (country == null) {
@@ -84,10 +95,20 @@ public class Page4 implements Handler {
        }
 
       html = html + "<div class='container5'>";
-
+       if (country == null) {
        html = html + "<div class='Tot_infection'>";
        html = html + "<p>Total Deaths</p>";
-       html = html + "<h2>" + myFormat.format(jdbc.getTotalDeathsByCountry(country)) + " Deaths</h2>";
+       }
+       else if (jdbc.getTotalDeathsByCountry(country) < 1) {
+        html = html + "<div class='Tot_infection'>";
+        html = html + "<p>Total Deaths</p>";
+        html = html + "<h2>NO DATA FOUND</h2>";
+       }
+       else {
+        html = html + "<div class='Tot_infection'>";
+        html = html + "<p>Total Deaths</p>";
+        html = html + "<h2>" + myFormat.format(jdbc.getTotalDeathsByCountry(country)) + " Deaths</h2>";
+       }
 
        html = html + "</div>";
 
@@ -98,15 +119,34 @@ public class Page4 implements Handler {
         html = html + "<label for='date2'>to </label>";
         html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date2' name='date2' data-date-inline-picker='true'>";
         html = html + "<input type='submit' value='Search' class='submit1'>";
-
-        html = html + "<h2>" + myFormat.format(jdbc.getSumDeathsTimePeriod(country, date1, date2)) + " Deaths</h2>";
+       if (country == null) {
        html = html + "</form>";
        html = html + "</div>";
-
+       }
+       else if (date2.equals("")){
+        html = html + "</form>";
+        html = html + "</div>";
+       }
+       else {
+        html = html + "<h2>" + myFormat.format(jdbc.getSumDeathsTimePeriod(country, date1, date2)) + " Deaths</h2>";
+        html = html + "</form>";
+        html = html + "</div>";
+       }
+       if (country == null) {
        html = html + "<div class='max_infection'>";
        html = html + "<p>Highest Deaths in 1 day</p>";
-       html = html + "<h2>" + myFormat.format(jdbc.getHighestDeathTallyByDayState(country)) + " Deaths </h2>";
-       html = html + "<h2>" + jdbc.getHighestDeathDay(country) + "</h2";
+       }
+       else if (jdbc.getHighestCaseTallyByDay(country) < 1) {
+        html = html + "<div class='max_infection'>";
+        html = html + "<p>Highest Deaths in 1 day</p>";
+        html = html + "<h2> NO DATA FOUND </h2>";
+       }
+       else {
+        html = html + "<div class='max_infection'>";
+        html = html + "<p>Highest Deaths in 1 day</p>";
+        html = html + "<h2>" + myFormat.format(jdbc.getHighestCaseTallyByDay(country)) + " Deaths </h2>";
+        html = html + "<h2>" + jdbc.getHighestDeathDay(country) + "</h2";
+       }
        
        html = html + "</div>";
 
