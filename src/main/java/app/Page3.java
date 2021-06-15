@@ -70,6 +70,16 @@ public class Page3 implements Handler {
         // Add the body
         html = html + "<body>";
 
+      if (country == null) {
+        html = html + "<div class='search_container'>";
+        html = html + "<form>";
+          html = html + "<div class='centered_div'>";
+          html = html + "<input type='text' id='search' name='search' placeholder='Search for a Country...'>";
+          html = html + "<input type='submit' id='submit1' value='Search' class='submit1'>";
+          html = html + "</div>";
+      html = html + "</div>";
+      }
+      else{
 
         html = html + "<div class='search_container'>";
           html = html + "<form>";
@@ -78,6 +88,7 @@ public class Page3 implements Handler {
             html = html + "<input type='submit' id='submit1' value='Search' class='submit1'>";
             html = html + "</div>";
         html = html + "</div>";
+      }
         
         html = html + "<div class='clear'></div>";
 
