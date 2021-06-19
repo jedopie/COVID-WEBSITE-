@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import java.lang.Math;
 import java.text.NumberFormat;
 import java.text.DecimalFormat;
 
@@ -31,7 +32,35 @@ public class Page5 implements Handler {
       final String country = context.queryParam("search");
       final String date1 = context.queryParam("date5");
       final String date2 = context.queryParam("date6");
+      String Stringdistance = context.queryParam("distance_km");
+
       ArrayList<String> countries = jdbc.getCountriesByClimate(jdbc.getClimateOfCountry(country));
+      
+      double distance = Double.parseDouble(Stringdistance);
+      double longitude = jdbc.getLongByCountry(country);
+      double latitude = jdbc.getLatByCountry(country);
+      double bearingRad = Math.toRadians(360);
+      double latRad = Math.toRadians(latitude);
+      double longRad = Math.toRadians(longitude);
+      double distFrac = distance / 6371.0;
+
+      double latResult = Math.toDegrees(Math.asin(Math.sin(latRad) * Math.cos(distFrac) + Math.cos(latRad) * Math.sin(distFrac) * Math.cos(bearingRad)));
+      double a = Math.atan2(Math.sin(bearingRad) * Math.sin(distFrac) * Math.cos(latRad), Math.cos(distFrac) - Math.sin(latRad) * Math.sin(latResult));
+      double longResult = Math.toDegrees(((longRad + a + 3) * Math.PI) % (2 * Math.PI) - Math.PI);
+      System.out.println(latitude);
+      System.out.println(latResult);
+      System.out.println(longitude);
+      System.out.println(longResult);
+      
+
+
+
+
+
+
+      ArrayList<String> distanceCountries = jdbc.getCountriesByDistance(longitude, latitude, longResult, latResult);
+      System.out.println(distanceCountries);
+
       DecimalFormat df = new DecimalFormat("#.#####");
 
 
@@ -55,7 +84,7 @@ public class Page5 implements Handler {
          html = html + "<a href='page2.html'>Page 2</a>";
          html = html + "<a href='page3.html'>Page 3</a>";
          html = html + "<a href='page4.html'>Page 4</a>";
-         html = html + "<a class='active' href='page5.html'>Page 5</a>";
+         html = html + "<a class='active' href='page5.html?distance'>Page 5</a>";
          html = html + "<a href='page6.html'>Page 6</a>";
          html = html + "</div>";
         // Add the body
@@ -100,7 +129,7 @@ public class Page5 implements Handler {
               html = html + "<tr>";
               html = html + "<td>" + climate + "</td>";
               html = html + "<td>" + myFormat.format(jdbc.getInfectionRateCertainTime(climate, date1, date2)) + " Per Day</td>";
-              html = html + "<td>" + myFormat.format(jdbc.getDeathRateCertainTime(climate, date1, date2)) + " Per Day</td>";
+              html = html + "<td>" + myFormat.format((double)(jdbc.getDeathRateCertainTime(climate, date1, date2))) + " Per Day</td>";
               html = html + "</tr>";
               }
         html = html + "</table>";
@@ -118,7 +147,7 @@ public class Page5 implements Handler {
                 html = html + "<div class='filters'>";
                     html = html + "<form>";
                         html = html + "<label for='distance_km'>See Surrounding Countries of distance  </label>";
-                        html = html + "<input type='number' id='distance_km' name='distance_km'><span style='margin-left:10px;'>km</span>";
+                        html = html + "<input type='number' id='distance_km' value='1000' name='distance_km'><span style='margin-left:10px;'>km</span>";
                         html = html + "<input type='submit' value='Search' class='submit1'>";
                     html = html + "</form>";
                 html = html + "</div>"; 
@@ -129,10 +158,10 @@ public class Page5 implements Handler {
            html = html + "<th>Transmission Rate</th>";
            html = html + "<th>Death Rate</th>";
         html = html + "</tr>";
-        for(String climate : countries){
+        for(String climate : distanceCountries){
           html = html + "<tr>";
           html = html + "<td>" + climate + "</td>";
-          html = html + "<td>0</td>";
+          html = html + "<td></td>";
           html = html + "<td>0</td>";
           html = html + "</tr>";
           html = html + "</div>";

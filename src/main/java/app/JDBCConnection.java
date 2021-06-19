@@ -918,13 +918,13 @@ public int getCountryPopulation(String country) {
         statement.setQueryTimeout(30);
 
         // The Query
-        String query = "SELECT sum(population) FROM locations WHERE country_region = '" + country + "' COLLATE NOCASE GROUP BY country_region;" ;
+        String query = "SELECT population FROM locations WHERE country_region = '" + country + "' COLLATE NOCASE AND province_state IS NULL" ;
         
         // Get Result
         ResultSet results = statement.executeQuery(query);
 
         while (results.next()) {
-             pop            = results.getInt("sum(population)");
+             pop            = results.getInt("population");
 
             // For now we will just store the movieName and ignore the id
             
@@ -995,5 +995,349 @@ public double getDeathToCaseRatio(String country) {
 
     // Finally we return all of the movies
     return ratio;
+}
+public double getLongByCountry(String country) {
+    double longitude = 0.0;
+    // Setup the variable for the JDBC connection
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT longitude FROM locations WHERE country_region = '" + country + "' COLLATE NOCASE GROUP BY country_region";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+             longitude           = results.getDouble("longitude");
+
+            // For now we will just store the movieName and ignore the id
+            
+        }
+
+        // Close the statement because we are done with it
+        statement.close();
+    } catch (SQLException e) {
+        // If there is an error, lets just pring the error
+        System.err.println(e.getMessage());
+    } finally {
+        // Safety code to cleanup
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            // connection close failed.
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Finally we return all of the movies
+    return longitude;
+}
+public double getLatByCountry(String country) {
+    double latitude = 0.0;
+    // Setup the variable for the JDBC connection
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT latitude FROM locations WHERE country_region = '" + country + "' COLLATE NOCASE GROUP BY country_region";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+          latitude           = results.getDouble("latitude");
+
+            // For now we will just store the movieName and ignore the id
+            
+        }
+
+        // Close the statement because we are done with it
+        statement.close();
+    } catch (SQLException e) {
+        // If there is an error, lets just pring the error
+        System.err.println(e.getMessage());
+    } finally {
+        // Safety code to cleanup
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            // connection close failed.
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Finally we return all of the movies
+    return latitude;
+}
+public ArrayList<String> getCountriesByDistance(double longitude, double latitude, double longResult,  double latResult) {
+    ArrayList<String> countries = new ArrayList<String>();
+
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT country_region FROM locations JOIN casesdeaths ON casesdeaths.Location_id = locations.id WHERE longitude BETWEEN " + longResult + " and " + longitude + " AND latitude BETWEEN " + latitude + " and " + latResult + " GROUP BY country_region";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+            String country     = results.getString("country_region");
+            
+
+            countries.add(country);
+        }
+
+        statement.close();
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    return countries;
+}
+public ArrayList<String> getSimCountriesByCasesPerMillion(double perMil) {
+    ArrayList<String> countries = new ArrayList<String>();
+
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT country_region, sum(cases) / population AS permil FROM locations JOIN casesdeaths ON casesdeaths.location_id = locations.id GROUP BY country_region HAVING permil > " + (0.8 * perMil) + " and permil < " + (2 * perMil) + " ORDER BY permil ASC";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+            String country     = results.getString("country_region");
+            
+
+            countries.add(country);
+        }
+
+        statement.close();
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    return countries;
+}
+public ArrayList<String> getSimilarCountriesByDeathsToCasesRatio(double deathsToCases) {
+    ArrayList<String> simCountries = new ArrayList<String>();
+
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT country_region, CAST(sum(deaths) AS FLOAT) / sum(cases) AS dToC FROM locations JOIN casesdeaths ON casesdeaths.location_id = locations.id GROUP BY country_region HAVING dToC > " + (0.8 * deathsToCases) + " and dToC < " + (1.05 * deathsToCases) + " ORDER BY dToC ASC";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+            String country     = results.getString("country_region");
+            
+
+            simCountries.add(country);
+        }
+
+        statement.close();
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    return simCountries;
+}
+public ArrayList<String> getSimilarCountriesByMaxDeaths(int maxDeaths) {
+    ArrayList<String> simCountries = new ArrayList<String>();
+
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT country_region, max(deaths) AS maxD FROM locations JOIN casesdeaths ON casesdeaths.location_id = locations.id GROUP BY country_region HAVING maxD > " + (0.8 * maxDeaths) + " and maxD < " + (1.3 * maxDeaths) + " ORDER BY maxD ASC";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+            String country     = results.getString("country_region");
+            
+
+            simCountries.add(country);
+        }
+
+        statement.close();
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    return simCountries;
+}
+public int getHighestDeathTallyDayByCountry(String country) {
+    int max = 0;
+
+    // Setup the variable for the JDBC connection
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT max(deaths) FROM casesdeaths JOIN locations ON locations.id = casesdeaths.location_id WHERE country_region = '"+country+"' COLLATE NOCASE GROUP BY country_region;" ;
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+             max              = results.getInt("max(deaths)");
+
+            // For now we will just store the movieName and ignore the id
+            
+        }
+
+        // Close the statement because we are done with it
+        statement.close();
+    } catch (SQLException e) {
+        // If there is an error, lets just pring the error
+        System.err.println(e.getMessage());
+    } finally {
+        // Safety code to cleanup
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            // connection close failed.
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Finally we return all of the movies
+    return max;
+}
+public ArrayList<String> getSimilarCountriesByMaxCases(int maxCases) {
+    ArrayList<String> simCountries = new ArrayList<String>();
+
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT country_region, max(cases) AS maxC FROM locations JOIN casesdeaths ON casesdeaths.location_id = locations.id GROUP BY country_region HAVING maxC > " + (0.8 * maxCases) + " and maxC < " + (1.3 * maxCases) + " ORDER BY maxC ASC";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+            String country     = results.getString("country_region");
+            
+
+            simCountries.add(country);
+        }
+
+        statement.close();
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    return simCountries;
 }
 }

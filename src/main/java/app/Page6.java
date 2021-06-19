@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import java.text.NumberFormat;
+import java.text.DecimalFormat;
 
 /**
  * Temporary HTML as an example page.
@@ -23,6 +25,24 @@ public class Page6 implements Handler {
 
     @Override
     public void handle(Context context) throws Exception {
+      JDBCConnection jdbc = new JDBCConnection();
+      final String country = context.queryParam("search");
+      final String usState = context.queryParam("search_US");
+      final String sort = context.queryParam("sort_similar");
+      DecimalFormat df = new DecimalFormat("#.###");
+      NumberFormat myFormat = NumberFormat.getInstance();
+
+      ArrayList<String> countries = jdbc.getSimCountriesByCasesPerMillion(((double)(jdbc.getTotalCasesByCountry(country)) / jdbc.getCountryPopulation(country)));
+      ArrayList<String> countriesByDToC = jdbc.getSimilarCountriesByDeathsToCasesRatio((double)(jdbc.getTotalDeathsByCountry(country)) / jdbc.getTotalCasesByCountry(country));
+      ArrayList<String> countriesByMaxDeaths = jdbc.getSimilarCountriesByMaxDeaths(jdbc.getHighestDeathTallyByDayState(country));
+      ArrayList<String> countriesByMaxCases = jdbc.getSimilarCountriesByMaxCases(jdbc.getHighestCaseTallyByDay(country));
+
+
+
+      System.out.println(countriesByDToC);
+      System.out.println(jdbc.getDeathToCaseRatio(country));
+
+
         // Create a simple HTML webpage in a String
         String html = "<html>";
 
@@ -50,16 +70,38 @@ public class Page6 implements Handler {
         // Add the body
         html = html + "<body>";
 
-
+      if (country == null) {
         html = html + "<div class='search_container'>";
         html = html + "<form>";
           html = html + "<div class='centered_div'>";
           html = html + "<input type='text' id='search' name='search' placeholder='Search for a Country...'>";
           html = html + "<input type='submit' value='Search' class='submit1'>";
           html = html + "</div>";
-        html = html + "</form>";
         html = html + "<div class='clear'></div>";
       html = html + "</div>";
+      }
+      else {
+        html = html + "<div class='search_container'>";
+        html = html + "<form>";
+          html = html + "<div class='centered_div'>";
+          html = html + "<input type='text' id='search' value='"+country+"' name='search' placeholder='Search for a Country...'>";
+          html = html + "<input type='submit' value='search' class='submit1'>";
+          html = html + "</div>";
+        html = html + "<div class='clear'></div>";
+      html = html + "</div>";
+      }
+      
+
+      if (country == null || country.equals("")) {
+        html = html + "<div class='container4'>";
+        html = html + "<div class='country_title' id='countryID'>Please Enter a Country</div>";
+       html = html + "</div>";
+       }
+       else {
+        html = html + "<div class='container4'>";
+         html = html + "<div class='country_title' id='countryID'>" + country.toUpperCase() + "</div>";
+        html = html + "</div>";
+       }
 
 
 
@@ -70,7 +112,6 @@ public class Page6 implements Handler {
             html = html + "</div>";
 
             html = html + "<div class='filters'>";
-            html = html + "<form class='worst'>";
             html = html + "<label for='sort_similar'>See Similar Countries based on </label>";
             html = html + "<select name='sort_similar' id='sort_similar'>";
             html = html + "<option value='per_mil'>Total infections/1 million people</option>";
@@ -78,26 +119,113 @@ public class Page6 implements Handler {
             html = html + "<option value='max_deaths'>Maximum daily deaths</option>";
             html = html + "<option value='max_infection'>Maximum daily infections</option>";
             html = html + "</select>";
+            html = html + "<input type='submit' value='Search' class='submit1'>";
         html = html + "</form>";
     html = html + "</div>"; 
 
-            html = html + "<table class='tbl'>";
+            if (sort.equals("") || country == null) {
+              html = html + "<div class='tbl'>";
+
+              html = html + "<table class='tbl'>";
+              html = html + "<tr>";
+                  html = html + "<th></th>";
+                  html = html + "<th></th>";
+                  html = html + "<th></th>";
+              html = html + "</tr>";
+              for(String climate : countries){
+                  html = html + "<tr>";
+                  html = html + "<td></td>";
+                  html = html + "<td></td>";
+                  html = html + "<td></td>";
+                  html = html + "</tr>";
+                  }
+                
+          html = html + "</table>";
+          html = html + "</div>";
+                }
+
+            else if (sort.equals("per_mil")) {
+              html = html + "<div class='tbl'>";
+
+              html = html + "<table class='tbl'>";
             html = html + "<tr>";
                 html = html + "<th>Country</th>";
                 html = html + "<th>Total Infections</th>";
                 html = html + "<th>Infections/1 million people</th>";
             html = html + "</tr>";
-            for(int i = 0; i <= 6; i++){
+            for(String climate : countries){
                 html = html + "<tr>";
-                html = html + "<td>COUNTRY</td>";
-                html = html + "<td>0</td>";
-                html = html + "<td>0</td>";
+                html = html + "<td>" + climate +"</td>";
+                html = html + "<td>" + myFormat.format(jdbc.getTotalCasesByCountry(climate)) + "</td>";
+                html = html + "<td>" + df.format((1000000 * ((double)(jdbc.getTotalCasesByCountry(climate)) / jdbc.getCountryPopulation(climate)))) + "</td>";
                 html = html + "</tr>";
                 }
+              
         html = html + "</table>";
-
-      html = html + "<br class='clear' />";
         html = html + "</div>";
+        html = html + "<br class='clear' />";
+        html = html + "</div>";
+              }
+              else if (sort.equals("death_inf_ratio")) {
+                html = html + "<div class='tbl'>";
+
+                html = html + "<table class='tbl'>";
+                html = html + "<tr>";
+                    html = html + "<th>Country</th>";
+                    html = html + "<th>Death to Infection Ratio</th>";
+                html = html + "</tr>";
+                for(String climate : countriesByDToC){
+                    html = html + "<tr>";
+                    html = html + "<td>" + climate +"</td>";
+                    html = html + "<td>" + df.format((double)(jdbc.getTotalDeathsByCountry(climate)) / jdbc.getTotalCasesByCountry(climate)) + "</td>";
+                    html = html + "</tr>";
+                    }
+                  
+            html = html + "</table>";
+            html = html + "</div>";
+            html = html + "<br class='clear' />";
+            html = html + "</div>";
+                  }
+                  else if (sort.equals("max_deaths")) {
+                    html = html + "<div class='tbl'>";
+                    html = html + "<table class='tbl'>";
+                    html = html + "<tr>";
+                        html = html + "<th>Country</th>";
+                        html = html + "<th>Highest Daily Death Tally</th>";
+                    html = html + "</tr>";
+                    for(String climate : countriesByMaxDeaths){
+                        html = html + "<tr>";
+                        html = html + "<td>" + climate +"</td>";
+                        html = html + "<td>" + myFormat.format(jdbc.getHighestDeathTallyDayByCountry(climate)) + "</td>";
+                        html = html + "</tr>";
+                        }
+                      
+                html = html + "</table>";
+                html = html + "</div>";
+                html = html + "<br class='clear' />";
+                html = html + "</div>";
+                      }
+                      else if (sort.equals("max_infection")) {
+                        html = html + "<div class='tbl'>";
+                        html = html + "<table class='tbl'>";
+                        html = html + "<tr>";
+                            html = html + "<th>Country</th>";
+                            html = html + "<th>Highest Daily Case Tally</th>";
+                        html = html + "</tr>";
+                        for(String climate : countriesByMaxCases){
+                            html = html + "<tr>";
+                            html = html + "<td>" + climate +"</td>";
+                            html = html + "<td>" + myFormat.format(jdbc.getHighestCaseTallyByDay(climate)) + "</td>";
+                            html = html + "</tr>";
+                            }
+                          
+                    html = html + "</table>";
+                    html = html + "</div>";
+                    html = html + "<br class='clear' />";
+                    html = html + "</div>";
+                          }
+                    
+
 
         html = html + "<div class='sim_distance'>";  
             html = html + "<div class='grey'>";
@@ -107,7 +235,12 @@ public class Page6 implements Handler {
                 html = html + "<div class='US_SEARCH'>";
                     html = html + "<form>";
                     html = html + "<div class='centered_div'>";
-                    html = html + "<input type='text' id='search_US' name='search_US' placeholder='Search for a US State...'>";
+                    if (usState == null) {
+                      html = html + "<input type='text' id='search_US' name='search_US' placeholder='Search for a US State...'>";
+                    }
+                    else {
+                    html = html + "<input type='text' id='search_US' name='search_US' placeholder='"+ usState +"'>";
+                    }
                     html = html + "<input type='submit' value='Search' class='submit1'>";
                     html = html + "</div>";
                     html = html + "</form>";
@@ -124,6 +257,7 @@ public class Page6 implements Handler {
                         html = html + "</select>";
                     html = html + "</form>";
                 html = html + "</div>"; 
+                html = html + "<div class='tbl'>";
         html = html + "<table class='tbl'>";
         html = html + "<tr>";
           html = html + "<th>Country</th>";
@@ -180,7 +314,6 @@ html = html + "</div>";
       html = html + "</div>";
         // Look up some information from JDBC
         // First we need to use your JDBCConnection class
-        JDBCConnection jdbc = new JDBCConnection();
 
        
         // Finish the HTML webpage
