@@ -58,14 +58,14 @@ public class Page6 implements Handler {
         html = html + "<div class='covid'>COVID-19</div>";
         html = html + "</div>";
 
-         html = html + "<div class='topnav'>";
-         html = html + "<a href='page1.html'>Home</a>";
-         html = html + "<a href='page2.html'>Page 2</a>";
-         html = html + "<a href='page3.html'>Page 3</a>";
-         html = html + "<a href='page4.html'>Page 4</a>";
-         html = html + "<a href='page5.html?distance_km=1000'>Page 5</a>";
-         html = html + "<a class='active' href='page6.html?search=&sort_similar=per_mil'>Page 6</a>";
-         html = html + "</div>";
+        html = html + "<div class='topnav'>";
+        html = html + "<a  href='page1.html'>Home</a>";
+        html = html + "<a href='page2.html'>Overview</a>";
+        html = html + "<a href='page3.html'>Infection data</a>";
+        html = html + "<a href='page4.html'>Death data</a>";
+        html = html + "<a href='page5.html?distance_km=1000'>Similar Countries</a>";
+        html = html + "<a class='active' href='page6.html?search=&sort_similar=per_mil'>Similar impacts</a>";
+        html = html + "</div>";
 
         // Add the body
         html = html + "<body>";
@@ -119,7 +119,7 @@ public class Page6 implements Handler {
             html = html + "<option value='max_deaths'>Maximum daily deaths</option>";
             html = html + "<option value='max_infection'>Maximum daily infections</option>";
             html = html + "</select>";
-            html = html + "<input type='submit' value='Search' class='submit1'>";
+            html = html + "<input type='submit' value='Go' class='submit1'>";
         html = html + "</form>";
     html = html + "</div>"; 
 
@@ -241,7 +241,7 @@ public class Page6 implements Handler {
                     else {
                     html = html + "<input type='text' id='search_US' name='search_US' placeholder='"+ usState +"'>";
                     }
-                    html = html + "<input type='submit' value='Search' class='submit1'>";
+                    html = html + "<input type='submit' value='Go' class='submit1'>";
                     html = html + "</div>";
                     html = html + "</form>";
                 html = html + "</div>";

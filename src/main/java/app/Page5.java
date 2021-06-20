@@ -84,13 +84,13 @@ public class Page5 implements Handler {
         html = html + "</div>";
 
         html = html + "<div class='topnav'>";
-         html = html + "<a href='page1.html'>Page 1</a>";
-         html = html + "<a href='page2.html'>Page 2</a>";
-         html = html + "<a href='page3.html'>Page 3</a>";
-         html = html + "<a href='page4.html'>Page 4</a>";
-         html = html + "<a class='active' href='page5.html?distance_km=1000'>Page 5</a>";
-         html = html + "<a href='page6.html?search=&sort_similar=per_mil'>Page 6</a>";
-         html = html + "</div>";
+        html = html + "<a href='page1.html'>Home</a>";
+        html = html + "<a href='page2.html'>Overview</a>";
+        html = html + "<a href='page3.html'>infection data</a>";
+        html = html + "<a href='page4.html'>Death data</a>";
+        html = html + "<a class='active' href='page5.html?distance_km=1000'>Similar Countries</a>";
+        html = html + "<a href='page6.html?search=&sort_similar=per_mil'>Similar impacts</a>";
+        html = html + "</div>";
         // Add the body
         html = html + "<body>";
 
@@ -140,7 +140,7 @@ System.out.println(jdbc.getClimateOfCountry(country));
                     html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date5' name='date5' data-date-inline-picker='true'>";
                     html = html + "<label for='date6'>  to  </label>";
                     html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date6' name='date6' data-date-inline-picker='true'>";
-                    html = html + "<input type='submit' value='Search' class='submit1'>";
+                    html = html + "<input type='submit' value='Go' class='submit1'>";
                   html = html + "</div>";
                   html = html + "<div class='tbl'>";
             html = html + "<table class='tbl'>";
@@ -172,7 +172,7 @@ System.out.println(jdbc.getClimateOfCountry(country));
                     html = html + "<form>";
                         html = html + "<label for='distance_km'>See Surrounding Countries of distance  </label>";
                         html = html + "<input type='number' id='distance_km' value='1000' name='distance_km'><span style='margin-left:10px;'>km</span>";
-                        html = html + "<input type='submit' value='Search' class='submit1'>";
+                        html = html + "<input type='submit' value='Go' class='submit1'>";
                     html = html + "</form>";
                 html = html + "</div>"; 
                 html = html + "<div class='tbl'>";

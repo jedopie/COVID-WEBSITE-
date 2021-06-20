@@ -228,6 +228,42 @@ body
 	opacity: 0.3;
   }
 
+  .page_desc {
+	  margin: 40px;
+  }
+
+  .desc {
+	float: left;
+	width: 18%;
+	margin-right: 29px;
+	margin-bottom: 60px;
+	background:#019fbb;
+	color: white;
+	height: 500px;
+  }
+
+  .last_desc {
+	float: left;
+	width: 18%;
+	background:#019fbb;
+	color: white;
+	margin-bottom: 60px;
+	height: 500px
+  }
+
+  .page_desc h2, p{
+	  margin: 20px;
+  }
+
+  .question {
+	  margin: 40px 30px 0px 30px;
+	  text-align: center;
+  }
+
+  .question h1{
+	  font-size: 50px;
+  }
+
 .floatleft1 {
 	float:left;
 	width: 70%;
@@ -419,9 +455,9 @@ input[type=text] {
 	text-align: center;
   }
 
-  input[type=submit] {
+  .search_container input[type=submit] {
 	width: 15%;
-	padding: 10px;
+	padding: 15px;
 	cursor: pointer;
 	border: 1px solid #ccc;
 	border-radius: 15px;
@@ -435,6 +471,20 @@ input[type=text] {
         background-color: white;
 		text-align: center;
 	}
+
+	input[type=submit] {
+		padding: 10px;
+		cursor: pointer;
+		border: 1px solid #ccc;
+		border-radius: 15px;
+		box-sizing: border-box;
+		display: inline-block;
+		background: #f1f1f1;
+		margin-left: 10px;
+  
+	}
+
+
 
 	.country_title {
 		width: 80%;
@@ -491,6 +541,7 @@ input[type=text] {
 	/* border-radius: 15px; */
   }
 
+
   .max_infection {
 	float: left;
 	width: 30%;
@@ -500,14 +551,14 @@ input[type=text] {
   }
 
   .container5 input[type=date] {
-	width: 120px;
+	width: 140px;
 	border: 1px solid #ccc;
 	border-radius: 15px;
 	box-sizing: border-box;
 	background: white;
 	top: 5%;
 	left: 50%;
-	height: 40px;
+	height: 35px;
 	margin: 2px 0px 2px 2px;
   }
 
@@ -515,6 +566,10 @@ input[type=text] {
 	  color: white;
 	  margin-left: 10px;
 	  font-weight: bold;
+  }
+
+  .container5 input[type='submit'] {
+
   }
 
   /* aus button for states drop down */
@@ -588,7 +643,7 @@ input[type=text] {
 	}
 
 	.container6 input[type=date] {
-		width: 140px;
+		width: 160px;
 		border: 1px solid #ccc;
 		border-radius: 15px;
 		box-sizing: border-box;
@@ -647,6 +702,7 @@ input[type=text] {
 		width: 50%;
 		height:400px;
 		padding-left: 30px;
+		margin-bottom: 30px;
 	  } 
 
 	  .container8 {
@@ -659,7 +715,7 @@ input[type=text] {
 		border: 1px solid #ccc;
 		border-radius: 15px;
 		box-sizing: border-box;
-		width: 85%;
+		width: 80%;
 		padding: 10px;
 		color: white;
 		display: inline-block;

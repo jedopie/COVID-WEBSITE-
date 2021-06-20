@@ -63,14 +63,14 @@ public class Page3 implements Handler {
         html = html + "<div class='covid'>COVID-19</div>";
         html = html + "</div>";
 
-         html = html + "<div class='topnav'>";
-         html = html + "<a href='page1.html'>Home</a>";
-         html = html + "<a href='page2.html'>Page 2</a>";
-         html = html + "<a class='active' href='page3.html'>Page 3</a>";
-         html = html + "<a href='page4.html'>Page 4</a>";
-         html = html + "<a href='page5.html?distance_km=1000'>Page 5</a>";
-         html = html + "<a href='page6.html?search=&sort_similar=per_mil'>Page 6</a>";
-         html = html + "</div>";
+        html = html + "<div class='topnav'>";
+        html = html + "<a href='page1.html'>Home</a>";
+        html = html + "<a href='page2.html'>Overview</a>";
+        html = html + "<a class='active' href='page3.html'>Infection data</a>";
+        html = html + "<a href='page4.html'>Death data</a>";
+        html = html + "<a href='page5.html?distance_km=1000'>Similar Countries</a>";
+        html = html + "<a href='page6.html?search=&sort_similar=per_mil'>Similar impacts</a>";
+        html = html + "</div>";
         // Add the body
         html = html + "<body>";
 
@@ -130,11 +130,10 @@ public class Page3 implements Handler {
 
          html = html + "<div class='infection_date'>";
           html = html + "<p>Total Infections<br><p>";
-          html = html + "<label for='date1'> from </label>";
           html = html + "<input type='date' min='2020-01-01' max='2021-04-30' value='2020-01-01' id='date1' name='date1' data-date-inline-picker='true'>";
           html = html + "<label for='date2'>to </label>";
           html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date2' name='date2' data-date-inline-picker='true'>";
-          html = html + "<input type='submit' id='submit2' value='Search' class='submit2'>";
+          html = html + "<input type='submit' id='submit2' value='Go' class='submit2'>";
          if (country==null) {
           html = html + "<h2></h2>";
 
@@ -171,7 +170,13 @@ public class Page3 implements Handler {
          html = html + "</div>";
 
          html = html + "<br class='clear' />";
+         html = html + "</div>";
 
+
+         html = html + "<div class='question'>";
+        html = html + "<h1>State Infection Statistics</h1>";
+        html = html + "<p>See below the infection statistics for each state including Total infections, highest infections in a day<br> and total infections over a time period. Use the calendar provided to choose these dates</p>";
+        html = html + "</div>";
 
         html = html + "<div class='container6'>";
             html = html + "<form class='worst'>";
@@ -180,7 +185,7 @@ public class Page3 implements Handler {
             html = html + "<option value='worst'>Worst Affected</option>";
             html = html + "<option value='least'>Least Affected</option>";
             html = html + "</select>";
-            html = html + "<input type='submit' value='Search' class='submit2'>";
+            html = html + "<input type='submit' value='Go' class='submit2'>";
 
           html = html + "<table class='tbl'>";
           html = html + "<tr>";
@@ -193,7 +198,7 @@ public class Page3 implements Handler {
               html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date3' name='date3' data-date-inline-picker='true'>";
               html = html + "<label for='date4'> to </label>";
               html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date4' name='date4' data-date-inline-picker='true'>";
-              html = html + "<input type='submit' value='Search' class='submit3'>";
+              html = html + "<input type='submit' value='Go' class='submit3'>";
               html = html + "</th>";
 
           html = html + "<th>Highest Infections in 1 day</th>";
