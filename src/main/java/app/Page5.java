@@ -185,8 +185,8 @@ System.out.println(jdbc.getClimateOfCountry(country));
         for(String climate : distanceCountries){
           html = html + "<tr>";
           html = html + "<td>" + climate + "</td>";
-          html = html + "<td>" + df.format(jdbc.getTransmissionRateEntirePeriod(climate)) + "</td>";
-          html = html + "<td>" + df.format(jdbc.getDeathRateEntirePeriod(climate)) + "</td>";
+          html = html + "<td>" + df.format(jdbc.getTransmissionRateEntirePeriod(climate)) + " Per Day</td>";
+          html = html + "<td>" + df.format(jdbc.getDeathRateEntirePeriod(climate)) + " Per Day</td>";
           html = html + "</tr>";
           html = html + "</div>";
           }
