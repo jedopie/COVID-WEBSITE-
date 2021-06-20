@@ -50,11 +50,11 @@ public class Page1 implements Handler {
          // Link for each page
          html = html + "<div class='topnav'>";
          html = html + "<a class='active' href='page1.html'>Home</a>";
-         html = html + "<a href='page2.html'>Page 2</a>";
-         html = html + "<a href='page3.html'>Page 3</a>";
-         html = html + "<a href='page4.html'>Page 4</a>";
-         html = html + "<a href='page5.html?distance_km=1000'>Page 5</a>";
-         html = html + "<a href='page6.html?search=&sort_similar=per_mil'>Page 6</a>";
+         html = html + "<a href='page2.html'>Overview</a>";
+         html = html + "<a href='page3.html'>Infection data</a>";
+         html = html + "<a href='page4.html'>Death data</a>";
+         html = html + "<a href='page5.html?distance_km=1000'>Similar Countries</a>";
+         html = html + "<a href='page6.html?search=&sort_similar=per_mil'>Similar impacts</a>";
          html = html + "</div>";
          
 
@@ -75,8 +75,8 @@ public class Page1 implements Handler {
             html = html + "<li><a href='page2.html'>COVID-19: Whats happening around the world?</a></li>";
             html = html + "<li><a href='page3.html'>Want to see more about Covid-19 infections?</a></li>";
             html = html + "<li><a href='page4.html'>Want to see more about Covid-19 Deaths?</a></li>";
-            html = html + "<li><a href='page5.html'>See Cumulative Covid data from similar countries</a></li>";
-            html = html + "<li><a href='page6.html'>Explore our data set with advanced search tools</a></li>";
+            html = html + "<li><a href='page5.html'>See Covid data from similar located countries</a></li>";
+            html = html + "<li><a href='page6.html'>Explore countries facing similar impacts</a></li>";
             html = html + "</ul>";
             html = html + "</div>";
 
@@ -94,7 +94,7 @@ public class Page1 implements Handler {
 
             html = html + "<div class='middle'>";
             html = html + "<h2><a class='titlehelp' href='page1.html'>Need more<br>Help?</a></h2>";
-            html = html + "<p>Need more Help? Well click <a class='help'href='page1.html'>'Help'</a> here and we'll take you through a short video on how to explore the website to get the most out of it. Listen to the intsrcutions carefully to ensure we can further your education regarding Covid-19</p>";
+            html = html + "<p>Need more Help? Well click <a class='help'href='#desc'>'Help'</a> here and we'll take you below to an outline of each page and what you can explore about Covid-19 to ensure you get the most about our website and gather the information about Covid-19 you intended to. It all starts with finding the right page so have a look through the descriptions and see what suits you.</p>";
             html = html + "</div>";
 
 
@@ -102,10 +102,46 @@ public class Page1 implements Handler {
             html = html + "<div class='right'>";
             html = html + "<h2>What can I explore about <br>Covid-19?</h2>";
             html = html + "<p>There is much to explore using our wide range of data. explore the impacts of Covid-19 using our tools such as set the time periods of the data, .";
-            html = html + "see similar countries based on your preferred data, multiple ratios and more. For users wanting an overview, explore the first 4 pages in the menu's, however to dive deeper, explore the last 2 pages in the menu's</p>";
+            html = html + "see similar countries based on your preferred data, multiple ratios and more. For users wanting an overview, explore the first 4 pages in the menu's, however to dive deeper, explore the last 2 pages in the menu's.</p>";
 
             html = html + "</div>";
         html = html + "</div>";
+
+        html = html + "<div class='question'>";
+        html = html + "<h1>Don't know which page your<br>looking for?</h1>";
+        html = html + "<p>Below is a description of each to help you find the right page as quick as possible!</p>";
+        html = html + "</div>";
+
+        html = html + "<div class='page_desc'>";
+
+            html = html + "<div class='desc'>";
+                html = html + "<h2>An Overview of Covid-19</h2>";
+                html = html + "<p>The second page of this website is for our users to have a vast look at the main facts of covid 19 such as the total global cases, deaths and 5 worst affected countries. To have a look at this overview click <a href='page2.html'>'here'</a></p>";
+            html = html + "</div>";
+
+            html = html + "<div class='desc'>";
+                html = html + "<h2>Statistics on Covid-19 Infections</h2>";
+                html = html + "<p>The third page of this website is for our users to delve deeper into the infection statistics of Covid-19. With a simple search of your country you can find the total infections over your set time period, see maximum infections in a day, see the infections states of the searched country and more. To explore further click<a href='page3.html'>'here'</a> </p>";
+                html = html + "</div>";
+
+            html = html + "<div class='desc'>";
+                html = html + "<h2>Statistics on Covid-19 Deaths</h2>";
+                html = html + "<p>The third page of this website is for our users to delve deeper into the Death statistics of Covid-19. With a simple search of your country you can find the total deaths over your set time period, see maximum deaths in a day, see the death ratios of states of the searched country and more. To explore further click<a href='page4.html'>'here'</a> </p>";
+            html = html + "</div>";
+
+            html = html + "<div class='desc'>";
+                html = html + "<h2>Covid-19 Data from similar Countries</h2>";
+                html = html + "<p>The fourth page of this website is for our users to explore Covid-19 data from similar countries of your search, based on their climates or countries in close proximities. You can also see the population, death and infection ratios for Covid-19 in these similar countries. To explore further click<a href='page5.html'>'here'</a></p>";
+                 html = html + "</div>";
+
+            html = html + "<div class='last_desc'>";
+                html = html + "<h2>Covid-19 Data from countries facing similar impacts</h2>";
+                html = html + "<p>The final page of this website is for our users to to explore Covid-19 data from countries facing similar impacts from Covid-19 to the country you searched. These similarly impacted countries can be based off the impact of your choice such as infections per million people, Death ratio's or maximum daily deaths and infections. You also have the option to find Similar US States to a US state of your search. To explore further click<a href='page6.html'>'here'</a></p>";
+                html = html + "</div>";
+        html = html + "</div>";
+        html = html + "<div id='desc'></div>";
+
+
 
         // Finish the HTML webpage
         html = html + "</body>" + "</html>";
