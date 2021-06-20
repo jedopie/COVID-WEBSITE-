@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import java.text.NumberFormat;
+import java.text.DecimalFormat;
+
 
 
 /**
@@ -33,6 +35,11 @@ public class Page4 implements Handler {
         final String sort = context.queryParam("sort_aus");
         final String date3 = context.queryParam("date3");
         final String date4 = context.queryParam("date4");
+        DecimalFormat df = new DecimalFormat("#.####");
+
+
+        ArrayList<String> states = jdbc.getStatesByCountry(country);
+
 
         // Create a simple HTML webpage in a String
         String html = "<html>";
@@ -54,8 +61,8 @@ public class Page4 implements Handler {
          html = html + "<a href='page2.html'>Page 2</a>";
          html = html + "<a href='page3.html'>Page 3</a>";
          html = html + "<a class='active' href='page4.html'>Page 4</a>";
-         html = html + "<a href='page5.html'>Page 5</a>";
-         html = html + "<a href='page6.html'>Page 6</a>";
+         html = html + "<a href='page5.html?distance_km=1000'>Page 5</a>";
+         html = html + "<a href='page6.html?search=&sort_similar=per_mil'>Page 6</a>";
          html = html + "</div>";
 
         // Add the body
@@ -119,16 +126,13 @@ public class Page4 implements Handler {
         html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date2' name='date2' data-date-inline-picker='true'>";
         html = html + "<input type='submit' value='Search' class='submit1'>";
        if (country == null) {
-       html = html + "</form>";
        html = html + "</div>";
        }
        else if (date2.equals("")){
-        html = html + "</form>";
         html = html + "</div>";
        }
        else {
         html = html + "<h2>" + myFormat.format(jdbc.getSumDeathsTimePeriod(country, date1, date2)) + " Deaths</h2>";
-        html = html + "</form>";
         html = html + "</div>";
        }
        if (country == null) {
@@ -161,7 +165,6 @@ public class Page4 implements Handler {
         html = html + "<option value='worst'>Worst Affected</option>";
         html = html + "<option value='least'>Least Affected</option>";
         html = html + "</select>";
-      html = html + "</form>";
         html = html + "<table class='tbl'>";
         html = html + "<tr>";
           html = html + "<th>State</th>";
@@ -170,22 +173,26 @@ public class Page4 implements Handler {
             html = html + "<th>";
             html = html + "<form>";
             html = html + "<label for='date3'>Total Deaths/Total infections Ratio</label>";
-            html = html + "<input type='date' id='date3' name='date3' data-date-inline-picker='true'>";
+            html = html + "<input type='date' id='date3'min=' 2020-01-01' max='2021-04-30' value='2020-01-01' name='date3' data-date-inline-picker='true'>";
             html = html + "<label for='date4'> to </label>";
-            html = html + "<input type='date' id='date4' name='date4' data-date-inline-picker='true'>";
+            html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date4' name='date4' data-date-inline-picker='true'>";
+            html = html + "<input type='submit' value='Search' class='submit1'>";
             html = html + "</form>";
             html = html + "</th>";
 
           html = html + "<th>Highest Deaths/Highest infections in 1 Day Ratio</th>";
         html = html + "</tr>";
-        html = html + "<tr>";
-          html = html + "<td>java forloop display for all countries</td>";
-          html = html + "<td></td>";
-          html = html + "<td></td>";
-          html = html + "<td></td>";
-        html = html + "</tr>";
-      html = html + "</table>";
+        for (String state : states) {
 
+        html = html + "<tr>";
+          html = html + "<td>" + state + " </td>";
+          html = html + "<td>" + df.format(jdbc.getDeathInfectionRatioByState(state)) + "</td>";
+          html = html + "<td>" + df.format(jdbc.getDeathInfectionRatioByStateTimePeriod(state, date3, date4)) + " Deaths Per Case</td>";
+          html = html + "<td>" + df.format(jdbc.getHighestDeathInfectionRatioByState(state)) + " ON " + jdbc.getHighestDeathInfectionRatioDayByState(state) + "</td>";
+      
+        html = html + "</tr>";
+        }
+      html = html + "</table>";
       html = html + "<br class='clear' />";
     html = html + "</div>";
 

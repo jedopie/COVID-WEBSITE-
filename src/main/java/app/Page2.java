@@ -52,8 +52,8 @@ public class Page2 implements Handler {
          html = html + "<a class='active' href='page2.html'>Page 2</a>";
          html = html + "<a href='page3.html'>Page 3</a>";
          html = html + "<a href='page4.html'>Page 4</a>";
-         html = html + "<a href='page5.html'>Page 5</a>";
-         html = html + "<a href='page6.html'>Page 6</a>";
+         html = html + "<a href='page5.html?distance_km=1000'>Page 5</a>";
+         html = html + "<a href='page6.html?search=&sort_similar=per_mil'>Page 6</a>";
          html = html + "</div>";
          
          html = html + "</head>";

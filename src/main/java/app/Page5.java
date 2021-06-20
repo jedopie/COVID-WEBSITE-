@@ -34,7 +34,11 @@ public class Page5 implements Handler {
       final String date2 = context.queryParam("date6");
       String Stringdistance = context.queryParam("distance_km");
 
+
+      
+
       ArrayList<String> countries = jdbc.getCountriesByClimate(jdbc.getClimateOfCountry(country));
+      System.out.println(countries);
       
       double distance = Double.parseDouble(Stringdistance);
       double longitude = jdbc.getLongByCountry(country);
@@ -61,7 +65,7 @@ public class Page5 implements Handler {
       ArrayList<String> distanceCountries = jdbc.getCountriesByDistance(longitude, latitude, longResult, latResult);
       System.out.println(distanceCountries);
 
-      DecimalFormat df = new DecimalFormat("#.#####");
+      DecimalFormat df = new DecimalFormat("#.###");
 
 
         // Create a simple HTML webpage in a String
@@ -84,30 +88,51 @@ public class Page5 implements Handler {
          html = html + "<a href='page2.html'>Page 2</a>";
          html = html + "<a href='page3.html'>Page 3</a>";
          html = html + "<a href='page4.html'>Page 4</a>";
-         html = html + "<a class='active' href='page5.html?distance'>Page 5</a>";
-         html = html + "<a href='page6.html'>Page 6</a>";
+         html = html + "<a class='active' href='page5.html?distance_km=1000'>Page 5</a>";
+         html = html + "<a href='page6.html?search=&sort_similar=per_mil'>Page 6</a>";
          html = html + "</div>";
         // Add the body
         html = html + "<body>";
 
-        html = html + "<div class='search_container'>";
-        html = html + "<form>";
-          html = html + "<div class='centered_div'>";
-          html = html + "<input type='text' id='search' name='search' placeholder='Search for a Country...'>";
-          html = html + "<input type='submit' value='Search' class='submit1'>";
+        if (country == null) {
+          html = html + "<div class='search_container'>";
+          html = html + "<form>";
+            html = html + "<div class='centered_div'>";
+            html = html + "<input type='text' id='search' name='search' placeholder='Search for a Country...'>";
+            html = html + "<input type='submit' value='Search' class='submit1'>";
+            html = html + "</div>";
+          html = html + "<div class='clear'></div>";
+        html = html + "</div>";
+        }
+        else {
+          html = html + "<div class='search_container'>";
+          html = html + "<form>";
+            html = html + "<div class='centered_div'>";
+            html = html + "<input type='text' id='search' value='"+country+"' name='search' placeholder='Search for a Country...'>";
+            html = html + "<input type='submit' value='search' class='submit1'>";
+            html = html + "</div>";
+          html = html + "<div class='clear'></div>";
+        html = html + "</div>";
+        }
+        
+  
+        if (country == null || country.equals("")) {
+          html = html + "<div class='container4'>";
+          html = html + "<div class='country_title' id='countryID'>Please Enter a Country</div>";
+         html = html + "</div>";
+         }
+         else {
+          html = html + "<div class='container4'>";
+           html = html + "<div class='country_title' id='countryID'>" + country.toUpperCase() + "</div>";
           html = html + "</div>";
-        html = html + "</form>";
-        html = html + "<div class='clear'></div>";
-      html = html + "</div>";
-
-
+         }
 
       html = html + "<div class='container7'>";
         html = html + "<div class='sim_climate'>";
             html = html + "<div class='grey'>";
             html = html + "<h4>See Covid data from countries in similar climates</h4>";
             html = html + "</div>";
-
+System.out.println(jdbc.getClimateOfCountry(country));
             html = html + "<div class='filters'>";
                  html = html + "<p>" + jdbc.getClimateOfCountry(country) + "</p>";
                  html = html + "<form>";
@@ -116,7 +141,6 @@ public class Page5 implements Handler {
                     html = html + "<label for='date6'>  to  </label>";
                     html = html + "<input type='date' min='2020-01-01' max='2021-04-30' id='date6' name='date6' data-date-inline-picker='true'>";
                     html = html + "<input type='submit' value='Search' class='submit1'>";
-                html = html + "</form>";
                   html = html + "</div>";
                   html = html + "<div class='tbl'>";
             html = html + "<table class='tbl'>";
@@ -161,11 +185,12 @@ public class Page5 implements Handler {
         for(String climate : distanceCountries){
           html = html + "<tr>";
           html = html + "<td>" + climate + "</td>";
-          html = html + "<td></td>";
-          html = html + "<td>0</td>";
+          html = html + "<td>" + df.format(jdbc.getTransmissionRateEntirePeriod(climate)) + "</td>";
+          html = html + "<td>" + df.format(jdbc.getDeathRateEntirePeriod(climate)) + "</td>";
           html = html + "</tr>";
           html = html + "</div>";
           }
+
       html = html + "</table>";
 
       html = html + "<br class='clear' />";
@@ -194,7 +219,7 @@ public class Page5 implements Handler {
             html = html + "<td>" + myFormat.format(jdbc.getTotalDeathsByCountry(climate)) + "</td>";
             html = html + "<td>" + myFormat.format(jdbc.getCountryPopulation(climate)) + "</td>";
             html = html + "<td>" + df.format((double)(jdbc.getTotalDeathsByCountry(climate)) / jdbc.getTotalCasesByCountry(climate)) + " Deaths per Infection</td>";
-            html = html + "<td>" +  "</td>";
+            html = html + "<td>" + df.format(jdbc.getInfectionsPlusDeathsToPopulation(climate)) +  "</td>";
             html = html + "</tr>";
             }
         html = html + "</table>";

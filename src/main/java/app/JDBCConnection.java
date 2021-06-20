@@ -785,7 +785,7 @@ public ArrayList<String> getCountriesByClimate(String climate) {
         statement.setQueryTimeout(30);
 
         // The Query
-        String query = "SELECT country_region FROM locations WHERE climate = '" + climate + "' COLLATE NOCASE GROUP BY country_region";
+        String query = "SELECT country_region,sum(cases) FROM locations JOIN casesdeaths ON casesdeaths.location_id = locations.id WHERE climate = '" + climate + "' COLLATE NOCASE GROUP BY country_region ORDER BY sum(cases)";
         
         // Get Result
         ResultSet results = statement.executeQuery(query);
@@ -1339,5 +1339,368 @@ public ArrayList<String> getSimilarCountriesByMaxCases(int maxCases) {
     }
 
     return simCountries;
+}
+public double getDeathRateEntirePeriod(String country) {
+    double sum = 0.0;
+    // Setup the variable for the JDBC connection
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT CAST(sum(deaths) AS FLOAT) / (julianday('2021-04-22') - julianday('2020-01-22')) AS sumdeaths, country_region FROM casesdeaths JOIN locations ON locations.id = casesdeaths.location_id WHERE country_region = '" + country + "' COLLATE NOCASE GROUP BY country_region;" ;
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+             sum             = results.getDouble("sumdeaths");
+
+            // For now we will just store the movieName and ignore the id
+            
+        }
+
+        // Close the statement because we are done with it
+        statement.close();
+    } catch (SQLException e) {
+        // If there is an error, lets just pring the error
+        System.err.println(e.getMessage());
+    } finally {
+        // Safety code to cleanup
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            // connection close failed.
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Finally we return all of the movies
+    return sum;
+}
+public double getTransmissionRateEntirePeriod(String country) {
+    double sum = 0.0;
+    // Setup the variable for the JDBC connection
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT CAST(sum(cases) AS FLOAT) / (julianday('2021-04-22') - julianday('2020-01-22')) AS sumcases, country_region FROM casesdeaths JOIN locations ON locations.id = casesdeaths.location_id WHERE country_region = '" + country + "' COLLATE NOCASE GROUP BY country_region;" ;
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+             sum             = results.getDouble("sumcases");
+
+            // For now we will just store the movieName and ignore the id
+            
+        }
+
+        // Close the statement because we are done with it
+        statement.close();
+    } catch (SQLException e) {
+        // If there is an error, lets just pring the error
+        System.err.println(e.getMessage());
+    } finally {
+        // Safety code to cleanup
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            // connection close failed.
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Finally we return all of the movies
+    return sum;
+}
+public double getInfectionsPlusDeathsToPopulation(String country) {
+    double sum = 0.0;
+    // Setup the variable for the JDBC connection
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT (sum(deaths) + sum(cases)) / population AS infectionrate, country_region FROM casesdeaths JOIN locations ON locations.id = casesdeaths.Location_id WHERE country_region = '" + country + "' COLLATE NOCASE GROUP BY country_region;" ;
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+             sum             = results.getDouble("infectionrate");
+
+            // For now we will just store the movieName and ignore the id
+            
+        }
+
+        // Close the statement because we are done with it
+        statement.close();
+    } catch (SQLException e) {
+        // If there is an error, lets just pring the error
+        System.err.println(e.getMessage());
+    } finally {
+        // Safety code to cleanup
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            // connection close failed.
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Finally we return all of the movies
+    return sum;
+}
+public ArrayList<String> getStatesByCountry(String country) {
+    ArrayList<String> states = new ArrayList<String>();
+
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT province_state, CAST(sum(deaths) AS FLOAT) / sum(cases) AS RATE FROM Locations JOIN casesdeaths ON casesdeaths.location_id = locations.id WHERE country_region = '" + country + "' COLLATE NOCASE AND province_state IS NOT NULL GROUP BY id ORDER BY rate ASC";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+            String state     = results.getString("province_state");
+            
+
+            states.add(state);
+        }
+
+        statement.close();
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    return states;
+}
+public double getDeathInfectionRatioByStateTimePeriod(String state, String date1, String date2) {
+    double sum = 0.0;
+    // Setup the variable for the JDBC connection
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT province_state, CAST(sum(deaths) AS FLOAT) / sum(cases) AS rate FROM casesdeaths JOIN locations ON locations.id = casesdeaths.location_id WHERE province_state = '" + state + "' COLLATE NOCASE AND date < date('" + date2 + "') AND date > date('" + date1 + "') GROUP BY id" ;
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+             sum             = results.getDouble("rate");
+
+            // For now we will just store the movieName and ignore the id
+            
+        }
+
+        // Close the statement because we are done with it
+        statement.close();
+    } catch (SQLException e) {
+        // If there is an error, lets just pring the error
+        System.err.println(e.getMessage());
+    } finally {
+        // Safety code to cleanup
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            // connection close failed.
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Finally we return all of the movies
+    return sum;
+}
+public double getDeathInfectionRatioByState(String state) {
+    double sum = 0.0;
+    // Setup the variable for the JDBC connection
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT CAST(sum(deaths) AS FLOAT) / sum(cases) AS rate FROM casesdeaths JOIN locations ON locations.id = casesdeaths.Location_id WHERE province_state = '" + state + "' GROUP BY id" ;
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+             sum             = results.getDouble("rate");
+
+            // For now we will just store the movieName and ignore the id
+            
+        }
+
+        // Close the statement because we are done with it
+        statement.close();
+    } catch (SQLException e) {
+        // If there is an error, lets just pring the error
+        System.err.println(e.getMessage());
+    } finally {
+        // Safety code to cleanup
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            // connection close failed.
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Finally we return all of the movies
+    return sum;
+}
+public double getHighestDeathInfectionRatioByState(String state) {
+    double sum = 0.0;
+    // Setup the variable for the JDBC connection
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT province_state, CAST(max(deaths) AS FLOAT) / max(cases) AS rate FROM casesdeaths JOIN locations ON locations.id = casesdeaths.location_id WHERE province_state = '" + state + "' COLLATE NOCASE GROUP BY id;";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+             sum             = results.getDouble("rate");
+
+            // For now we will just store the movieName and ignore the id
+            
+        }
+
+        // Close the statement because we are done with it
+        statement.close();
+    } catch (SQLException e) {
+        // If there is an error, lets just pring the error
+        System.err.println(e.getMessage());
+    } finally {
+        // Safety code to cleanup
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            // connection close failed.
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Finally we return all of the movies
+    return sum;
+}
+public String getHighestDeathInfectionRatioDayByState(String state) {
+    String sum = "";
+    // Setup the variable for the JDBC connection
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT province_state, CAST(max(deaths) AS FLOAT) / max(cases), date FROM casesdeaths JOIN locations ON locations.id = casesdeaths.location_id WHERE province_state = 'victoria' COLLATE NOCASE GROUP BY id;";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+             sum             = results.getString("date");
+
+            // For now we will just store the movieName and ignore the id
+            
+        }
+
+        // Close the statement because we are done with it
+        statement.close();
+    } catch (SQLException e) {
+        // If there is an error, lets just pring the error
+        System.err.println(e.getMessage());
+    } finally {
+        // Safety code to cleanup
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            // connection close failed.
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Finally we return all of the movies
+    return sum;
 }
 }
