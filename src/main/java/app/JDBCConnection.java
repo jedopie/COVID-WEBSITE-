@@ -369,7 +369,7 @@ public int getTotalCasesByState(String state) {
         statement.setQueryTimeout(30);
 
         // The Query
-        String query = "SELECT province_state, sum(cases) FROM casesdeaths JOIN locations ON locations.id = casesdeaths.location_id WHERE province_state = '" + state + "' GROUP BY id" ;
+        String query = "SELECT province_state, sum(cases) FROM casesdeaths JOIN locations ON locations.id = casesdeaths.location_id WHERE province_state = '" + state + "' COLLATE NOCASE GROUP BY id" ;
         
         // Get Result
         ResultSet results = statement.executeQuery(query);
@@ -638,7 +638,6 @@ public String getHighestDeathDay(String country) {
 }
 public int getHighestDeathTallyByDayState(String country) {
     int max = 0;
-    String date;
 
     // Setup the variable for the JDBC connection
     Connection connection = null;
@@ -652,14 +651,13 @@ public int getHighestDeathTallyByDayState(String country) {
         statement.setQueryTimeout(30);
 
         // The Query
-        String query = "SELECT country_region, max(deaths) FROM casesdeaths JOIN locations ON locations.id = casesdeaths.Location_id WHERE country_region = '" + country + "' COLLATE NOCASE Group BY country_region" ;
+        String query = "SELECT country_region, max(deaths) FROM casesdeaths JOIN locations ON locations.id = casesdeaths.Location_id WHERE province_state = '" + country + "' COLLATE NOCASE Group BY id" ;
         
         // Get Result
         ResultSet results = statement.executeQuery(query);
 
         while (results.next()) {
              max              = results.getInt("max(deaths)");
-             date             = results.getString("date");
 
             // For now we will just store the movieName and ignore the id
             
@@ -1671,7 +1669,7 @@ public String getHighestDeathInfectionRatioDayByState(String state) {
         statement.setQueryTimeout(30);
 
         // The Query
-        String query = "SELECT province_state, CAST(max(deaths) AS FLOAT) / max(cases), date FROM casesdeaths JOIN locations ON locations.id = casesdeaths.location_id WHERE province_state = 'victoria' COLLATE NOCASE GROUP BY id;";
+        String query = "SELECT province_state, CAST(max(deaths) AS FLOAT) / max(cases), date FROM casesdeaths JOIN locations ON locations.id = casesdeaths.location_id WHERE province_state = '" + state + "' COLLATE NOCASE GROUP BY id;";
         
         // Get Result
         ResultSet results = statement.executeQuery(query);
@@ -1702,5 +1700,262 @@ public String getHighestDeathInfectionRatioDayByState(String state) {
 
     // Finally we return all of the movies
     return sum;
+}
+public ArrayList<String> getSimStatesByCasesPerMillion(double perMil) {
+    ArrayList<String> countries = new ArrayList<String>();
+
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT province_state, sum(cases) / population AS permil FROM locations JOIN casesdeaths ON casesdeaths.location_id = locations.id WHERE country_region = 'us' COLLATE NOCASE AND province_state IS NOT NULL GROUP BY id HAVING permil > " + (0.8 * perMil) + " and permil < " + (2 * perMil) + " ORDER BY permil ASC";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+            String country     = results.getString("province_state");
+            
+
+            countries.add(country);
+        }
+
+        statement.close();
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    return countries;
+}
+public int getStatePopulation(String state) {
+    int pop = 0;
+    // Setup the variable for the JDBC connection
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT population FROM locations WHERE province_state = '" + state + "' COLLATE NOCASE AND province_state IS NOT NULL";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+             pop             = results.getInt("population");
+
+            // For now we will just store the movieName and ignore the id
+            
+        }
+
+        // Close the statement because we are done with it
+        statement.close();
+    } catch (SQLException e) {
+        // If there is an error, lets just pring the error
+        System.err.println(e.getMessage());
+    } finally {
+        // Safety code to cleanup
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            // connection close failed.
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Finally we return all of the movies
+    return pop;
+}
+public ArrayList<String> getSimilarStatesByDeathsToCasesRatio(double deathsToCases) {
+    ArrayList<String> simCountries = new ArrayList<String>();
+
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT province_state, CAST(sum(deaths) AS FLOAT) / sum(cases) AS dToC FROM locations JOIN casesdeaths ON casesdeaths.location_id = locations.id WHERE province_state IS NOT NULL GROUP BY id HAVING dToC > " + (0.8 * deathsToCases) + " and dToC < " + (1.05 * deathsToCases) + " ORDER BY dToC ASC";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+            String country     = results.getString("province_state");
+            
+
+            simCountries.add(country);
+        }
+
+        statement.close();
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    return simCountries;
+}
+public int getTotalDeathsByState(String country) {
+    int sum = 0;
+
+    // Setup the variable for the JDBC connection
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT country_region, sum(deaths) FROM casesdeaths JOIN Locations ON locations.ID = casesdeaths.Location_id WHERE province_state = '" + country + "' COLLATE NOCASE GROUP BY id" ;
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+             sum              = results.getInt("sum(deaths)");
+
+            // For now we will just store the movieName and ignore the id
+            
+        }
+
+        // Close the statement because we are done with it
+        statement.close();
+    } catch (SQLException e) {
+        // If there is an error, lets just pring the error
+        System.err.println(e.getMessage());
+    } finally {
+        // Safety code to cleanup
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            // connection close failed.
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Finally we return all of the movies
+    return sum;
+}
+public ArrayList<String> getSimilarStatesByMaxDeaths(int maxDeaths) {
+    ArrayList<String> simCountries = new ArrayList<String>();
+
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT province_state, max(deaths) AS maxD FROM locations JOIN casesdeaths ON casesdeaths.location_id = locations.id WHERE province_state IS NOT NULL GROUP BY id HAVING maxD > " + (0.8 * maxDeaths) + " and maxD < " + (1.3 * maxDeaths) + " ORDER BY maxD ASC";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+            String state     = results.getString("province_state");
+            
+
+            simCountries.add(state);
+        }
+
+        statement.close();
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    return simCountries;
+}
+public ArrayList<String> getSimilarStatesByMaxCases(int maxCases) {
+    ArrayList<String> simCountries = new ArrayList<String>();
+
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT province_state, max(cases) AS maxC FROM locations JOIN casesdeaths ON casesdeaths.location_id = locations.id WHERE province_state IS NOT NULL GROUP BY id HAVING maxC > " + (0.8 * maxCases) + " and maxC < " + (1.3 * maxCases) + " ORDER BY maxC ASC";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+            String country     = results.getString("province_state");
+            
+
+            simCountries.add(country);
+        }
+
+        statement.close();
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    return simCountries;
 }
 }
