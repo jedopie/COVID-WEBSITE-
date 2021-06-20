@@ -132,7 +132,6 @@ public class Page5 implements Handler {
             html = html + "<div class='grey'>";
             html = html + "<h4>See Covid data from countries in similar climates</h4>";
             html = html + "</div>";
-System.out.println(jdbc.getClimateOfCountry(country));
             html = html + "<div class='filters'>";
                  html = html + "<p>" + jdbc.getClimateOfCountry(country) + "</p>";
                  html = html + "<form>";
@@ -185,8 +184,8 @@ System.out.println(jdbc.getClimateOfCountry(country));
         for(String climate : distanceCountries){
           html = html + "<tr>";
           html = html + "<td>" + climate + "</td>";
-          html = html + "<td>" + df.format(jdbc.getTransmissionRateEntirePeriod(climate)) + "</td>";
-          html = html + "<td>" + df.format(jdbc.getDeathRateEntirePeriod(climate)) + "</td>";
+          html = html + "<td>" + df.format(jdbc.getTransmissionRateEntirePeriod(climate)) + " Per Day</td>";
+          html = html + "<td>" + df.format(jdbc.getDeathRateEntirePeriod(climate)) + " Per Day</td>";
           html = html + "</tr>";
           html = html + "</div>";
           }
