@@ -54,7 +54,7 @@ public class Page1 implements Handler {
          html = html + "<a href='page3.html'>Infection data</a>";
          html = html + "<a href='page4.html'>Death data</a>";
          html = html + "<a href='page5.html?distance_km=1000'>Similar Countries</a>";
-         html = html + "<a href='page6.html?search=&sort_similar=per_mil'>Similar impacts</a>";
+         html = html + "<a href='page6.html?search=&sort_similar=per_mil&search_US=&sort_similar2=per_mil2&sort_similar3=max_infection2'>Similar impacts</a>";
          html = html + "</div>";
          
 
@@ -75,8 +75,8 @@ public class Page1 implements Handler {
             html = html + "<li><a href='page2.html'>COVID-19: Whats happening around the world?</a></li>";
             html = html + "<li><a href='page3.html'>Want to see more about Covid-19 infections?</a></li>";
             html = html + "<li><a href='page4.html'>Want to see more about Covid-19 Deaths?</a></li>";
-            html = html + "<li><a href='page5.html'>See Covid data from similar located countries</a></li>";
-            html = html + "<li><a href='page6.html'>Explore countries facing similar impacts</a></li>";
+            html = html + "<li><a href='page5.html?distance_km=1000'>See Covid data from similar located countries</a></li>";
+            html = html + "<li><a href='page6.html?search=&sort_similar=per_mil&search_US=&sort_similar2=per_mil2&sort_similar3=max_infection2'>Explore countries facing similar impacts</a></li>";
             html = html + "</ul>";
             html = html + "</div>";
 

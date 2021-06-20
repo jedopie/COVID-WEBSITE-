@@ -89,7 +89,7 @@ public class Page5 implements Handler {
         html = html + "<a href='page3.html'>infection data</a>";
         html = html + "<a href='page4.html'>Death data</a>";
         html = html + "<a class='active' href='page5.html?distance_km=1000'>Similar Countries</a>";
-        html = html + "<a href='page6.html?search=&sort_similar=per_mil'>Similar impacts</a>";
+        html = html + "<a href='page6.html?search=&sort_similar=per_mil&search_US=&sort_similar2=per_mil2&sort_similar3=max_infection2'>Similar impacts</a>";
         html = html + "</div>";
         // Add the body
         html = html + "<body>";
