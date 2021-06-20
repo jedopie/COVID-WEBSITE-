@@ -1715,7 +1715,7 @@ public ArrayList<String> getSimStatesByCasesPerMillion(double perMil) {
         statement.setQueryTimeout(30);
 
         // The Query
-        String query = "SELECT province_state, sum(cases) / population AS permil FROM locations JOIN casesdeaths ON casesdeaths.location_id = locations.id WHERE country_region = 'us' COLLATE NOCASE AND province_state IS NOT NULL GROUP BY id HAVING permil > " + (0.8 * perMil) + " and permil < " + (2 * perMil) + " ORDER BY permil ASC";
+        String query = "SELECT province_state, sum(cases) / population AS permil FROM locations JOIN casesdeaths ON casesdeaths.location_id = locations.id WHERE country_region = 'us' COLLATE NOCASE AND province_state IS NOT NULL GROUP BY id HAVING permil > " + (0.8 * perMil) + " and permil < " + (1.2 * perMil) + " ORDER BY permil ASC";
         
         // Get Result
         ResultSet results = statement.executeQuery(query);
@@ -1938,6 +1938,170 @@ public ArrayList<String> getSimilarStatesByMaxCases(int maxCases) {
 
         while (results.next()) {
             String country     = results.getString("province_state");
+            
+
+            simCountries.add(country);
+        }
+
+        statement.close();
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    return simCountries;
+}
+public ArrayList<String> getSimCountriesFromStateByCasesPerMillion(double perMil) {
+    ArrayList<String> countries = new ArrayList<String>();
+
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT country_region, sum(cases) / population AS permil FROM locations JOIN casesdeaths ON casesdeaths.location_id = locations.id WHERE province_state IS NULL GROUP BY id HAVING permil > " + (0.8 * perMil) + " and permil < " + (1.2 * perMil) + " ORDER BY permil ASC";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+            String country     = results.getString("country_region");
+            
+
+            countries.add(country);
+        }
+
+        statement.close();
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    return countries;
+}
+public ArrayList<String> getSimilarCountriesFromStateByDeathsToCasesRatio(double deathsToCases) {
+    ArrayList<String> simCountries = new ArrayList<String>();
+
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT country_region, CAST(sum(deaths) AS FLOAT) / sum(cases) AS dToC FROM locations JOIN casesdeaths ON casesdeaths.location_id = locations.id WHERE province_state IS NULL GROUP BY country_region HAVING dToC > " + (0.8 * deathsToCases) + " and dToC < " + (1.05 * deathsToCases) + " ORDER BY dToC ASC";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+            String country     = results.getString("country_region");
+            
+
+            simCountries.add(country);
+        }
+
+        statement.close();
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    return simCountries;
+}
+public ArrayList<String> getSimilarCountriesFromStateByMaxDeaths(int maxDeaths) {
+    ArrayList<String> simCountries = new ArrayList<String>();
+
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT country_region, max(deaths) AS maxD FROM locations JOIN casesdeaths ON casesdeaths.location_id = locations.id  WHERE province_state IS NULL  GROUP BY country_region HAVING maxD > " + (0.8 * maxDeaths) + " and maxD < " + (1.3 * maxDeaths) + " ORDER BY maxD ASC";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+            String country     = results.getString("country_region");
+            
+
+            simCountries.add(country);
+        }
+
+        statement.close();
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    return simCountries;
+}
+public ArrayList<String> getSimilarCountriesByMaxCasesFromState(int maxCases) {
+    ArrayList<String> simCountries = new ArrayList<String>();
+
+    Connection connection = null;
+
+    try {
+        // Connect to JDBC data base
+        connection = DriverManager.getConnection(DATABASE);
+
+        // Prepare a new SQL Query & Set a timeout
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+
+        // The Query
+        String query = "SELECT country_region, max(cases) AS maxC FROM locations JOIN casesdeaths ON casesdeaths.location_id = locations.id WHERE province_state IS NULL GROUP BY country_region HAVING maxC > " + (0.8 * maxCases) + " and maxC < " + (1.3 * maxCases) + " ORDER BY maxC ASC";
+        
+        // Get Result
+        ResultSet results = statement.executeQuery(query);
+
+        while (results.next()) {
+            String country     = results.getString("country_region");
             
 
             simCountries.add(country);

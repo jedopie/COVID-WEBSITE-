@@ -29,8 +29,10 @@ public class Page6 implements Handler {
       final String country = context.queryParam("search");
       final String usState = context.queryParam("search_US");
       final String usSort = context.queryParam("sort_similar2");
+      final String usCountrySort = context.queryParam("sort_similar3");
+
       final String sort = context.queryParam("sort_similar");
-      DecimalFormat df = new DecimalFormat("#.###");
+      DecimalFormat df = new DecimalFormat("#.####");
       NumberFormat myFormat = NumberFormat.getInstance();
 
       ArrayList<String> countries = jdbc.getSimCountriesByCasesPerMillion(((double)(jdbc.getTotalCasesByCountry(country)) / jdbc.getCountryPopulation(country)));
@@ -43,6 +45,12 @@ public class Page6 implements Handler {
       ArrayList<String> statesByMaxDeaths = jdbc.getSimilarStatesByMaxDeaths(jdbc.getHighestDeathTallyByDayState(usState));
       ArrayList<String> statesByMaxCases = jdbc.getSimilarStatesByMaxCases(jdbc.getHighestCaseTallyByDayState(usState));
 
+      ArrayList<String> countriesByPerMilFromState = jdbc.getSimCountriesFromStateByCasesPerMillion(((double)(jdbc.getTotalCasesByState(usState)) / jdbc.getStatePopulation(usState)));
+      ArrayList<String> countriesByDToCFromState = jdbc.getSimilarCountriesFromStateByDeathsToCasesRatio((double)(jdbc.getTotalDeathsByState(usState)) / jdbc.getTotalCasesByState(usState));
+      ArrayList<String> countriesByMaxDeathsFromState = jdbc.getSimilarCountriesFromStateByMaxDeaths(jdbc.getHighestDeathTallyByDayState(usState));
+      ArrayList<String> countriesByMaxCasesFromState = jdbc.getSimilarCountriesByMaxCasesFromState(jdbc.getHighestCaseTallyByDayState(usState));
+
+      System.out.println(jdbc.getHighestCaseTallyByDay(usState));
 
 
         // Create a simple HTML webpage in a String
@@ -151,14 +159,14 @@ public class Page6 implements Handler {
               html = html + "<table class='tbl'>";
             html = html + "<tr>";
                 html = html + "<th>Country</th>";
-                html = html + "<th>Total Infections</th>";
                 html = html + "<th>Infections/1 million people</th>";
+                html = html + "<th>Total Infections</th>";
             html = html + "</tr>";
             for(String climate : countries){
                 html = html + "<tr>";
                 html = html + "<td>" + climate +"</td>";
+                html = html + "<td>" + myFormat.format((1000000 * ((double)(jdbc.getTotalCasesByCountry(climate)) / jdbc.getCountryPopulation(climate)))) + "</td>";
                 html = html + "<td>" + myFormat.format(jdbc.getTotalCasesByCountry(climate)) + "</td>";
-                html = html + "<td>" + df.format((1000000 * ((double)(jdbc.getTotalCasesByCountry(climate)) / jdbc.getCountryPopulation(climate)))) + "</td>";
                 html = html + "</tr>";
                 }
               
@@ -256,7 +264,6 @@ public class Page6 implements Handler {
                         html = html + "<option value='max_infection2'>Maximum daily infections</option>";
                         html = html + "</select>";
                         html = html + "<input type='submit' value='Search' class='submit1'>";
-                    html = html + "</form>";
                 html = html + "</div>"; 
 
             if (usSort.equals("per_mil2")) {
@@ -264,15 +271,15 @@ public class Page6 implements Handler {
                 html = html + "<table class='tbl'>";
         html = html + "<tr>";
           html = html + "<th>Country</th>";
-           html = html + "<th>Total Infections</th>";
            html = html + "<th>Infections/1 million people</th>";
+           html = html + "<th>Total Infections</th>";
         html = html + "</tr>";
 
         for(String state : statesByPerMil){
             html = html + "<tr>";
             html = html + "<td>" + state + "</td>";
+            html = html + "<td>" +  myFormat.format((1000000 * ((double)(jdbc.getTotalCasesByState(state)) / jdbc.getStatePopulation(state))))  + "</td>";
             html = html + "<td>" + myFormat.format(jdbc.getTotalCasesByState(state)) + "</td>";
-            html = html + "<td>" +  df.format((1000000 * ((double)(jdbc.getTotalCasesByState(state)) / jdbc.getStatePopulation(state))))  + "</td>";
             html = html + "</tr>";
             }
       html = html + "</table>";
@@ -350,32 +357,103 @@ html = html + "</div>";
         html = html + "<div class='filters'>";
         html = html + "<form class='worst'>";
         html = html + "<label for='sort_similar'>See Similar Countries to your US State based on </label>";
-        html = html + "<select name='sort_similar2' id='sort_similar2'>";
+        html = html + "<select name='sort_similar3' id='sort_similar3'>";
         html = html + "<option value='per_mil2'>Total infections/1 million people</option>";
         html = html + "<option value='death_inf_ratio2'>Deaths to infections Ratio</option>";
         html = html + "<option value='max_deaths2'>Maximum daily deaths</option>";
         html = html + "<option value='max_infection2'>Maximum daily infections</option>";
         html = html + "</select>";
-    html = html + "</form>";
+        html = html + "<input type='submit' value='Search' class='submit1'>";
 html = html + "</div>"; 
-        html = html + "<table class='tbl'>";
+if (usCountrySort.equals("per_mil2")) {
+  html = html + "<table class='tbl'>";
+  html = html + "<tr>";
+      html = html + "<th>Country</th>";
+     html = html + "<th>Infections/1 million people</th>";
+     html = html + "<th>Total Infections</th>";
+  html = html + "</tr>";
+  for(String simCountry : countriesByPerMilFromState){
+      html = html + "<tr>";
+      html = html + "<td>" + simCountry + "</td>";
+      html = html + "<td>" + myFormat.format((1000000 * ((double)(jdbc.getTotalCasesByCountry(simCountry)) / jdbc.getCountryPopulation(simCountry)))) + "</td>";
+      html = html + "<td>" + myFormat.format(jdbc.getTotalCasesByCountry(simCountry)) + "</td>";
+      html = html + "</tr>";
+      }
+  html = html + "</table>";
+
+  html = html + "<br class='clear' />";
+
+html = html + "</div>";
+    }
+    else if (usCountrySort.equals("death_inf_ratio2")) {
+      html = html + "<table class='tbl'>";
+      html = html + "<tr>";
+          html = html + "<th>Country</th>";
+         html = html + "<th>Death to Infection Ratio</th>";
+         html = html + "<th>Total Deaths</th>";
+      html = html + "</tr>";
+      for(String simCountry : countriesByDToCFromState){
         html = html + "<tr>";
-            html = html + "<th>Country</th>";
-           html = html + "<th>Total Infections</th>";
-           html = html + "<th>Infections/1 million people</th>";
+        html = html + "<td>" + simCountry +"</td>";
+        html = html + "<td>" + df.format((double)(jdbc.getTotalDeathsByCountry(simCountry)) / jdbc.getTotalCasesByCountry(simCountry)) + "</td>";
+        html = html + "<td>" + myFormat.format(jdbc.getTotalDeathsByCountry(simCountry)) +"</td>";
+
         html = html + "</tr>";
-        for(int i = 0; i <= 6; i++){
+          }
+      html = html + "</table>";
+    
+      html = html + "<br class='clear' />";
+    
+    html = html + "</div>";
+        }
+        else if (usCountrySort.equals("max_deaths2")) {
+          html = html + "<table class='tbl'>";
+          html = html + "<tr>";
+              html = html + "<th>Country</th>";
+             html = html + "<th>Highest Daily Death Tally</th>";
+             html = html + "<th>Highest Death Day</th>";
+          html = html + "</tr>";
+          for(String simCountry : countriesByMaxDeathsFromState){
             html = html + "<tr>";
-            html = html + "<td>COUNTRY</td>";
-            html = html + "<td>0</td>";
-            html = html + "<td>0</td>";
+            html = html + "<td>" + simCountry +"</td>";
+            html = html + "<td>" + myFormat.format(jdbc.getHighestDeathTallyDayByCountry(simCountry)) + "</td>";
+            html = html + "<td>" + jdbc.getHighestDeathDay(simCountry) + "</td>";
             html = html + "</tr>";
+    
+            html = html + "</tr>";
+              }
+          html = html + "</table>";
+        
+          html = html + "<br class='clear' />";
+        
+        html = html + "</div>";
             }
-        html = html + "</table>";
+            else if (usCountrySort.equals("max_infection2")) {
+              html = html + "<table class='tbl'>";
+              html = html + "<tr>";
+                  html = html + "<th>Country</th>";
+                 html = html + "<th>Highest Case Tally</th>";
+                 html = html + "<th>Highest Case Date</th>";
+              html = html + "</tr>";
+              for(String simCountry : countriesByMaxCasesFromState){
+                html = html + "<tr>";
+                html = html + "<td>" + simCountry + "</td>";
+                html = html + "<td>" + myFormat.format(jdbc.getHighestCaseTallyByDay(simCountry)) + "</td>";
+                html = html + "<td>" + jdbc.getHighestCaseDay(simCountry) + "</td>";
 
-        html = html + "<br class='clear' />";
+                html = html + "</tr>";
+        
+                html = html + "</tr>";
+                  }
+              html = html + "</table>";
+            
+              html = html + "<br class='clear' />";
+            
+            html = html + "</div>";
+                }
 
-      html = html + "</div>";
+                System.out.println(countriesByMaxCasesFromState);
+
         // Look up some information from JDBC
         // First we need to use your JDBCConnection class
 
