@@ -249,7 +249,7 @@ public class Page6 implements Handler {
                       html = html + "<input type='text' id='search_US' name='search_US' placeholder='Search for a US State...'>";
                     }
                     else {
-                    html = html + "<input type='text' id='search_US' name='search_US' placeholder='"+ usState +"'>";
+                    html = html + "<input type='text' id='search_US' name='search_US' value='" + usState + "' placeholder='"+ usState +"'>";
                     }
                     html = html + "<input type='submit' value='Go' class='submit1'>";
                     html = html + "</div>";

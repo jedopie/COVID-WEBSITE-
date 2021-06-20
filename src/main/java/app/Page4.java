@@ -146,7 +146,7 @@ public class Page4 implements Handler {
        else {
         html = html + "<div class='max_infection'>";
         html = html + "<p>Highest Deaths in 1 day</p>";
-        html = html + "<h2>" + myFormat.format(jdbc.getHighestCaseTallyByDay(country)) + " Deaths </h2>";
+        html = html + "<h2>" + myFormat.format(jdbc.getHighestDeathTallyDayByCountry(country)) + " Deaths </h2>";
         html = html + "<h2>" + jdbc.getHighestDeathDay(country) + "</h2";
        }
        
